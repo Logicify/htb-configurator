@@ -25,16 +25,16 @@ public class TestMain
         File catalog1=new File("/media/wind/downloads(linux)/work task");
         File catalog2=new File("/media/wind/downloads(linux)/work task1");
         File htbfiles[]=catalog1.listFiles();
-        InputFromFile input,input2;
+        InputFromFile input=new InputFromFile(),input2=new InputFromFile();
         for(File file: htbfiles){
             try {
-                input=new InputFromFile(file);
+                input.setFile(file);
                 htb1=input.read();
                 String filename2=catalog2.getAbsolutePath()+'/'+file.getName();
                 htb1.setFileName(filename2);
                 OutputToFile output=new OutputToFile();
                 output.write(htb1);
-                input2=new InputFromFile(new File(filename2));
+                input2.setFile(file);
                 htb2=input.read();
                 Assert.assertEquals("Files are not equal",htb1,htb2);
             } catch (FileNotFoundException e) {

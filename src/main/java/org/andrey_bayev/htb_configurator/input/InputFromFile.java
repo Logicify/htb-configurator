@@ -23,6 +23,11 @@ public class InputFromFile implements InputHTB{
     private BufferedReader input;
     private File fileOfInput;
 
+    public InputFromFile(){
+        this.fileOfInput=null;
+        this.input=null;
+    }
+
     public InputFromFile(File file) throws FileNotFoundException{
         this.fileOfInput=file;
         this.input=new BufferedReader(new InputStreamReader(new FileInputStream(fileOfInput)));
@@ -31,6 +36,11 @@ public class InputFromFile implements InputHTB{
     public InputFromFile(String filename) throws FileNotFoundException {
         this.fileOfInput=new File(filename);
         this.input=this.input=new BufferedReader(new InputStreamReader(new FileInputStream(fileOfInput)));
+    }
+
+    public void setFile(File file) throws FileNotFoundException{
+        this.fileOfInput=file;
+        this.input=new BufferedReader(new InputStreamReader(new FileInputStream(fileOfInput)));
     }
 
     //todo: build an HTBClass from file

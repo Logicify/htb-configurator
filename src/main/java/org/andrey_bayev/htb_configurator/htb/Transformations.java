@@ -86,7 +86,7 @@ public class Transformations
 
         if(bytes.getSuf()==SpeedSuffice.MBPS) return (bytes.getSpeed()+"Mb");
         else if(bytes.getSuf()==SpeedSuffice.KBPS) return (bytes.getSpeed()+"Kb");
-        else return bytes+"";
+        else return bytes.getSpeed()+"";
     }
 
     public static String fromSufficeToString(SpeedSuffice e){
