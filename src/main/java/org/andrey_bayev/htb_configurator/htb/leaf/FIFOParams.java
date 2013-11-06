@@ -8,39 +8,40 @@
 
 package org.andrey_bayev.htb_configurator.htb.leaf;
 
+import org.andrey_bayev.htb_configurator.htb.SpeedInBytes;
+import org.andrey_bayev.htb_configurator.htb.SpeedSuffice;
+
 /**
  * this class keeps parameters for simple FIFO queueing disciplines
  */
 public class FIFOParams {
 
-    boolean packets;//to use packets or not
-    long limit;//Number of packets/bytes the queue can hold
+    SpeedInBytes limit;//Number of packets/bytes the queue can hold
 
     public FIFOParams(){
-        this.packets=true;
-        this.limit=1000;
+        limit=new SpeedInBytes();
+        this.limit.setSpeed(1000);
+        this.limit.setSuf(SpeedSuffice.BPS);
     }
 
-    public FIFOParams(boolean packets,long limit){
-        this.packets=packets;
-        if (limit<0) this.limit=0;
+    public FIFOParams(SpeedInBytes limit){
+         if (limit.getSpeed()<0) {
+             limit=new SpeedInBytes();
+            this.limit.setSpeed(0);
+            this.limit.setSuf(SpeedSuffice.BPS);
+        }
         else this.limit=limit;
     }
 
-    public boolean isPackets() {
-        return packets;
-    }
-
-    public void setPackets(boolean packets) {
-        this.packets = packets;
-    }
-
-    public long getLimit() {
+    public SpeedInBytes getLimit() {
         return limit;
     }
 
-    public void setLimit(long limit) {
-        if ( limit<0) this.limit = 0;
+    public void setLimit(SpeedInBytes limit) {
+        if ( limit.getSpeed()<0) {
+            this.limit.setSpeed(0);
+            this.limit.setSuf(SpeedSuffice.BPS);
+        }
         else this.limit=limit;
     }
 

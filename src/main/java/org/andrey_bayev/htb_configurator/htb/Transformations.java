@@ -10,6 +10,8 @@ package org.andrey_bayev.htb_configurator.htb;
 
 public class Transformations
 {
+    static final int MB=1048576;
+    static final int KB=1024;
 
     public static SpeedSuffice convertSuffice(String s) {
         switch(s)
@@ -42,22 +44,35 @@ public class Transformations
     /**
      * this static function converts string value into long value like this:
      * a=a;
-     * aKb=a*1000;
+     * aKb=a*1024;
      * aMb=a*1000000;
      * @param s
      * @return
      */
-    public static long fromBytesToLong(String s){
-        if (s.charAt(s.length()-2)=='M' || s.charAt(s.length()-1)=='m') {  //todo: fix
-            return Long.parseLong(s.substring(0,s.length()-2))*1000000;
+    public static SpeedInBytes fromStringToSpeedInBytes(String s){
+        SpeedInBytes bytesSpeed=new SpeedInBytes();
+        int mIndex=s.indexOf('M');
+        mIndex=(mIndex!=-1)?mIndex:s.indexOf('m');
+        int kIndex=s.indexOf('K');
+        kIndex=(kIndex!=-1)?kIndex:s.indexOf('k');
+
+
+        if (mIndex!=-1) {  //todo: fix
+            bytesSpeed.setSpeed(Integer.parseInt(s.substring(0,mIndex)));
+            bytesSpeed.setSuf(SpeedSuffice.MBPS);
+            return bytesSpeed;
         }
         else
         {
-            if (s.charAt(s.length()-2)=='K' || s.charAt(s.length()-1)=='k') {
-                return Long.parseLong(s.substring(0,s.length()-2))*1000;
+            if (kIndex!=-1) {
+                bytesSpeed.setSpeed(Integer.parseInt(s.substring(0,kIndex)));
+                bytesSpeed.setSuf(SpeedSuffice.KBPS);
+                return bytesSpeed;
             }
             else{
-                return Long.parseLong(s.substring(0));
+                bytesSpeed.setSpeed(Integer.parseInt(s));
+                bytesSpeed.setSuf(SpeedSuffice.BPS);
+                return bytesSpeed;
             }
         }
 
@@ -66,12 +81,11 @@ public class Transformations
     /**
      * converts Bytes into KBytes or MBytes
      */
-    public static String fromLongToBytes(long bytes)
+    public static String fromSpeedInBytesToString(SpeedInBytes bytes)
     {
-        final int MB=1024*1024;
-        final int KB=1024;
-        if(bytes>=MB) return (bytes/MB+"Mb");
-        else if(bytes>=KB) return (bytes/KB+"Kb");
+
+        if(bytes.getSuf()==SpeedSuffice.MBPS) return (bytes.getSpeed()+"Mb");
+        else if(bytes.getSuf()==SpeedSuffice.KBPS) return (bytes.getSpeed()+"Kb");
         else return bytes+"";
     }
 

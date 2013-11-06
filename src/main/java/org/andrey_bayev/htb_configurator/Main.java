@@ -30,7 +30,6 @@ public class Main {
             HTBClass myhtb=in.read();
             myhtb.setFileName("/media/wind/downloads(linux)/work task/eth4-2_13.gotomeeting");
             OutputToFile out=new OutputToFile();
-
             out.write(myhtb);
         } catch (FileNotFoundException e) {
             System.out.println(e);

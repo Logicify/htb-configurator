@@ -7,33 +7,46 @@
  */
 package org.andrey_bayev.htb_configurator.htb.leaf;
 
+import org.andrey_bayev.htb_configurator.htb.SpeedInBytes;
+import org.andrey_bayev.htb_configurator.htb.SpeedSuffice;
+
 /**
  * This class keeps sfq parameters if user set LEAF=sfq;
  */
 public class SFQParams{
-    private long quantum;//Amount of data in bytes a stream is allowed to dequeue before next queue gets a turn.
+    private SpeedInBytes quantum;//Amount of data in bytes a stream is allowed to dequeue before next queue gets a turn.
     private int perturb;//Period of hash function perturbation.
 
     public SFQParams()
     {
-        this.quantum=1600;//default MTU packet value
+        this.quantum=new SpeedInBytes();
+        this.quantum.setSpeed(1600);//default MTU packet value
+        this.quantum.setSuf(SpeedSuffice.BPS);
         this.perturb=10;
     }
 
-    public SFQParams(long quantum, int perturb)
+    public SFQParams(SpeedInBytes quantum, int perturb)
     {
-        if(quantum<0) this.quantum=1600;
+
+        if(quantum.getSpeed()<0) {
+            this.quantum=new SpeedInBytes();
+            this.quantum.setSpeed(1600);
+            this.quantum.setSuf(SpeedSuffice.BPS);
+        }
         else this.quantum=quantum;
         if(perturb<0) this.perturb=10;
         else this.perturb = perturb;
     }
 
-    public long getQuantum() {
+    public SpeedInBytes getQuantum(){
         return quantum;
     }
 
-    public void setQuantum(long quantum) {
-        if(quantum<0) this.quantum=1600;
+    public void setQuantum(SpeedInBytes quantum) {
+        if(quantum.getSpeed()<0) {
+            this.quantum.setSpeed(1600);
+            this.quantum.setSuf(SpeedSuffice.BPS);
+        }
         else this.quantum=quantum;
     }
 

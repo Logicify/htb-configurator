@@ -13,8 +13,6 @@ import org.andrey_bayev.htb_configurator.htb.Transformations;
 import org.andrey_bayev.htb_configurator.htb.filters.Mark;
 import org.andrey_bayev.htb_configurator.htb.filters.Realm;
 import org.andrey_bayev.htb_configurator.htb.filters.Rule;
-import org.andrey_bayev.htb_configurator.htb.leaf.Leaf;
-import org.andrey_bayev.htb_configurator.htb.leaf.SFQParams;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -93,12 +91,12 @@ public class OutputToFile implements OutputHTB{
                 //writing BURST into File
                 if(checkIfTrue("BURST")){
                     writeComment("BURST");
-                    output.println("BURST=" + Transformations.fromLongToBytes(htb.getBurst()));
+                    output.println("BURST=" + Transformations.fromSpeedInBytesToString(htb.getBurst()));
                 }
                 //writing CBURST into File
                 if(checkIfTrue("CBURST")){
                     writeComment("CBURST");
-                    output.println("CBURST="+Transformations.fromLongToBytes(htb.getCburst()));
+                    output.println("CBURST="+Transformations.fromSpeedInBytesToString(htb.getCburst()));
                 }
                 //writing PRIO into File
                 if(checkIfTrue("PRIO")){
@@ -118,7 +116,7 @@ public class OutputToFile implements OutputHTB{
                 //writing MTU into File
                 if(checkIfTrue("MTU")){
                     writeComment("MTU");
-                    output.println("MTU="+Transformations.fromLongToBytes(htb.getMtu()));
+                    output.println("MTU="+Transformations.fromSpeedInBytesToString(htb.getMtu()));
                 }
                 //writing LEAF params into File
                 if(checkIfTrue("LEAF")){
@@ -128,7 +126,7 @@ public class OutputToFile implements OutputHTB{
                         //writing QUANTUM parameter of SFQ into File
                         if(checkIfTrue("QUANTUM")){
                             writeComment("QUANTUM");
-                            output.println("QUANTUM="+Transformations.fromLongToBytes(htb.getSfq().getQuantum()));
+                            output.println("QUANTUM="+Transformations.fromSpeedInBytesToString(htb.getSfq().getQuantum()));
                         }
                         //writing PERTURB parameter of SFQ into File
                         if(checkIfTrue("PERTURB")){
@@ -140,12 +138,7 @@ public class OutputToFile implements OutputHTB{
                         //writing LIMIT parameter of PFIFO
                         if(checkIfTrue("LIMIT")){
                             writeComment("LIMIT");
-                            if(!htb.getPfifo().isPackets()){
-                                output.println("LIMIT="+Transformations.fromLongToBytes(htb.getPfifo().getLimit()));
-                            }
-                            else{
-                                output.println("LIMIT="+htb.getPfifo().getLimit());
-                            }
+                            output.println("LIMIT="+Transformations.fromSpeedInBytesToString(htb.getPfifo().getLimit()));
                         }
 
                     }
@@ -153,12 +146,7 @@ public class OutputToFile implements OutputHTB{
                         //writing LIMIT parameter of BFIFO
                         if(checkIfTrue("LIMIT")){
                             writeComment("LIMIT");
-                            if(!htb.getBfifo().isPackets()){
-                                output.println("LIMIT="+Transformations.fromLongToBytes(htb.getBfifo().getLimit()));
-                            }
-                            else{
-                                output.println("LIMIT="+htb.getBfifo().getLimit());
-                            }
+                            output.println("LIMIT="+Transformations.fromSpeedInBytesToString(htb.getBfifo().getLimit()));
                         }
                     }
                 }

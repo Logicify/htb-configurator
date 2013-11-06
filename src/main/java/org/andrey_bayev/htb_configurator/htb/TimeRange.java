@@ -19,8 +19,8 @@ public class TimeRange {
     private String time;
     private Bandwidth rate;
     private Bandwidth ceil;
-    private long burst;
-    private long cburst;
+    private SpeedInBytes burst;
+    private SpeedInBytes cburst;
     private String comment;
 
     public TimeRange(String timeRange,String comment){
@@ -50,25 +50,28 @@ public class TimeRange {
         String rat[]=rateParts.split("/");
         rate=new Bandwidth(rat[0]);
         if(rat.length==2){
-            burst=Transformations.fromBytesToLong(rat[1]);
+            burst=Transformations.fromStringToSpeedInBytes(rat[1]);
         } else {
-            burst=0;
+            burst.setSpeed(0);
+            burst.setSuf(SpeedSuffice.BPS);
         }
         if (ceilParts!="")
         {
             String ceilpts[]=ceilParts.split("/");
             ceil=new Bandwidth(ceilpts[0]);
             if (ceilpts.length==2){
-                cburst=Transformations.fromBytesToLong(ceilpts[1]);
+                cburst=Transformations.fromStringToSpeedInBytes(ceilpts[1]);
             }
             else{
-                cburst=0;
+                cburst.setSpeed(0);
+                cburst.setSuf(SpeedSuffice.BPS);
             }
         }
         else
         {
             ceil=null;
-            cburst=0;
+            cburst.setSpeed(0);
+            cburst.setSuf(SpeedSuffice.BPS);
         }
     }
 
@@ -104,19 +107,19 @@ public class TimeRange {
         this.ceil = ceil;
     }
 
-    public long getBurst() {
+    public SpeedInBytes getBurst() {
         return burst;
     }
 
-    public void setBurst(long burst) {
+    public void setBurst(SpeedInBytes burst) {
         this.burst = burst;
     }
 
-    public long getCburst() {
+    public SpeedInBytes getCburst() {
         return cburst;
     }
 
-    public void setCburst(long cburst) {
+    public void setCburst(SpeedInBytes cburst) {
         this.cburst = cburst;
     }
 
@@ -148,13 +151,13 @@ public class TimeRange {
         }
         t+=time+';';
         t+=rate.getSpeed()+Transformations.fromSufficeToString(rate.getSufficeOfSpeed());
-        if(burst!=0){
-           t+='/'+Transformations.fromLongToBytes(burst);
+        if(burst.getSpeed()!=0){
+           t+='/'+Transformations.fromSpeedInBytesToString(burst);
         }
         if(ceil!=null){
             t+=','+ceil.getSpeed()+Transformations.fromSufficeToString(ceil.getSufficeOfSpeed());
-            if(cburst!=0){
-                t+='/'+Transformations.fromLongToBytes(cburst);
+            if(cburst.getSpeed()!=0){
+                t+='/'+Transformations.fromSpeedInBytesToString(cburst);
             }
         }
         return t;
