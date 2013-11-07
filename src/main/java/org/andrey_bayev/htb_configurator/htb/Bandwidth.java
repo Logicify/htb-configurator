@@ -12,7 +12,7 @@ package org.andrey_bayev.htb_configurator.htb;
  */
 public class Bandwidth {
 
-    private SpeedSuffice sufficeOfSpeed;//suffices of speed rate
+    private Unit unit;//suffices of speed rate
     private boolean prate;//if true uses RATE param of parent class
     private boolean pceil;//if true uses CEIL param of parent class
     private int speed; //speed of the traffic
@@ -21,10 +21,10 @@ public class Bandwidth {
         this.prate=true;
     }
 
-    public Bandwidth(int speed, SpeedSuffice sufficeOfSpeed, boolean prate,boolean pceil){
+    public Bandwidth(int speed, Unit unit, boolean prate,boolean pceil){
         if (speed<0) this.speed=0;
         else this.speed=speed;
-        this.sufficeOfSpeed=SpeedSuffice.KBIT;
+        this.unit = Unit.KBIT;
         this.prate=prate;
         this.pceil=pceil;
     }
@@ -41,19 +41,19 @@ public class Bandwidth {
                 int pos;
                 pos=value.length()-1;
                 while(value.charAt(pos)<'0' || value.charAt(pos)>'9') pos--;
-                this.sufficeOfSpeed=Transformations.convertSuffice(value.substring(pos + 1, value.length()));
+                this.unit =Transformations.convertStringIntoUnit(value.substring(pos + 1, value.length()));
                 this.speed=Integer.parseInt(value.substring(0,pos+1));
 
             }
         }
     }
 
-    public SpeedSuffice getSufficeOfSpeed() {
-        return sufficeOfSpeed;
+    public Unit getUnit() {
+        return unit;
     }
 
-    public void setSufficeOfSpeed(SpeedSuffice sufficeOfSpeed) {
-        this.sufficeOfSpeed = sufficeOfSpeed;
+    public void setUnit(Unit unit) {
+        this.unit = unit;
     }
 
     public boolean isPrate() {

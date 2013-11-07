@@ -69,7 +69,7 @@ public class OutputToFile implements OutputHTB{
                             output.println("RATE=pceil");
                         }
                         else{
-                            output.println("RATE="+htb.getRate().getSpeed()+Transformations.fromSufficeToString(htb.getRate().getSufficeOfSpeed()));
+                            output.println("RATE="+htb.getRate().getSpeed()+Transformations.fromUnitToString(htb.getRate().getUnit()));
                         }
                     }
                 }
@@ -84,7 +84,7 @@ public class OutputToFile implements OutputHTB{
                             output.println("CEIL=pceil");
                         }
                         else{
-                            output.println("CEIL="+htb.getCeil().getSpeed()+Transformations.fromSufficeToString(htb.getCeil().getSufficeOfSpeed()));
+                            output.println("CEIL="+htb.getCeil().getSpeed()+Transformations.fromUnitToString(htb.getCeil().getUnit()));
                         }
                     }
                 }

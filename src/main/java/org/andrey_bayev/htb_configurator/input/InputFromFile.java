@@ -43,7 +43,7 @@ public class InputFromFile implements InputHTB{
         this.input=new BufferedReader(new InputStreamReader(new FileInputStream(fileOfInput)));
     }
 
-    //todo: build an HTBClass from file
+
     /**
      * In this method I am building the HTBClass from HTB file
      * @return

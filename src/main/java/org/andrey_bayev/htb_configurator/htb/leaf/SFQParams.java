@@ -8,7 +8,7 @@
 package org.andrey_bayev.htb_configurator.htb.leaf;
 
 import org.andrey_bayev.htb_configurator.htb.SpeedInBytes;
-import org.andrey_bayev.htb_configurator.htb.SpeedSuffice;
+import org.andrey_bayev.htb_configurator.htb.Unit;
 
 /**
  * This class keeps sfq parameters if user set LEAF=sfq;
@@ -21,7 +21,7 @@ public class SFQParams{
     {
         this.quantum=new SpeedInBytes();
         this.quantum.setSpeed(1600);//default MTU packet value
-        this.quantum.setSuf(SpeedSuffice.BPS);
+        this.quantum.setUnit(Unit.BPS);
         this.perturb=10;
     }
 
@@ -31,7 +31,7 @@ public class SFQParams{
         if(quantum.getSpeed()<0) {
             this.quantum=new SpeedInBytes();
             this.quantum.setSpeed(1600);
-            this.quantum.setSuf(SpeedSuffice.BPS);
+            this.quantum.setUnit(Unit.BPS);
         }
         else this.quantum=quantum;
         if(perturb<0) this.perturb=10;
@@ -45,7 +45,7 @@ public class SFQParams{
     public void setQuantum(SpeedInBytes quantum) {
         if(quantum.getSpeed()<0) {
             this.quantum.setSpeed(1600);
-            this.quantum.setSuf(SpeedSuffice.BPS);
+            this.quantum.setUnit(Unit.BPS);
         }
         else this.quantum=quantum;
     }

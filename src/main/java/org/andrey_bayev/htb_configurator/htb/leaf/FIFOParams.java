@@ -9,7 +9,7 @@
 package org.andrey_bayev.htb_configurator.htb.leaf;
 
 import org.andrey_bayev.htb_configurator.htb.SpeedInBytes;
-import org.andrey_bayev.htb_configurator.htb.SpeedSuffice;
+import org.andrey_bayev.htb_configurator.htb.Unit;
 
 /**
  * this class keeps parameters for simple FIFO queueing disciplines
@@ -21,14 +21,14 @@ public class FIFOParams {
     public FIFOParams(){
         limit=new SpeedInBytes();
         this.limit.setSpeed(1000);
-        this.limit.setSuf(SpeedSuffice.BPS);
+        this.limit.setUnit(Unit.BPS);
     }
 
     public FIFOParams(SpeedInBytes limit){
          if (limit.getSpeed()<0) {
              limit=new SpeedInBytes();
             this.limit.setSpeed(0);
-            this.limit.setSuf(SpeedSuffice.BPS);
+            this.limit.setUnit(Unit.BPS);
         }
         else this.limit=limit;
     }
@@ -40,7 +40,7 @@ public class FIFOParams {
     public void setLimit(SpeedInBytes limit) {
         if ( limit.getSpeed()<0) {
             this.limit.setSpeed(0);
-            this.limit.setSuf(SpeedSuffice.BPS);
+            this.limit.setUnit(Unit.BPS);
         }
         else this.limit=limit;
     }

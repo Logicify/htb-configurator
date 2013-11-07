@@ -10,42 +10,38 @@ package org.andrey_bayev.htb_configurator.htb;
 
 public class Transformations
 {
-    static final int MB=1048576;
-    static final int KB=1024;
 
-    public static SpeedSuffice convertSuffice(String s) {
+    public static Unit convertStringIntoUnit(String s) {
         switch(s)
         {
             case "Kbit":
             {
-               return SpeedSuffice.KBIT;
+               return Unit.KBIT;
             }
             case "Mbit":
             {
-               return SpeedSuffice.MBIT;
+               return Unit.MBIT;
             }
             case "bps":
             {
-               return SpeedSuffice.BPS;
+               return Unit.BPS;
             }
             case "Kbps":
             {
-                return SpeedSuffice.KBPS;
+                return Unit.KBPS;
             }
             case "Mbps":
             {
-                return SpeedSuffice.MBPS;
+                return Unit.MBPS;
             }
-            default: return SpeedSuffice.BIT;
+            default: return Unit.BIT;
 
         }
     }
 
     /**
-     * this static function converts string value into long value like this:
-     * a=a;
-     * aKb=a*1024;
-     * aMb=a*1000000;
+     * this static function converts string value into SpeedInBytes object that helps us to keep values like
+     * 10Kb, 34Mb separating them like ((10,KB),(34,Mb)):
      * @param s
      * @return
      */
@@ -57,21 +53,21 @@ public class Transformations
         kIndex=(kIndex!=-1)?kIndex:s.indexOf('k');
 
 
-        if (mIndex!=-1) {  //todo: fix
+        if (mIndex!=-1) {
             bytesSpeed.setSpeed(Integer.parseInt(s.substring(0,mIndex)));
-            bytesSpeed.setSuf(SpeedSuffice.MBPS);
+            bytesSpeed.setUnit(Unit.MBPS);
             return bytesSpeed;
         }
         else
         {
             if (kIndex!=-1) {
                 bytesSpeed.setSpeed(Integer.parseInt(s.substring(0,kIndex)));
-                bytesSpeed.setSuf(SpeedSuffice.KBPS);
+                bytesSpeed.setUnit(Unit.KBPS);
                 return bytesSpeed;
             }
             else{
                 bytesSpeed.setSpeed(Integer.parseInt(s));
-                bytesSpeed.setSuf(SpeedSuffice.BPS);
+                bytesSpeed.setUnit(Unit.BPS);
                 return bytesSpeed;
             }
         }
@@ -84,12 +80,12 @@ public class Transformations
     public static String fromSpeedInBytesToString(SpeedInBytes bytes)
     {
 
-        if(bytes.getSuf()==SpeedSuffice.MBPS) return (bytes.getSpeed()+"Mb");
-        else if(bytes.getSuf()==SpeedSuffice.KBPS) return (bytes.getSpeed()+"Kb");
+        if(bytes.getUnit()== Unit.MBPS) return (bytes.getSpeed()+"Mb");
+        else if(bytes.getUnit()== Unit.KBPS) return (bytes.getSpeed()+"Kb");
         else return bytes.getSpeed()+"";
     }
 
-    public static String fromSufficeToString(SpeedSuffice e){
+    public static String fromUnitToString(Unit e){
         switch(e)
         {
             case MBIT: return "Mbit";

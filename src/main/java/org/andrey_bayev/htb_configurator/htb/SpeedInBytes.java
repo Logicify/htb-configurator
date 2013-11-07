@@ -7,19 +7,21 @@
  */
 package org.andrey_bayev.htb_configurator.htb;
 
-//this class keeps speed value(like 10Kb,100Mb,100) dividing it into digit value and SpeedSuffice value
+//this class keeps speed value(like 10Kb,100Mb,100) dividing it into digit value and Unit value
 public class SpeedInBytes {
+    final int KB=1024;
+    final int MB=KB*1024;
 
     int speed;//keeps digital value of speed
-    SpeedSuffice suf;
+    Unit unit;
 
     public SpeedInBytes(){
 
     };
 
-    public SpeedInBytes(int speed, SpeedSuffice suf) {
+    public SpeedInBytes(int speed, Unit unit) {
         this.speed = speed;
-        this.suf = suf;
+        this.unit = unit;
     }
 
 
@@ -31,12 +33,29 @@ public class SpeedInBytes {
         this.speed = speed;
     }
 
-    public SpeedSuffice getSuf() {
-        return suf;
+    public Unit getUnit() {
+        return unit;
     }
 
-    public void setSuf(SpeedSuffice suf) {
-        this.suf = suf;
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
+
+    /**
+     * this method returns speed in bytes, using units KB and MB
+      * @return
+     */
+    public long getBytes()
+    {
+        switch(unit)
+        {
+            case MBPS:
+                return speed*MB;
+            case KBPS:
+                return speed*KB;
+            default:
+                return speed;
+        }
     }
 
 }

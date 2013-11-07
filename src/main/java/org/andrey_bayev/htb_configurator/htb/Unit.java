@@ -16,6 +16,6 @@ package org.andrey_bayev.htb_configurator.htb;
  * KBPS for Kbytes/sec
  * MBPS for Mbytes/sec
  */
-public enum SpeedSuffice {
+public enum Unit {
     BIT,KBIT,MBIT,BPS,KBPS,MBPS
 }
