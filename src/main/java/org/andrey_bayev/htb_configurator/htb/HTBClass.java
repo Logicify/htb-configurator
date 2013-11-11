@@ -58,177 +58,216 @@ public class HTBClass
 
     private LinkedList<TimeRange> timeRanges;//This parameter allows you to change class bandwidth during the day or week
 
-    private HashMap<String,Boolean>toFile;//Keeps what parameters you need to write into file
+    private HashMap<String, Boolean> toFile;//Keeps what parameters you need to write into file
 
-    private HashMap<String,String>comments;//keeps the comments to the parameters
+    private HashMap<String, String> comments;//keeps the comments to the parameters
 
-    public HTBClass(){
-        burst=new SpeedInBytes();
-        cburst=new SpeedInBytes();
-        mtu=new SpeedInBytes();
+    public HTBClass()
+    {
+        burst = new SpeedInBytes();
+        cburst = new SpeedInBytes();
+        mtu = new SpeedInBytes();
 
     }
 
     //All getters and setters
-    public boolean isRoot() {
+    public boolean isRoot()
+    {
         return root;
     }
 
-    public void setRoot(boolean root) {
+    public void setRoot(boolean root)
+    {
         this.root = root;
     }
 
-    public RootParams getRootParams() {
+    public RootParams getRootParams()
+    {
         return rootParams;
     }
 
-    public void setRootParams(RootParams rootParams) {
+    public void setRootParams(RootParams rootParams)
+    {
         this.rootParams = rootParams;
     }
 
-    public Leaf getLeaf() {
+    public Leaf getLeaf()
+    {
         return leaf;
     }
 
-    public void setLeaf(Leaf leaf) {
+    public void setLeaf(Leaf leaf)
+    {
         this.leaf = leaf;
     }
 
-    public SFQParams getSfq() {
+    public SFQParams getSfq()
+    {
         return sfq;
     }
 
-    public void setSfq(SFQParams sfq) {
+    public void setSfq(SFQParams sfq)
+    {
         this.sfq = sfq;
     }
 
-    public FIFOParams getPfifo() {
+    public FIFOParams getPfifo()
+    {
         return pfifo;
     }
 
-    public void setPfifo(FIFOParams pfifo) {
+    public void setPfifo(FIFOParams pfifo)
+    {
         this.pfifo = pfifo;
     }
 
-    public FIFOParams getBfifo() {
+    public FIFOParams getBfifo()
+    {
         return bfifo;
     }
 
-    public void setBfifo(FIFOParams bfifo) {
+    public void setBfifo(FIFOParams bfifo)
+    {
         this.bfifo = bfifo;
     }
 
-    public int getPrio() {
+    public int getPrio()
+    {
         return prio;
     }
 
-    public void setPrio(int prio) {
+    public void setPrio(int prio)
+    {
         this.prio = prio;
     }
 
-    public Bandwidth getRate() {
+    public Bandwidth getRate()
+    {
         return rate;
     }
 
-    public void setRate(Bandwidth rate) {
+    public void setRate(Bandwidth rate)
+    {
         this.rate = rate;
     }
 
-    public Bandwidth getCeil() {
+    public Bandwidth getCeil()
+    {
         return ceil;
     }
 
-    public void setCeil(Bandwidth ceil) {
+    public void setCeil(Bandwidth ceil)
+    {
         this.ceil = ceil;
     }
 
-    public SpeedInBytes getBurst() {
+    public SpeedInBytes getBurst()
+    {
         return burst;
     }
 
-    public void setBurst(SpeedInBytes burst) {
+    public void setBurst(SpeedInBytes burst)
+    {
         this.burst = burst;
     }
 
-    public SpeedInBytes getCburst() {
+    public SpeedInBytes getCburst()
+    {
         return cburst;
     }
 
-    public void setCburst(SpeedInBytes cburst) {
+    public void setCburst(SpeedInBytes cburst)
+    {
         this.cburst = cburst;
     }
 
-    public SpeedInBytes getMtu() {
+    public SpeedInBytes getMtu()
+    {
         return mtu;
     }
 
-    public void setMtu(SpeedInBytes mtu) {
+    public void setMtu(SpeedInBytes mtu)
+    {
         this.mtu = mtu;
     }
 
-    public LinkedList<Rule> getRules() {
+    public LinkedList<Rule> getRules()
+    {
         return rules;
     }
 
-    public void setRules(LinkedList<Rule> rules) {
+    public void setRules(LinkedList<Rule> rules)
+    {
         this.rules = rules;
     }
 
-    public LinkedList<Realm> getRealms() {
+    public LinkedList<Realm> getRealms()
+    {
         return realms;
     }
 
-    public void setRealms(LinkedList<Realm> realms) {
+    public void setRealms(LinkedList<Realm> realms)
+    {
         this.realms = realms;
     }
 
-    public LinkedList<Mark> getMarks() {
+    public LinkedList<Mark> getMarks()
+    {
         return marks;
     }
 
-    public void setMarks(LinkedList<Mark> marks) {
+    public void setMarks(LinkedList<Mark> marks)
+    {
         this.marks = marks;
     }
 
-    public LinkedList<TimeRange> getTimeRanges() {
+    public LinkedList<TimeRange> getTimeRanges()
+    {
         return timeRanges;
     }
 
-    public void setTimeRanges(LinkedList<TimeRange> timeRanges) {
+    public void setTimeRanges(LinkedList<TimeRange> timeRanges)
+    {
         this.timeRanges = timeRanges;
     }
 
-    public HashMap<String, Boolean> getToFile() {
+    public HashMap<String, Boolean> getToFile()
+    {
         return toFile;
     }
 
-    public void setToFile(HashMap<String, Boolean> toFile) {
+    public void setToFile(HashMap<String, Boolean> toFile)
+    {
         this.toFile = toFile;
     }
 
-    public HashMap<String, String> getComments() {
+    public HashMap<String, String> getComments()
+    {
         return comments;
     }
 
-    public void setComments(HashMap<String, String> comments) {
+    public void setComments(HashMap<String, String> comments)
+    {
         this.comments = comments;
     }
 
 
-    public String getFileName() {
+    public String getFileName()
+    {
         return fileName;
     }
 
-    public void setFileName(String fileName) {
+    public void setFileName(String fileName)
+    {
         this.fileName = fileName;
     }
 
     //this method checks is we need to write the param to the file
-    public boolean checkIfTrue(String value){
-        if(toFile.get(value)!=null && toFile.get(value)) return true;
+    public boolean checkIfTrue(String value)
+    {
+        if (toFile.get(value) != null && toFile.get(value)) return true;
         else return false;
     }
-
 
 
 }

@@ -16,6 +16,9 @@ package org.andrey_bayev.htb_configurator.htb;
  * KBPS for Kbytes/sec
  * MBPS for Mbytes/sec
  */
-public enum Unit {
-    BIT,KBIT,MBIT,BPS,KBPS,MBPS
+public enum Unit
+{
+    // todo: can these be convertd between each other? if yes, let's do a value-enum, and embody a
+    // conversion within
+    BIT, KBIT, MBIT, BPS, KBPS, MBPS
 }

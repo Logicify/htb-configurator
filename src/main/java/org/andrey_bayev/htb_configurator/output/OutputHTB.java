@@ -6,9 +6,11 @@
  * To change this template use File | Settings | File Templates.
  */
 package org.andrey_bayev.htb_configurator.output;
+
 import org.andrey_bayev.htb_configurator.htb.HTBClass;
 
 
-public interface OutputHTB {
+public interface OutputHTB
+{
     public void write(HTBClass htb);
 }

@@ -17,54 +17,62 @@ public class RootParams
     private int r2q; //coefficient for computing DRR (Deficit Round Robin) quanta
     private boolean dcache; //to use dequeue cache or not
 
-    public RootParams() {
-        defaultID=0;
-        r2q=10;
-        dcache=false;
+    public RootParams()
+    {
+        defaultID = 0;
+        r2q = 10;
+        dcache = false;
     }
 
-    public RootParams(int defaultId,int r2q,boolean dcache){
-        if (defaultId<0) this.defaultID=0;
-        else this.defaultID=defaultID;
-        if (r2q<10) this.r2q=10;
-        else this.r2q=r2q;
-        this.dcache=dcache;
+    public RootParams(int defaultId, int r2q, boolean dcache)
+    {
+        if (defaultId < 0) this.defaultID = 0;
+        else this.defaultID = defaultID;
+        if (r2q < 10) this.r2q = 10;  //todo: why defaults again
+        else this.r2q = r2q;
+        this.dcache = dcache;
     }
 
-    public int getDefaultID() {
+    public int getDefaultID()
+    {
         return defaultID;
     }
 
-    public void setDefaultID(int defaultID) {
-        if (defaultID<0) this.defaultID=0;
+    public void setDefaultID(int defaultID)
+    {
+        if (defaultID < 0) this.defaultID = 0;
         else this.defaultID = defaultID;
     }
 
-    public int getR2q() {
+    public int getR2q()
+    {
         return r2q;
     }
 
-    public void setR2q(int r2q) {
-        if (r2q<10) this.r2q=10;
+    public void setR2q(int r2q)
+    {
+        if (r2q < 10) this.r2q = 10;
         else this.r2q = r2q;
     }
 
-    public boolean isDchache() {
+    public boolean isDchache()
+    {
         return dcache;
     }
 
-    public void setDchache(boolean dchache) {
+    public void setDchache(boolean dchache)
+    {
         this.dcache = dchache;
     }
 
     public boolean equals(RootParams params)
     {
-        if(this==null && params==null) return true;
-        if(this==null && params!=null) return false;
-        if(this!=null && params==null) return false;
-        if (this.defaultID!=params.defaultID) return false;
-        if (this.r2q!=params.r2q) return false;
-        if (this.dcache!=params.dcache) return false;
+        if (this == null && params == null) return true;
+        if (this == null && params != null) return false;
+        if (this != null && params == null) return false;
+        if (this.defaultID != params.defaultID) return false;
+        if (this.r2q != params.r2q) return false;
+        if (this.dcache != params.dcache) return false;
         return true;
     }
 

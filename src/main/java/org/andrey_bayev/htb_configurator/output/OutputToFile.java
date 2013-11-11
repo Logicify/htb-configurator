@@ -19,198 +19,244 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 
-public class OutputToFile implements OutputHTB{
+public class OutputToFile implements OutputHTB
+{
     private File fileOfOutput;
     private HTBClass htb;
     private PrintWriter output;
-    public OutputToFile(){
-        this.fileOfOutput=null;
+
+    public OutputToFile()
+    {
+        this.fileOfOutput = null;
     }
 
 
-
     @Override
-    public void write(HTBClass htbcl) {
-        htb=htbcl;
-        fileOfOutput=new File(htb.getFileName());
-        try {
-            output=new PrintWriter(new FileOutputStream(fileOfOutput));
+    public void write(HTBClass htbcl)
+    {
+        htb = htbcl;
+        fileOfOutput = new File(htb.getFileName());
+        try
+        {
+            output = new PrintWriter(new FileOutputStream(fileOfOutput));
             writeComment("HTB");
             //checking if the file is root HTB class
             if (htb.isRoot())
             {
                 //writing DEFAULT into file
-                if(checkIfTrue("DEFAULT")){
+                if (checkIfTrue("DEFAULT"))
+                {
                     writeComment("DEFAULT");
-                    output.println("DEFAULT="+htb.getRootParams().getDefaultID());
+                    output.println("DEFAULT=" + htb.getRootParams().getDefaultID());
                 }
                 //writing R2Q into file
-                if(checkIfTrue("R2Q")){
+                if (checkIfTrue("R2Q"))
+                {
                     writeComment("R2Q");
-                    output.println("R2Q="+htb.getRootParams().getR2q());
+                    output.println("R2Q=" + htb.getRootParams().getR2q());
                 }
                 //writing DCHACHE into file
-                if(checkIfTrue("DCACHE")){
+                if (checkIfTrue("DCACHE"))
+                {
                     writeComment("DCACHE");
-                    if(htb.getRootParams().isDchache()) output.println("DCACHE=yes");
+                    if (htb.getRootParams().isDchache()) output.println("DCACHE=yes");
                     else output.println("DCACHE=no");
                 }
-            }
-            else
+            } else
             {
                 //writing RATE into File
-                if(checkIfTrue("RATE")){
+                if (checkIfTrue("RATE"))
+                {
                     writeComment("RATE");
-                    if(htb.getRate().isPrate()){
+                    if (htb.getRate().isPrate())
+                    {
                         output.println("RATE=prate");
-                    }
-                    else{
-                        if(htb.getRate().isPceil()){
+                    } else
+                    {
+                        if (htb.getRate().isPceil())
+                        {
                             output.println("RATE=pceil");
-                        }
-                        else{
-                            output.println("RATE="+htb.getRate().getSpeed()+Transformations.fromUnitToString(htb.getRate().getUnit()));
+                        } else
+                        {
+                            output.println("RATE=" + htb.getRate().getSpeed() + Transformations.fromUnitToString(htb.getRate().getUnit()));
                         }
                     }
                 }
                 //writing CEIL into File
-                if(checkIfTrue("CEIL")){
+                if (checkIfTrue("CEIL"))
+                {
                     writeComment("CEIL");
-                    if(htb.getCeil().isPrate()){
+                    if (htb.getCeil().isPrate())
+                    {
                         output.println("CEIL=prate");
-                    }
-                    else{
-                        if(htb.getCeil().isPceil()){
+                    } else
+                    {
+                        if (htb.getCeil().isPceil())
+                        {
                             output.println("CEIL=pceil");
-                        }
-                        else{
-                            output.println("CEIL="+htb.getCeil().getSpeed()+Transformations.fromUnitToString(htb.getCeil().getUnit()));
+                        } else
+                        {
+                            output.println("CEIL=" + htb.getCeil().getSpeed() + Transformations.fromUnitToString(htb.getCeil().getUnit()));
                         }
                     }
                 }
                 //writing BURST into File
-                if(checkIfTrue("BURST")){
+                if (checkIfTrue("BURST"))
+                {
                     writeComment("BURST");
                     output.println("BURST=" + Transformations.fromSpeedInBytesToString(htb.getBurst()));
                 }
                 //writing CBURST into File
-                if(checkIfTrue("CBURST")){
+                if (checkIfTrue("CBURST"))
+                {
                     writeComment("CBURST");
-                    output.println("CBURST="+Transformations.fromSpeedInBytesToString(htb.getCburst()));
+                    output.println("CBURST=" + Transformations.fromSpeedInBytesToString(htb.getCburst()));
                 }
                 //writing PRIO into File
-                if(checkIfTrue("PRIO")){
+                if (checkIfTrue("PRIO"))
+                {
                     writeComment("PRIO");
-                    output.println("PRIO="+htb.getPrio());
+                    output.println("PRIO=" + htb.getPrio());
                 }
                 //writing LEAF into File
-                if(checkIfTrue("LEAF")){
+                if (checkIfTrue("LEAF"))
+                {
                     writeComment("LEAF");
-                    switch(htb.getLeaf()){
-                        case SFQ: output.println("LEAF=sfq"); break;
-                        case PFIFO: output.println("LEAF=pfifo"); break;
-                        case BFIFO: output.println("LEAF=bfifo"); break;
-                        default: output.println("LEAF=none"); break;
+                    switch (htb.getLeaf())
+                    {
+                        case SFQ:
+                            output.println("LEAF=sfq");
+                            break;
+                        case PFIFO:
+                            output.println("LEAF=pfifo");
+                            break;
+                        case BFIFO:
+                            output.println("LEAF=bfifo");
+                            break;
+                        default:
+                            output.println("LEAF=none");
+                            break;
                     }
                 }
                 //writing MTU into File
-                if(checkIfTrue("MTU")){
+                if (checkIfTrue("MTU"))
+                {
                     writeComment("MTU");
-                    output.println("MTU="+Transformations.fromSpeedInBytesToString(htb.getMtu()));
+                    output.println("MTU=" + Transformations.fromSpeedInBytesToString(htb.getMtu()));
                 }
                 //writing LEAF params into File
-                if(checkIfTrue("LEAF")){
+                if (checkIfTrue("LEAF"))
+                {
 
-                switch(htb.getLeaf()){
-                    case SFQ:{
-                        //writing QUANTUM parameter of SFQ into File
-                        if(checkIfTrue("QUANTUM")){
-                            writeComment("QUANTUM");
-                            output.println("QUANTUM="+Transformations.fromSpeedInBytesToString(htb.getSfq().getQuantum()));
+                    switch (htb.getLeaf())
+                    {
+                        case SFQ:
+                        {
+                            //writing QUANTUM parameter of SFQ into File
+                            if (checkIfTrue("QUANTUM"))
+                            {
+                                writeComment("QUANTUM");
+                                output.println("QUANTUM=" + Transformations.fromSpeedInBytesToString(htb.getSfq().getQuantum()));
+                            }
+                            //writing PERTURB parameter of SFQ into File
+                            if (checkIfTrue("PERTURB"))
+                            {
+                                writeComment("PERTURB");
+                                output.println("PERTURB=" + htb.getSfq().getPerturb());
+                            }
                         }
-                        //writing PERTURB parameter of SFQ into File
-                        if(checkIfTrue("PERTURB")){
-                            writeComment("PERTURB");
-                            output.println("PERTURB="+htb.getSfq().getPerturb());
-                        }
-                    }
-                    case PFIFO:{
-                        //writing LIMIT parameter of PFIFO
-                        if(checkIfTrue("LIMIT")){
-                            writeComment("LIMIT");
-                            output.println("LIMIT="+Transformations.fromSpeedInBytesToString(htb.getPfifo().getLimit()));
-                        }
+                        case PFIFO:
+                        {
+                            //writing LIMIT parameter of PFIFO
+                            if (checkIfTrue("LIMIT"))
+                            {
+                                writeComment("LIMIT");
+                                output.println("LIMIT=" + Transformations.fromSpeedInBytesToString(htb.getPfifo().getLimit()));
+                            }
 
-                    }
-                    case BFIFO:{
-                        //writing LIMIT parameter of BFIFO
-                        if(checkIfTrue("LIMIT")){
-                            writeComment("LIMIT");
-                            output.println("LIMIT="+Transformations.fromSpeedInBytesToString(htb.getBfifo().getLimit()));
+                        }
+                        case BFIFO:
+                        {
+                            //writing LIMIT parameter of BFIFO
+                            if (checkIfTrue("LIMIT"))
+                            {
+                                writeComment("LIMIT");
+                                output.println("LIMIT=" + Transformations.fromSpeedInBytesToString(htb.getBfifo().getLimit()));
+                            }
                         }
                     }
-                }
                     //writing filtering params into file
-                        //writing RULES into file
-                        if(checkIfTrue("RULE")){
+                    //writing RULES into file
+                    if (checkIfTrue("RULE"))
+                    {
 
-                            for(Rule rule: htb.getRules()){
-                                if (rule.getComment()!=null) output.println('#'+rule.getComment());
-                                output.print("RULE=");
-                                if(rule.getSaddr()!=null) output.print(rule.getSaddr().toString()+",");
-                                if(rule.getDaddr()!=null) output.print(rule.getDaddr().toString());
-                                output.println();
-                            }
-
+                        for (Rule rule : htb.getRules())
+                        {
+                            if (rule.getComment() != null) output.println('#' + rule.getComment());
+                            output.print("RULE=");
+                            if (rule.getSaddr() != null) output.print(rule.getSaddr().toString() + ",");
+                            if (rule.getDaddr() != null) output.print(rule.getDaddr().toString());
+                            output.println();
                         }
-                        //writing REALMS into file
-                        if(checkIfTrue("REALM")){
 
-                            for(Realm realm: htb.getRealms()){
-                                if (realm.getComment()!=null) output.println('#'+realm.getComment());
-                                output.print("REALM=");
-                                if(realm.getSrealm()!=null) output.print(realm.getSrealm()+",");
-                                if(realm.getDrealm()!=null) output.print(realm.getDrealm());
-                                output.println();
-                            }
+                    }
+                    //writing REALMS into file
+                    if (checkIfTrue("REALM"))
+                    {
 
+                        for (Realm realm : htb.getRealms())
+                        {
+                            if (realm.getComment() != null) output.println('#' + realm.getComment());
+                            output.print("REALM=");
+                            if (realm.getSrealm() != null) output.print(realm.getSrealm() + ",");
+                            if (realm.getDrealm() != null) output.print(realm.getDrealm());
+                            output.println();
                         }
-                        //writing MARKS into file
-                        if(checkIfTrue("MARK")){
-                            for(Mark mark: htb.getMarks()){
-                                if (mark.getComment()!=null) output.println('#'+mark.getComment());
-                                output.println("MARK="+mark.getFirewallRule());
-                            }
 
+                    }
+                    //writing MARKS into file
+                    if (checkIfTrue("MARK"))
+                    {
+                        for (Mark mark : htb.getMarks())
+                        {
+                            if (mark.getComment() != null) output.println('#' + mark.getComment());
+                            output.println("MARK=" + mark.getFirewallRule());
                         }
-                        //writing TIMES into file
-                        if(checkIfTrue("TIME")){
-                            for(TimeRange time: htb.getTimeRanges()){
-                                if(time.getComment()!=null) output.println('#'+time.getComment());
-                                output.println("TIME="+time.toString());
-                            }
 
+                    }
+                    //writing TIMES into file
+                    if (checkIfTrue("TIME"))
+                    {
+                        for (TimeRange time : htb.getTimeRanges())
+                        {
+                            if (time.getComment() != null) output.println('#' + time.getComment());
+                            output.println("TIME=" + time.toString());
                         }
+
+                    }
                 }
 
             }
             output.flush();
             output.close();
 
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e)
+        {
             System.out.println("File is not found");
         }
 
     }
 
 
-private void writeComment(String value){
-    if(htb.getComments().get(value)!=null) output.println("#"+htb.getComments().get(value));
-}
+    private void writeComment(String value)
+    {
+        if (htb.getComments().get(value) != null) output.println("#" + htb.getComments().get(value));
+    }
 
-private boolean checkIfTrue(String value){
-    if(htb.getToFile().get(value)!=null && htb.getToFile().get(value)) return true;
-    else return false;
-}
+    private boolean checkIfTrue(String value)
+    {
+        if (htb.getToFile().get(value) != null && htb.getToFile().get(value)) return true;
+        else return false;
+    }
 
 }

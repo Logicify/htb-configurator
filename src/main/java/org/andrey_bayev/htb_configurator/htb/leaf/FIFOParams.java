@@ -14,35 +14,40 @@ import org.andrey_bayev.htb_configurator.htb.Unit;
 /**
  * this class keeps parameters for simple FIFO queueing disciplines
  */
-public class FIFOParams {
+public class FIFOParams
+{
 
     SpeedInBytes limit;//Number of packets/bytes the queue can hold
 
-    public FIFOParams(){
-        limit=new SpeedInBytes();
-        this.limit.setSpeed(1000);
+    public FIFOParams()
+    {
+        limit = new SpeedInBytes();
+        this.limit.setSpeed(1000); // todo why 1000? why a default?
         this.limit.setUnit(Unit.BPS);
     }
 
-    public FIFOParams(SpeedInBytes limit){
-         if (limit.getSpeed()<0) {
-             limit=new SpeedInBytes();
+    public FIFOParams(SpeedInBytes limit)
+    {
+        if (limit.getSpeed() < 0)
+        {
+            limit = new SpeedInBytes(); //todo maybe this.limit = new speedInBytes()?
             this.limit.setSpeed(0);
             this.limit.setUnit(Unit.BPS);
-        }
-        else this.limit=limit;
+        } else this.limit = limit;
     }
 
-    public SpeedInBytes getLimit() {
+    public SpeedInBytes getLimit()
+    {
         return limit;
     }
 
-    public void setLimit(SpeedInBytes limit) {
-        if ( limit.getSpeed()<0) {
+    public void setLimit(SpeedInBytes limit)
+    {
+        if (limit.getSpeed() < 0)
+        {
             this.limit.setSpeed(0);
             this.limit.setUnit(Unit.BPS);
-        }
-        else this.limit=limit;
+        } else this.limit = limit;
     }
 
 

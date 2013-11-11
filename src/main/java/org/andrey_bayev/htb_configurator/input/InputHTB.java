@@ -7,9 +7,11 @@
  */
 
 package org.andrey_bayev.htb_configurator.input;
+
 import org.andrey_bayev.htb_configurator.htb.HTBClass;
 
 
-public interface InputHTB {
+public interface InputHTB
+{
     public HTBClass read();
 }

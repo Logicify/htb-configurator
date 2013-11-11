@@ -9,63 +9,73 @@ package org.andrey_bayev.htb_configurator.htb.filters;
 
 /**
  * This class make up "u32" filter rules that select traffic for
- #	each of the classes
+ * #	each of the classes
  */
-public class Rule {
+public class Rule
+{
     private Address saddr;
     private Address daddr;
     private String comment;
 
-    public Rule(){
-        this.saddr=null;
-        this.daddr=null;
-        this.comment=null;
+    public Rule()
+    {
+        this.saddr = null;
+        this.daddr = null;
+        this.comment = null;
     }
 
-    public Rule(String saddr,String daddr,String comment){
-        if(saddr!=null) {
-            this.saddr=new Address(saddr);
-        }
-        else{
-            this.saddr=null;
-        }
-
-        if(daddr!=null){
-            this.daddr=new Address(daddr);
-        }
-        else{
-           this.daddr=null;
+    public Rule(String saddr, String daddr, String comment)
+    {
+        if (saddr != null)
+        {
+            this.saddr = new Address(saddr);
+        } else
+        {
+            this.saddr = null;
         }
 
-        this.comment=comment;
+        if (daddr != null)
+        {
+            this.daddr = new Address(daddr);
+        } else
+        {
+            this.daddr = null;
+        }
+
+        this.comment = comment;
     }
 
 
-    public Address getSaddr() {
+    public Address getSaddr()
+    {
         return saddr;
     }
 
-    public void setSaddr(Address saddr) {
+    public void setSaddr(Address saddr)
+    {
         this.saddr = saddr;
     }
 
-    public Address getDaddr() {
+    public Address getDaddr()
+    {
         return daddr;
     }
 
-    public void setDaddr(Address daddr) {
+    public void setDaddr(Address daddr)
+    {
         this.daddr = daddr;
     }
 
 
-    public String getComment() {
+    public String getComment()
+    {
         return comment;
     }
 
-    public void setComment(String comment) {
+    public void setComment(String comment)
+    {
         this.comment = comment;
     }
-
 
 
 }

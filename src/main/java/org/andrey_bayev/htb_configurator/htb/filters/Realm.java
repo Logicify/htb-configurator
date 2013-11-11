@@ -14,33 +14,40 @@ public class Realm
     private String drealm;
     private String comment;
 
-    public Realm(String srealm,String drealm,String comment){
-        this.srealm=srealm;
-        this.drealm=drealm;
-        this.comment=comment;
+    public Realm(String srealm, String drealm, String comment)
+    {
+        this.srealm = srealm;
+        this.drealm = drealm;
+        this.comment = comment;
     }
 
-    public String getSrealm() {
+    public String getSrealm()
+    {
         return srealm;
     }
 
-    public void setSrealm(String srealm) {
+    public void setSrealm(String srealm)
+    {
         this.srealm = srealm;
     }
 
-    public String getDrealm() {
+    public String getDrealm()
+    {
         return drealm;
     }
 
-    public void setDrealm(String drealm) {
+    public void setDrealm(String drealm)
+    {
         this.drealm = drealm;
     }
 
-    public String getComment() {
+    public String getComment()
+    {
         return comment;
     }
 
-    public void setComment(String comment) {
+    public void setComment(String comment)
+    {
         this.comment = comment;
     }
 

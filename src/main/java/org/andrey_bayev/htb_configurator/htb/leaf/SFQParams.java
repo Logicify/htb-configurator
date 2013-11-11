@@ -13,49 +13,56 @@ import org.andrey_bayev.htb_configurator.htb.Unit;
 /**
  * This class keeps sfq parameters if user set LEAF=sfq;
  */
-public class SFQParams{
+public class SFQParams
+{
     private SpeedInBytes quantum;//Amount of data in bytes a stream is allowed to dequeue before next queue gets a turn.
     private int perturb;//Period of hash function perturbation.
+    // why not name it hashPerturbationPeriod?
 
     public SFQParams()
     {
-        this.quantum=new SpeedInBytes();
+        this.quantum = new SpeedInBytes();
         this.quantum.setSpeed(1600);//default MTU packet value
         this.quantum.setUnit(Unit.BPS);
-        this.perturb=10;
+        this.perturb = 10;
     }
 
     public SFQParams(SpeedInBytes quantum, int perturb)
     {
 
-        if(quantum.getSpeed()<0) {
-            this.quantum=new SpeedInBytes();
-            this.quantum.setSpeed(1600);
+        if (quantum.getSpeed() < 0)
+        {
+            this.quantum = new SpeedInBytes();
+            this.quantum.setSpeed(1600); // TODO why defaults, again?
             this.quantum.setUnit(Unit.BPS);
-        }
-        else this.quantum=quantum;
-        if(perturb<0) this.perturb=10;
+        } else this.quantum = quantum;
+        if (perturb < 0) this.perturb = 10;  // TODO if these are really sane defaults, move them to some kind of
+            // constants class of SpeedDefaults. There should be no 'magic numbers' in code.
         else this.perturb = perturb;
     }
 
-    public SpeedInBytes getQuantum(){
+    public SpeedInBytes getQuantum()
+    {
         return quantum;
     }
 
-    public void setQuantum(SpeedInBytes quantum) {
-        if(quantum.getSpeed()<0) {
+    public void setQuantum(SpeedInBytes quantum)
+    {
+        if (quantum.getSpeed() < 0)
+        {
             this.quantum.setSpeed(1600);
             this.quantum.setUnit(Unit.BPS);
-        }
-        else this.quantum=quantum;
+        } else this.quantum = quantum;
     }
 
-    public int getPerturb() {
+    public int getPerturb()
+    {
         return perturb;
     }
 
-    public void setPerturb(int perturb) {
-        if(perturb<0) this.perturb=10;
+    public void setPerturb(int perturb)
+    {
+        if (perturb < 0) this.perturb = 10;
         else this.perturb = perturb;
     }
 }

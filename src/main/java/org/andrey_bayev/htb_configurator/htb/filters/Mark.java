@@ -7,29 +7,35 @@ package org.andrey_bayev.htb_configurator.htb.filters;
  * Time: 5:38 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Mark {
+public class Mark
+{
 
     private String firewallRule;
     private String comment;
 
-    public Mark(String firewallRule, String comment) {
+    public Mark(String firewallRule, String comment)
+    {
         this.firewallRule = firewallRule;
         this.comment = comment;
     }
 
-    public String getFirewallRule() {
+    public String getFirewallRule()
+    {
         return firewallRule;
     }
 
-    public void setFirewallRule(String firewallRule) {
+    public void setFirewallRule(String firewallRule)
+    {
         this.firewallRule = firewallRule;
     }
 
-    public String getComment() {
+    public String getComment()
+    {
         return comment;
     }
 
-    public void setComment(String comment) {
+    public void setComment(String comment)
+    {
         this.comment = comment;
     }
 }
