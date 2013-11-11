@@ -27,7 +27,7 @@ public class Bandwidth
     {
         if (speed < 0) this.speed = 0;
         else this.speed = speed;
-        this.unit = Unit.KBIT;
+        this.unit = unit;
         this.prate = prate;
         this.pceil = pceil;
     }
@@ -46,7 +46,7 @@ public class Bandwidth
             {
                 int pos;
                 pos = value.length() - 1;
-                // TODO what is this? (code below)
+                //todo: do this with regexp
                 while (value.charAt(pos) < '0' || value.charAt(pos) > '9') pos--;
                 this.unit = Transformations.convertStringIntoUnit(value.substring(pos + 1, value.length()));
                 this.speed = Integer.parseInt(value.substring(0, pos + 1));
@@ -92,7 +92,7 @@ public class Bandwidth
 
     public void setSpeed(int speed)
     {
-        if (speed < 0) this.speed = 1;
+        if (speed < 0) this.speed = 0;
         else speed = this.speed;
     }
 

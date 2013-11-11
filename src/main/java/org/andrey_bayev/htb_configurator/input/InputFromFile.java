@@ -22,31 +22,26 @@ import java.util.LinkedList;
 
 public class InputFromFile implements InputHTB
 {
-    private BufferedReader input;
     private File fileOfInput;
 
     public InputFromFile()
     {
         this.fileOfInput = null;
-        this.input = null;
     }
 
-    public InputFromFile(File file) throws FileNotFoundException
+    public InputFromFile(File file)
     {
         this.fileOfInput = file;
-        this.input = new BufferedReader(new InputStreamReader(new FileInputStream(fileOfInput)));
     }
 
-    public InputFromFile(String filename) throws FileNotFoundException
+    public InputFromFile(String filename)
     {
         this.fileOfInput = new File(filename);
-        this.input = this.input = new BufferedReader(new InputStreamReader(new FileInputStream(fileOfInput)));
     }
 
-    public void setFile(File file) throws FileNotFoundException
+    public void setFile(File file)
     {
         this.fileOfInput = file;
-        this.input = new BufferedReader(new InputStreamReader(new FileInputStream(fileOfInput)));
     }
 
 
@@ -58,7 +53,10 @@ public class InputFromFile implements InputHTB
     @Override
     public HTBClass read()
     {
+
         HTBClass htb = new HTBClass();
+        try(BufferedReader input=new BufferedReader(new InputStreamReader(new FileInputStream(fileOfInput)))){
+
         //I am defining values I need to create HTB class
         htb.setComments(new HashMap<String, String>());
         htb.setToFile(new HashMap<String, Boolean>());
@@ -79,8 +77,6 @@ public class InputFromFile implements InputHTB
         String comment = null;
         String key = null;
         String value = null;
-        try
-        {
             str = input.readLine();
             if (str.length() != 0 && str.charAt(0) == '#')
             {
@@ -246,11 +242,10 @@ public class InputFromFile implements InputHTB
             // finally (close, if you can)
             // there's special java construct try-catch-finally there for that purpose
             input.close();
-
-            return htb;
-        } catch (IOException e)
+        } catch (Exception e)
         {
-            System.out.println(e);
+            System.out.println("Error: "+e);
+            System.out.println("Caused: "+e.getCause());
         }
 
 

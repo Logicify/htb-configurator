@@ -17,11 +17,11 @@ public class Transformations
         {
             case "Kbit":
             {
-                return Unit.KBIT;
+                return Unit.KBITPS;
             }
             case "Mbit":
             {
-                return Unit.MBIT;
+                return Unit.MBITPS;
             }
             case "bps":
             {
@@ -36,7 +36,7 @@ public class Transformations
                 return Unit.MBPS;
             }
             default:
-                return Unit.BIT;
+                return Unit.BITPS;
 
         }
     }
@@ -94,9 +94,9 @@ public class Transformations
     {
         switch (e)
         {
-            case MBIT:
+            case MBITPS:
                 return "Mbit";
-            case KBIT:
+            case KBITPS:
                 return "Kbit";
             case MBPS:
                 return "Mbps";
@@ -104,7 +104,7 @@ public class Transformations
                 return "Kbps";
             case BPS:
                 return "bps";
-            case BIT:
+            case BITPS:
                 return "";
             default:
                 return "";

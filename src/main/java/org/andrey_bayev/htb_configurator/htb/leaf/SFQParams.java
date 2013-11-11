@@ -7,6 +7,7 @@
  */
 package org.andrey_bayev.htb_configurator.htb.leaf;
 
+import org.andrey_bayev.htb_configurator.htb.DefaultHTBClassValues;
 import org.andrey_bayev.htb_configurator.htb.SpeedInBytes;
 import org.andrey_bayev.htb_configurator.htb.Unit;
 
@@ -22,9 +23,9 @@ public class SFQParams
     public SFQParams()
     {
         this.quantum = new SpeedInBytes();
-        this.quantum.setSpeed(1600);//default MTU packet value
-        this.quantum.setUnit(Unit.BPS);
-        this.perturb = 10;
+        this.quantum.setSpeed(DefaultHTBClassValues.DEFAULT_QUANTUM_SPEED);//default MTU packet value
+        this.quantum.setUnit(DefaultHTBClassValues.DEFAULT_SPEED_UNIT);
+        this.perturb = DefaultHTBClassValues.DEFAULT_PERTURB;
     }
 
     public SFQParams(SpeedInBytes quantum, int perturb)
@@ -33,10 +34,10 @@ public class SFQParams
         if (quantum.getSpeed() < 0)
         {
             this.quantum = new SpeedInBytes();
-            this.quantum.setSpeed(1600); // TODO why defaults, again?
-            this.quantum.setUnit(Unit.BPS);
+            this.quantum.setSpeed(DefaultHTBClassValues.DEFAULT_QUANTUM_SPEED);
+            this.quantum.setUnit(DefaultHTBClassValues.DEFAULT_SPEED_UNIT);
         } else this.quantum = quantum;
-        if (perturb < 0) this.perturb = 10;  // TODO if these are really sane defaults, move them to some kind of
+        if (perturb < 0) this.perturb = DefaultHTBClassValues.DEFAULT_PERTURB;
             // constants class of SpeedDefaults. There should be no 'magic numbers' in code.
         else this.perturb = perturb;
     }
@@ -50,8 +51,8 @@ public class SFQParams
     {
         if (quantum.getSpeed() < 0)
         {
-            this.quantum.setSpeed(1600);
-            this.quantum.setUnit(Unit.BPS);
+            this.quantum.setSpeed(DefaultHTBClassValues.DEFAULT_QUANTUM_SPEED);
+            this.quantum.setUnit(DefaultHTBClassValues.DEFAULT_SPEED_UNIT);
         } else this.quantum = quantum;
     }
 
@@ -62,7 +63,7 @@ public class SFQParams
 
     public void setPerturb(int perturb)
     {
-        if (perturb < 0) this.perturb = 10;
+        if (perturb < 0) this.perturb = DefaultHTBClassValues.DEFAULT_PERTURB;
         else this.perturb = perturb;
     }
 }

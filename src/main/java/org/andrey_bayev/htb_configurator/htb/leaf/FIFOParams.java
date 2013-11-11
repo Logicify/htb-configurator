@@ -8,8 +8,8 @@
 
 package org.andrey_bayev.htb_configurator.htb.leaf;
 
+import org.andrey_bayev.htb_configurator.htb.DefaultHTBClassValues;
 import org.andrey_bayev.htb_configurator.htb.SpeedInBytes;
-import org.andrey_bayev.htb_configurator.htb.Unit;
 
 /**
  * this class keeps parameters for simple FIFO queueing disciplines
@@ -22,17 +22,18 @@ public class FIFOParams
     public FIFOParams()
     {
         limit = new SpeedInBytes();
-        this.limit.setSpeed(1000); // todo why 1000? why a default?
-        this.limit.setUnit(Unit.BPS);
+        this.limit.setSpeed(DefaultHTBClassValues.DEFAULT_LIMIT_SPEED);
+        this.limit.setUnit(DefaultHTBClassValues.DEFAULT_SPEED_UNIT);
     }
 
     public FIFOParams(SpeedInBytes limit)
     {
+
         if (limit.getSpeed() < 0)
         {
-            limit = new SpeedInBytes(); //todo maybe this.limit = new speedInBytes()?
-            this.limit.setSpeed(0);
-            this.limit.setUnit(Unit.BPS);
+            this.limit = new SpeedInBytes();
+            this.limit.setSpeed(DefaultHTBClassValues.DEFAULT_LIMIT_SPEED);
+            this.limit.setUnit(DefaultHTBClassValues.DEFAULT_SPEED_UNIT);
         } else this.limit = limit;
     }
 
@@ -45,8 +46,8 @@ public class FIFOParams
     {
         if (limit.getSpeed() < 0)
         {
-            this.limit.setSpeed(0);
-            this.limit.setUnit(Unit.BPS);
+            this.limit.setSpeed(DefaultHTBClassValues.DEFAULT_LIMIT_SPEED);
+            this.limit.setUnit(DefaultHTBClassValues.DEFAULT_SPEED_UNIT);
         } else this.limit = limit;
     }
 

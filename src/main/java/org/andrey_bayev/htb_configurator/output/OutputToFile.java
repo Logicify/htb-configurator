@@ -36,9 +36,10 @@ public class OutputToFile implements OutputHTB
     {
         htb = htbcl;
         fileOfOutput = new File(htb.getFileName());
-        try
+        try(PrintWriter out=new PrintWriter(new FileOutputStream(fileOfOutput)))
         {
-            output = new PrintWriter(new FileOutputStream(fileOfOutput));
+            output=out;
+
             writeComment("HTB");
             //checking if the file is root HTB class
             if (htb.isRoot())
@@ -240,9 +241,10 @@ public class OutputToFile implements OutputHTB
             output.flush();
             output.close();
 
-        } catch (FileNotFoundException e)
+        } catch (Exception e)
         {
-            System.out.println("File is not found");
+            System.out.println("Error: "+e);
+            System.out.println("Caused by: "+e.getCause());
         }
 
     }

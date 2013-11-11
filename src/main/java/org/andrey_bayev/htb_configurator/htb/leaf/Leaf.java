@@ -12,6 +12,8 @@ package org.andrey_bayev.htb_configurator.htb.leaf;
  */
 public enum Leaf
 {
-    // tODO: would be grate to explain at least a little every abbreviation
-    NONE, SFQ, PFIFO, BFIFO
+    NONE, //we haven't queueing disciplines
+    SFQ, //SFQ queueing discipline
+    PFIFO, //PFIFO queueing discipline
+    BFIFO //BFIFO queueing discipline
 }

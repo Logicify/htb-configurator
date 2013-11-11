@@ -19,16 +19,16 @@ public class RootParams
 
     public RootParams()
     {
-        defaultID = 0;
-        r2q = 10;
+        defaultID = DefaultHTBClassValues.DEFAULT_ROOT_ID;
+        r2q = DefaultHTBClassValues.DEFAULT_R2Q;
         dcache = false;
     }
 
     public RootParams(int defaultId, int r2q, boolean dcache)
     {
-        if (defaultId < 0) this.defaultID = 0;
+        if (defaultId < 0) this.defaultID = DefaultHTBClassValues.DEFAULT_ROOT_ID;
         else this.defaultID = defaultID;
-        if (r2q < 10) this.r2q = 10;  //todo: why defaults again
+        if (r2q < DefaultHTBClassValues.DEFAULT_R2Q) this.r2q = DefaultHTBClassValues.DEFAULT_R2Q;
         else this.r2q = r2q;
         this.dcache = dcache;
     }
@@ -40,7 +40,7 @@ public class RootParams
 
     public void setDefaultID(int defaultID)
     {
-        if (defaultID < 0) this.defaultID = 0;
+        if (defaultID < 0) this.defaultID = DefaultHTBClassValues.DEFAULT_ROOT_ID;
         else this.defaultID = defaultID;
     }
 
@@ -51,7 +51,7 @@ public class RootParams
 
     public void setR2q(int r2q)
     {
-        if (r2q < 10) this.r2q = 10;
+        if (r2q < DefaultHTBClassValues.DEFAULT_R2Q) this.r2q = DefaultHTBClassValues.DEFAULT_R2Q;
         else this.r2q = r2q;
     }
 

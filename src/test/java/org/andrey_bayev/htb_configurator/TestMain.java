@@ -20,7 +20,7 @@ import java.util.Comparator;
 
 public class TestMain
 {
-    @Ignore
+
     @org.junit.Test
     public void testHTBFiles()
     {
@@ -32,8 +32,7 @@ public class TestMain
         InputFromFile input = new InputFromFile(), input2 = new InputFromFile();
         for (File file : htbfiles)
         {
-            try
-            {
+
                 input.setFile(file);
                 htb1 = input.read();
                 String filename2 = catalog2.getAbsolutePath() + '/' + file.getName();
@@ -42,12 +41,8 @@ public class TestMain
                 output.write(htb1);
                 input2.setFile(file);
                 htb2 = input2.read();
-                Comparator comparator = new BeanComparator();
                 //Assert.assertEquals(htb1,htb2);
-            } catch (FileNotFoundException e)
-            {
-                Assert.assertTrue("File is not found", false);
-            }
+
         }
     }
 

@@ -18,16 +18,12 @@ public class Main
 {
     public static void main(String args[])
     {
-        try
-        {
+
             InputFromFile in = new InputFromFile("/media/wind/downloads(linux)/work task/eth2-2_13.gotomeeting");
             HTBClass myhtb = in.read();
             myhtb.setFileName("/media/wind/downloads(linux)/work task/eth4-2_13.gotomeeting");
             OutputToFile out = new OutputToFile();
             out.write(myhtb);
-        } catch (FileNotFoundException e)
-        {
-            System.out.println(e);
-        }
+
     }
 }

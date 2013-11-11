@@ -9,16 +9,14 @@ package org.andrey_bayev.htb_configurator.htb;
 
 /**
  * Traffic speed identifier
- * BIT for bits/sec
- * KBIT for Kbits/sec
- * MBIT for Mbits/sec
+ * BITPS for bits/sec
+ * KBITPS for Kbits/sec
+ * MBITPS for Mbits/sec
  * BPS for bytes/sec
  * KBPS for Kbytes/sec
  * MBPS for Mbytes/sec
  */
 public enum Unit
 {
-    // todo: can these be convertd between each other? if yes, let's do a value-enum, and embody a
-    // conversion within
-    BIT, KBIT, MBIT, BPS, KBPS, MBPS
+    BITPS, KBITPS, MBITPS, BPS, KBPS, MBPS
 }

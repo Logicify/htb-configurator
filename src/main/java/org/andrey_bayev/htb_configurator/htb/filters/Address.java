@@ -33,8 +33,8 @@ public class Address
         // with regexp, all this code virtually collapses to 4 lines.
 
         String parts[] = address.split(":");
-        // TODO: strings should be better compared by "".equals(parts[0]);
-        if (parts[0] != "")
+
+        if (!parts[0].equals(""))
         {
             String ipParts[] = parts[0].split("/");
             ip = ipParts[0];
