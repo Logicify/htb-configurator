@@ -9,10 +9,13 @@ package org.andrey_bayev.htb_configurator;
 import org.andrey_bayev.htb_configurator.htb.HTBClass;
 import org.andrey_bayev.htb_configurator.input.InputFromFile;
 import org.andrey_bayev.htb_configurator.output.OutputToFile;
+import org.apache.commons.beanutils.BeanComparator;
 import org.junit.Assert;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Comparator;
+import java.util.Objects;
 
 public class TestMain
 {
@@ -34,8 +37,10 @@ public class TestMain
                 OutputToFile output=new OutputToFile();
                 output.write(htb1);
                 input2.setFile(file);
-                htb2=input.read();
-                //Assert.assertEquals("Files are not equal",htb1,htb2);
+                htb2=input2.read();
+               ;
+               Comparator comparator=new BeanComparator();
+                //Assert.assertEquals(htb1,htb2);
             } catch (FileNotFoundException e) {
                 Assert.assertTrue("File is not found", false);
             }

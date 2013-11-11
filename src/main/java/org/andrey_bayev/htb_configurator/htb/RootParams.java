@@ -57,4 +57,15 @@ public class RootParams
         this.dcache = dchache;
     }
 
+    public boolean equals(RootParams params)
+    {
+        if(this==null && params==null) return true;
+        if(this==null && params!=null) return false;
+        if(this!=null && params==null) return false;
+        if (this.defaultID!=params.defaultID) return false;
+        if (this.r2q!=params.r2q) return false;
+        if (this.dcache!=params.dcache) return false;
+        return true;
+    }
+
 }
