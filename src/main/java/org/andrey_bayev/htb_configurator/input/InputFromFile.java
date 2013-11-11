@@ -235,12 +235,7 @@ public class InputFromFile implements InputHTB
                     }
                 }
             }
-            // todo: file works! should be! done in fool-proof way!
-            // like
-            // open
-            // process
-            // finally (close, if you can)
-            // there's special java construct try-catch-finally there for that purpose
+
             input.close();
         } catch (Exception e)
         {
