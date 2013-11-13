@@ -13,7 +13,8 @@ import java.util.regex.Pattern;
 //this class keeps address for Rule class
 public class Address
 {
-    public static final String IP_SOCKET_PATTERN = "^(((\\d{1,3})\\.){3}(\\d{1,3}))(\\/((0[xX][a-fA-F\\d]+)|(\\d+)))?(:(\\d{1,5})(\\/((0[xX][a-fA-F\\d]+)|(\\d+)))?)?$";
+    public static final String IP4_SOCKET_PATTERN = "^(((\\d{1,3})\\.){3}(\\d{1,3}))(\\/((0[xX][a-fA-F\\d]+)|(\\d+)))?(:(\\d{1,5})(\\/((0[xX][a-fA-F\\d]+)|(\\d+)))?)?$";
+    public static final String IP4_ADDRESS_PATTERN = "^(([12]?\\d?\\d)\\.){3}([12]?\\d?\\d)$";
     private String ip;
     private int ipMask;
     private int port;
@@ -167,15 +168,14 @@ public class Address
         int ipMask = 0, port = 0, portMask = 0;
 
         Pattern addressPattern =
-                Pattern.compile(IP_SOCKET_PATTERN);
+                Pattern.compile(IP4_SOCKET_PATTERN);
         Matcher myMatcher = addressPattern.matcher(addressString);
         // todo  better invert this.
         // e.g. if (!myMatcher.find()) {throw exception} ... -> without else block. This saves 1 indentation for readability
         if (myMatcher.find())
         {
             ip = myMatcher.group(1);
-            //todo pattern -> constant
-            Pattern ipPattern = Pattern.compile("^(([12]?\\d?\\d)\\.){3}([12]?\\d?\\d)$");
+            Pattern ipPattern = Pattern.compile(IP4_ADDRESS_PATTERN);
             if (!ipPattern.matcher(ip).find()) throw new IllegalArgumentException("wrong ip format");
             String maskOfIpGroup = myMatcher.group(6);
             if (maskOfIpGroup != null)
