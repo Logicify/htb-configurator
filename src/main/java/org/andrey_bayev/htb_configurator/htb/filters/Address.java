@@ -136,7 +136,6 @@ public class Address
         this.ipMask = ipMask;
     }
 
-    // todo if you override equals, better override hashCode as well, and it should depend on the same filds!
     public boolean equals(Address address)
     {
         if ((this == null) && (address == null)) return true;
@@ -146,19 +145,37 @@ public class Address
         }
 
         if (this.ip.equals(address.ip) && (this.ipMask == address.ipMask) &&
-                (this.port == address.port) && (this.portMask == address.portMask)) return true;
-        else return false;
+                (this.port == address.port) && (this.portMask == address.portMask)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode(){
+        int code=1;
+        code=code*12+ip.hashCode();
+        code=code*18+ipMask;
+        code=code*24+port;
+        code=code*32+portMask;
+        return code;
     }
 
     public String toString()
     {
         String address;
         address = ip;
-        if (ipMask != 0) address = address + '/' + ipMask;
+        if (ipMask != 0){
+            address = address + '/' + ipMask;
+        }
         if (port != 0)
         {
             address = address + ':' + port;
-            if (portMask != 0) address = address + '/' + portMask;
+            if (portMask != 0){
+                address = address + '/' + portMask;
+            }
         }
         return address;
     }
