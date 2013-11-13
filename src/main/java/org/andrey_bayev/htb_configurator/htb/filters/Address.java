@@ -231,17 +231,14 @@ public class Address
                 portMask = 0;
             }
 
-
+            Address address = new Address(ip, ipMask, port, portMask);
+            return address;
         } else
         {
             throw new IllegalArgumentException("wrong ip socket format");
         }
 
-        //TODO this should be within the try block
-        // we should not return address if we could not complete its parsing. All normal flow should go to the
-        // try block
-        Address address = new Address(ip, ipMask, port, portMask);
-        return address;
+
     }
 
 }
