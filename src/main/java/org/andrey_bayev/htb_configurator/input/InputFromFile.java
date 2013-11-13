@@ -63,7 +63,7 @@ public class InputFromFile implements InputHTB
 
             //I am defining values I need to create HTB class
             htb.setComments(new HashMap<String, String>());
-            htb.setToFile(new HashMap<String, Boolean>());
+            htb.setUseOfTheValues(new HashMap<String, Boolean>());
             htb.setRules(new LinkedList<Rule>());
             htb.setRealms(new LinkedList<Realm>());
             htb.setMarks(new LinkedList<Mark>());
@@ -100,7 +100,7 @@ public class InputFromFile implements InputHTB
                         String strs[] = str.split("=");
                         key = strs[0];
                         value = strs[1];
-                        htb.getToFile().put(key, true);
+                        htb.getUseOfTheValues().put(key, true);
 
                         if (key.equals("RULE"))
                         {

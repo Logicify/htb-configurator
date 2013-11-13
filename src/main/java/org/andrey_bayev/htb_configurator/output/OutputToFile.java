@@ -258,7 +258,7 @@ public class OutputToFile implements OutputHTB
 
     private boolean checkIfTrue(String value)
     {
-        if (htb.getToFile().get(value) != null && htb.getToFile().get(value)) return true;
+        if (htb.getUseOfTheValues().get(value) != null && htb.getUseOfTheValues().get(value)) return true;
             //todo better always use conditionals and other control structures with code blocks {}
             // even if it's single-line; really helps avoid issues later
         else return false;

@@ -58,8 +58,7 @@ public class HTBClass
 
     private LinkedList<TimeRange> timeRanges;//This parameter allows you to change class bandwidth during the day or week
 
-    //TODO: the name fo this variable makes me think it is related to the file read/write and not to the logic. THus it should go to the Input/Output somehow
-    private HashMap<String, Boolean> toFile;//Keeps what parameters you need to write into file
+    private HashMap<String, Boolean> useOfTheValues;//Keeps what parameters you need to write into file
 
     private HashMap<String, String> comments;//keeps the comments to the parameters
 
@@ -232,14 +231,14 @@ public class HTBClass
         this.timeRanges = timeRanges;
     }
 
-    public HashMap<String, Boolean> getToFile()
+    public HashMap<String, Boolean> getUseOfTheValues()
     {
-        return toFile;
+        return useOfTheValues;
     }
 
-    public void setToFile(HashMap<String, Boolean> toFile)
+    public void setUseOfTheValues(HashMap<String, Boolean> useOfTheValues)
     {
-        this.toFile = toFile;
+        this.useOfTheValues = useOfTheValues;
     }
 
     public HashMap<String, String> getComments()
@@ -266,7 +265,7 @@ public class HTBClass
     //this method checks is we need to write the param to the file
     public boolean checkIfTrue(String value)
     {
-        if (toFile.get(value) != null && toFile.get(value)) return true;
+        if (useOfTheValues.get(value) != null && useOfTheValues.get(value)) return true;
         else return false;
     }
 

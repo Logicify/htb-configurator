@@ -47,6 +47,7 @@ public class Address
         // with regexp, all this code virtually collapses to 4 lines.
         // TODO: i believe it's not needed anymore.
 
+
         String parts[] = address.split(":");
 
         if (!parts[0].equals(""))
