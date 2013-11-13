@@ -13,40 +13,21 @@ import org.junit.Test;
  */
 public class TestAddress
 {
-
-    //TODO You can use static array initializer in Java, which is basically a generating expression:
-    // like int[] something = {1,2,3} This automatically takes care of the size and stuff, and is easier to read.
-    // please redo examples.
-
-    String correctTests[] = {};
+    String correctTests[];
     String incorrectTests[];
     Address addresses[];
 
     @Before
     public void initTests()
     {
-        correctTests = new String[7];
-        incorrectTests = new String[5];
-        addresses = new Address[7];
-        correctTests[0] = "192.168.1.1";
-        correctTests[1] = "23.45.234.12/23";
-        correctTests[2] = "224.23.67.34:80";
-        correctTests[3] = "32.78.23.34:23/15";
-        correctTests[4] = "87.12.93.26/0xffe2:45/78";
-        correctTests[5] = "45.123.65.23/0xadd2:27030/0x234";
-        correctTests[6] = "45.123.65.23/0xadd2:24/1";
-        addresses[0] = new Address("192.168.1.1", 0, 0, 0);
-        addresses[1] = new Address("23.45.234.12", 23, 0, 0);
-        addresses[2] = new Address("224.23.67.34", 0, 80, 0);
-        addresses[3] = new Address("32.78.23.34", 0, 23, 15);
-        addresses[4] = new Address("87.12.93.26", 0xffe2, 45, 78);
-        addresses[5] = new Address("45.123.65.23", 0xadd2, 27030, 0x234);
-        addresses[6] = new Address("45.123.65.23", 0xadd2, 24, 1);
-        incorrectTests[0] = "@(T_T)@";
-        incorrectTests[1] = "323.45.35.87/23:80/45";
-        incorrectTests[2] = "89.23.34.78/0xsdf:23/0xpod";
-        incorrectTests[3] = "23.45.85.29:/23";
-        incorrectTests[4] = "23.90.234.134/0xda:100/0xx";
+        correctTests = new String[]{"192.168.1.1", "23.45.234.12/23","224.23.67.34:80","32.78.23.34:23/15",
+                "87.12.93.26/0xffe2:45/78","45.123.65.23/0xadd2:27030/0x234","45.123.65.23/0xadd2:24/1"};
+        incorrectTests = new String[]{"@(T_T)@","323.45.35.87/23:80/45","89.23.34.78/0xsdf:23/0xpod",
+                "23.45.85.29:/23","23.90.234.134/0xda:100/0xx"};
+        addresses = new Address[]{new Address("192.168.1.1", 0, 0, 0),new Address("23.45.234.12", 23, 0, 0),
+                new Address("224.23.67.34", 0, 80, 0),new Address("32.78.23.34", 0, 23, 15),
+                new Address("87.12.93.26", 0xffe2, 45, 78),new Address("45.123.65.23", 0xadd2, 27030, 0x234),
+                new Address("45.123.65.23", 0xadd2, 24, 1)};
     }
 
     @Test
