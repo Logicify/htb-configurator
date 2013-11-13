@@ -172,22 +172,18 @@ public class Address
         Pattern addressPattern =
                 Pattern.compile(IP4_SOCKET_PATTERN);
         Matcher myMatcher = addressPattern.matcher(addressString);
-        // todo  better invert this.
-        // e.g. if (!myMatcher.find()) {throw exception} ... -> without else block. This saves 1 indentation for readability
-        if (myMatcher.find())
-        {
-            ip = myMatcher.group(1);
-            Pattern ipPattern = Pattern.compile(IP4_ADDRESS_PATTERN);
-            if (!ipPattern.matcher(ip).find()) throw new IllegalArgumentException("wrong ip format");
-            String maskOfIpGroup = myMatcher.group(6);
-            if (maskOfIpGroup != null)
+        if(!myMatcher.find()) throw new IllegalArgumentException("wrong ip socket format");
+        ip = myMatcher.group(1);
+        Pattern ipPattern = Pattern.compile(IP4_ADDRESS_PATTERN);
+        if (!ipPattern.matcher(ip).find()) throw new IllegalArgumentException("wrong ip format");
+        String maskOfIpGroup = myMatcher.group(6);
+        if (maskOfIpGroup != null)
             {
                 try
                 {
 
                     if (maskOfIpGroup.matches(HEX_NUMBER_PATTERN))
                     {
-
                         ipMask = Integer.parseInt(maskOfIpGroup.substring(2), 16);
                     } else ipMask = Integer.parseInt(maskOfIpGroup, 10);
                 } catch (NumberFormatException e)
@@ -236,12 +232,6 @@ public class Address
 
             Address address = new Address(ip, ipMask, port, portMask);
             return address;
-        } else
-        {
-            throw new IllegalArgumentException("wrong ip socket format");
-        }
-
-
     }
 
 }
