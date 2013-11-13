@@ -15,6 +15,7 @@ public class Address
 {
     public static final String IP4_SOCKET_PATTERN = "^(((\\d{1,3})\\.){3}(\\d{1,3}))(\\/((0[xX][a-fA-F\\d]+)|(\\d+)))?(:(\\d{1,5})(\\/((0[xX][a-fA-F\\d]+)|(\\d+)))?)?$";
     public static final String IP4_ADDRESS_PATTERN = "^(([12]?\\d?\\d)\\.){3}([12]?\\d?\\d)$";
+    public static final String HEX_NUMBER_PATTERN = "0x[a-fA-F\\d]+";
     private String ip;
     private int ipMask;
     private int port;
@@ -182,8 +183,8 @@ public class Address
             {
                 try
                 {
-                    //todo pattern -> constant
-                    if (maskOfIpGroup.matches("0x[a-fA-F\\d]+"))
+
+                    if (maskOfIpGroup.matches(HEX_NUMBER_PATTERN))
                     {
 
                         ipMask = Integer.parseInt(maskOfIpGroup.substring(2), 16);
