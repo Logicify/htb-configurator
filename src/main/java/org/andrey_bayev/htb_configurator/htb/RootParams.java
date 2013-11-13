@@ -65,6 +65,7 @@ public class RootParams
         this.dcache = dchache;
     }
 
+
     public boolean equals(RootParams params)
     {
         if (this == null && params == null) return true;
@@ -76,6 +77,14 @@ public class RootParams
         return true;
     }
 
-    //TODO if overriding equals better override the hashcode with the same fields
+    @Override
+    public int hashCode() {
+        int hash = 1;
+        hash = hash * 17 + defaultID;
+        hash = hash * 31 + r2q;
+        hash = hash * 12 + ( dcache ? 1 : 0);
+        return hash;
+    }
+
 
 }
