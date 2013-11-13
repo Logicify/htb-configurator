@@ -192,10 +192,16 @@ public class OutputToFile implements OutputHTB
 
                         for (Rule rule : htb.getRules())
                         {
-                            if (rule.getComment() != null) output.println('#' + rule.getComment());
+                            if (rule.getComment() != null){
+                                output.println('#' + rule.getComment());
+                            }
                             output.print("RULE=");
-                            if (rule.getSaddr() != null) output.print(rule.getSaddr().toString() + ",");
-                            if (rule.getDaddr() != null) output.print(rule.getDaddr().toString());
+                            if (rule.getSaddr() != null){
+                                output.print(rule.getSaddr().toString() + ",");
+                            }
+                            if (rule.getDaddr() != null){
+                                output.print(rule.getDaddr().toString());
+                            }
                             output.println();
                         }
 
@@ -206,10 +212,16 @@ public class OutputToFile implements OutputHTB
 
                         for (Realm realm : htb.getRealms())
                         {
-                            if (realm.getComment() != null) output.println('#' + realm.getComment());
+                            if (realm.getComment() != null){
+                                output.println('#' + realm.getComment());
+                            }
                             output.print("REALM=");
-                            if (realm.getSrealm() != null) output.print(realm.getSrealm() + ",");
-                            if (realm.getDrealm() != null) output.print(realm.getDrealm());
+                            if (realm.getSrealm() != null){
+                                output.print(realm.getSrealm() + ",");
+                            }
+                            if (realm.getDrealm() != null){
+                                output.print(realm.getDrealm());
+                            }
                             output.println();
                         }
 
@@ -219,7 +231,9 @@ public class OutputToFile implements OutputHTB
                     {
                         for (Mark mark : htb.getMarks())
                         {
-                            if (mark.getComment() != null) output.println('#' + mark.getComment());
+                            if (mark.getComment() != null){
+                                output.println('#' + mark.getComment());
+                            }
                             output.println("MARK=" + mark.getFirewallRule());
                         }
 
@@ -229,7 +243,9 @@ public class OutputToFile implements OutputHTB
                     {
                         for (TimeRange time : htb.getTimeRanges())
                         {
-                            if (time.getComment() != null) output.println('#' + time.getComment());
+                            if (time.getComment() != null) {
+                                output.println('#' + time.getComment());
+                            }
                             output.println("TIME=" + time.toString());
                         }
 
@@ -253,15 +269,21 @@ public class OutputToFile implements OutputHTB
 
     private void writeComment(String value)
     {
-        if (htb.getComments().get(value) != null) output.println("#" + htb.getComments().get(value));
+        if (htb.getComments().get(value) != null){
+            output.println("#" + htb.getComments().get(value));
+        }
     }
 
     private boolean checkIfTrue(String value)
     {
-        if (htb.getUseOfTheValues().get(value) != null && htb.getUseOfTheValues().get(value)) return true;
-            //todo better always use conditionals and other control structures with code blocks {}
-            // even if it's single-line; really helps avoid issues later
-        else return false;
+        if (htb.getUseOfTheValues().get(value) != null && htb.getUseOfTheValues().get(value))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 }
