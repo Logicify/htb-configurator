@@ -50,6 +50,7 @@ public class Transformations
      */
     public static SpeedInBytes fromStringToSpeedInBytes(String s)
     {
+        //TODO regex!
         SpeedInBytes bytesSpeed = new SpeedInBytes();
         int mIndex = s.indexOf('M');
         mIndex = (mIndex != -1) ? mIndex : s.indexOf('m');

@@ -58,6 +58,7 @@ public class HTBClass
 
     private LinkedList<TimeRange> timeRanges;//This parameter allows you to change class bandwidth during the day or week
 
+    //TODO: the name fo this variable makes me think it is related to the file read/write and not to the logic. THus it should go to the Input/Output somehow
     private HashMap<String, Boolean> toFile;//Keeps what parameters you need to write into file
 
     private HashMap<String, String> comments;//keeps the comments to the parameters

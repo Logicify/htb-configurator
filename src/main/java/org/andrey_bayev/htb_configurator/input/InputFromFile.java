@@ -16,7 +16,10 @@ import org.andrey_bayev.htb_configurator.htb.leaf.FIFOParams;
 import org.andrey_bayev.htb_configurator.htb.leaf.Leaf;
 import org.andrey_bayev.htb_configurator.htb.leaf.SFQParams;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -55,28 +58,29 @@ public class InputFromFile implements InputHTB
     {
 
         HTBClass htb = new HTBClass();
-        try(BufferedReader input=new BufferedReader(new InputStreamReader(new FileInputStream(fileOfInput)))){
-
-        //I am defining values I need to create HTB class
-        htb.setComments(new HashMap<String, String>());
-        htb.setToFile(new HashMap<String, Boolean>());
-        htb.setRules(new LinkedList<Rule>());
-        htb.setRealms(new LinkedList<Realm>());
-        htb.setMarks(new LinkedList<Mark>());
-        htb.setTimeRanges(new LinkedList<TimeRange>());
-        HashMap<String, String> values = new HashMap<String, String>();
-
-        if (!fileOfInput.getAbsolutePath().contains("."))
+        try (BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(fileOfInput))))
         {
-            htb.setRoot(true);
-        }
-        htb.setFileName(fileOfInput.getAbsolutePath());
 
-        //I am reading data from file
-        String str = null;
-        String comment = null;
-        String key = null;
-        String value = null;
+            //I am defining values I need to create HTB class
+            htb.setComments(new HashMap<String, String>());
+            htb.setToFile(new HashMap<String, Boolean>());
+            htb.setRules(new LinkedList<Rule>());
+            htb.setRealms(new LinkedList<Realm>());
+            htb.setMarks(new LinkedList<Mark>());
+            htb.setTimeRanges(new LinkedList<TimeRange>());
+            HashMap<String, String> values = new HashMap<String, String>();
+
+            if (!fileOfInput.getAbsolutePath().contains("."))
+            {
+                htb.setRoot(true);
+            }
+            htb.setFileName(fileOfInput.getAbsolutePath());
+
+            //I am reading data from file
+            String str = null;
+            String comment = null;
+            String key = null;
+            String value = null;
             str = input.readLine();
             if (str.length() != 0 && str.charAt(0) == '#')
             {
@@ -236,11 +240,13 @@ public class InputFromFile implements InputHTB
                 }
             }
 
+            // todo all shoudl go to try-with-resource or try-finally
             input.close();
         } catch (Exception e)
         {
-            System.out.println("Error: "+e);
-            System.out.println("Caused: "+e.getCause());
+            //TODO see the same block in the outputToFile, same issues.
+            System.out.println("Error: " + e);
+            System.out.println("Caused: " + e.getCause());
         }
 
 

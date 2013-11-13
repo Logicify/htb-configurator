@@ -44,9 +44,9 @@ public class Bandwidth
                 this.pceil = true;
             } else
             {
+                //todo: do this with regexp
                 int pos;
                 pos = value.length() - 1;
-                //todo: do this with regexp
                 while (value.charAt(pos) < '0' || value.charAt(pos) > '9') pos--;
                 this.unit = Transformations.convertStringIntoUnit(value.substring(pos + 1, value.length()));
                 this.speed = Integer.parseInt(value.substring(0, pos + 1));

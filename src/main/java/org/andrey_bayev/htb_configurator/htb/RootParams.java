@@ -76,4 +76,6 @@ public class RootParams
         return true;
     }
 
+    //TODO if overriding equals better override the hashcode with the same fields
+
 }

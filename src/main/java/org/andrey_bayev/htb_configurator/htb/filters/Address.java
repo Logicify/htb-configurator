@@ -18,11 +18,12 @@ public class Address
     private int port;
     private int portMask;
 
-    public Address(String ip,int ipMask,int port,int portMask){
-        this.ip=ip;
-        this.ipMask=ipMask;
-        this.port=port;
-        this.portMask=portMask;
+    public Address(String ip, int ipMask, int port, int portMask)
+    {
+        this.ip = ip;
+        this.ipMask = ipMask;
+        this.port = port;
+        this.portMask = portMask;
     }
 
 
@@ -41,6 +42,7 @@ public class Address
         // nice regular expression.
         // Regexp can be tested online here http://www.regexplanet.com/advanced/java/index.html
         // with regexp, all this code virtually collapses to 4 lines.
+        // TODO: i believe it's not needed anymore.
 
         String parts[] = address.split(":");
 
@@ -130,14 +132,17 @@ public class Address
         this.ipMask = ipMask;
     }
 
-    public boolean equals(Address address){
-        if((this==null) && (address==null)) return true;
-        else{
-            if(((this!=null) && (address==null)) || ((this==null) && (address!=null))) return false;
+    // todo if you override equals, better override hashCode as well, and it should depend on the same filds!
+    public boolean equals(Address address)
+    {
+        if ((this == null) && (address == null)) return true;
+        else
+        {
+            if (((this != null) && (address == null)) || ((this == null) && (address != null))) return false;
         }
 
-        if(this.ip.equals(address.ip) && (this.ipMask==address.ipMask)&&
-                (this.port==address.port)&&(this.portMask==address.portMask))return true;
+        if (this.ip.equals(address.ip) && (this.ipMask == address.ipMask) &&
+                (this.port == address.port) && (this.portMask == address.portMask)) return true;
         else return false;
     }
 
@@ -155,61 +160,87 @@ public class Address
     }
 
     //this function convert String of ip socket into Address class format
-    public static Address convertStringIntoAddress(String addressString) throws IllegalArgumentException{
-        String ip="";
-        int ipMask=0,port=0,portMask=0;
-        Pattern addressPattern=
-            Pattern.compile("^(((\\d{1,3})\\.){3}(\\d{1,3}))(\\/((0[xX][a-fA-F\\d]+)|(\\d+)))?(:(\\d{1,5})(\\/((0[xX][a-fA-F\\d]+)|(\\d+)))?)?$");
-        Matcher myMatcher=addressPattern.matcher(addressString);
-        if(myMatcher.find()){
-            ip=myMatcher.group(1);
-            Pattern ipPattern=Pattern.compile("^(([12]?\\d?\\d)\\.){3}([12]?\\d?\\d)$");
-            if(!ipPattern.matcher(ip).find())throw new IllegalArgumentException("wrong ip format");
-            String maskOfIpGroup=myMatcher.group(6);
-            if (maskOfIpGroup!=null) {
-                try{
-                if(maskOfIpGroup.matches("0x[a-fA-F\\d]+")){
+    public static Address convertStringIntoAddress(String addressString) throws IllegalArgumentException
+    {
+        String ip = "";
+        int ipMask = 0, port = 0, portMask = 0;
+        //todo pattern - constant.
+        Pattern addressPattern =
+                Pattern.compile("^(((\\d{1,3})\\.){3}(\\d{1,3}))(\\/((0[xX][a-fA-F\\d]+)|(\\d+)))?(:(\\d{1,5})(\\/((0[xX][a-fA-F\\d]+)|(\\d+)))?)?$");
+        Matcher myMatcher = addressPattern.matcher(addressString);
+        // todo  better invert this.
+        // e.g. if (!myMatcher.find()) {throw exception} ... -> without else block. This saves 1 indentation for readability
+        if (myMatcher.find())
+        {
+            ip = myMatcher.group(1);
+            //todo pattern -> constant
+            Pattern ipPattern = Pattern.compile("^(([12]?\\d?\\d)\\.){3}([12]?\\d?\\d)$");
+            if (!ipPattern.matcher(ip).find()) throw new IllegalArgumentException("wrong ip format");
+            String maskOfIpGroup = myMatcher.group(6);
+            if (maskOfIpGroup != null)
+            {
+                try
+                {
+                    //todo pattern -> constant
+                    if (maskOfIpGroup.matches("0x[a-fA-F\\d]+"))
+                    {
 
-                    ipMask=Integer.parseInt(maskOfIpGroup.substring(2),16);
-                }else ipMask=Integer.parseInt(maskOfIpGroup,10);
-                }catch(NumberFormatException e){
+                        ipMask = Integer.parseInt(maskOfIpGroup.substring(2), 16);
+                    } else ipMask = Integer.parseInt(maskOfIpGroup, 10);
+                } catch (NumberFormatException e)
+                {
+
                     throw e;
+                    // todo was a good idea. Better throw one type of exception from within the method.
+                    // now you are throwing 2 - IAE and NFE; and both unchecked.
+                    // trick is that user of your code may handle IAE only, and when this rare NFE fires,
+                    // it will crash the whole app.
                     //throw new IllegalArgumentException("incorrect mask of ip format");
                 }
+            } else
+            {
+                ipMask = 0;
             }
-            else {
-                ipMask=0;
-            }
-            String portGroup=myMatcher.group(10);
-            if(portGroup!=null){
-                try{
-                port=Integer.parseInt(portGroup);
-                }catch(NumberFormatException e){
+            String portGroup = myMatcher.group(10);
+            if (portGroup != null)
+            {
+                try
+                {
+                    port = Integer.parseInt(portGroup);
+                } catch (NumberFormatException e)
+                {
                     throw new IllegalArgumentException("incorrect port format");
                 }
-            }
-            else port=0;
-            String maskOfPortGroup=myMatcher.group(12);
+            } else port = 0;
+            String maskOfPortGroup = myMatcher.group(12);
 
-            if(maskOfPortGroup!=null){
-                try{
-                    if(maskOfPortGroup.matches("0x[a-fA-F\\d]+")){
-                        portMask=Integer.parseInt(maskOfPortGroup.substring(2),16);
-                    }else portMask=Integer.parseInt(maskOfPortGroup,10);
-                }catch(NumberFormatException e){
+            if (maskOfPortGroup != null)
+            {
+                try
+                {
+                    if (maskOfPortGroup.matches("0x[a-fA-F\\d]+"))
+                    {
+                        portMask = Integer.parseInt(maskOfPortGroup.substring(2), 16);
+                    } else portMask = Integer.parseInt(maskOfPortGroup, 10);
+                } catch (NumberFormatException e)
+                {
                     throw new IllegalArgumentException("incorrect mask of port format");
                 }
-            }
-            else {
-                portMask=0;
+            } else
+            {
+                portMask = 0;
             }
 
 
-        }else{
+        } else
+        {
             throw new IllegalArgumentException("wrong ip socket format");
         }
 
-        Address address=new Address(ip,ipMask,port,portMask);
+        //TODO this should be within the try block
+        // we should not return address if we could not complete its parsing. All normal flow should go to the
+        // try block
+        Address address = new Address(ip, ipMask, port, portMask);
         return address;
     }
 

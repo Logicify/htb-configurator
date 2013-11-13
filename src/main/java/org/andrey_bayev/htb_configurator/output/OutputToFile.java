@@ -15,7 +15,6 @@ import org.andrey_bayev.htb_configurator.htb.filters.Realm;
 import org.andrey_bayev.htb_configurator.htb.filters.Rule;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 
@@ -36,9 +35,9 @@ public class OutputToFile implements OutputHTB
     {
         htb = htbcl;
         fileOfOutput = new File(htb.getFileName());
-        try(PrintWriter out=new PrintWriter(new FileOutputStream(fileOfOutput)))
+        try (PrintWriter out = new PrintWriter(new FileOutputStream(fileOfOutput)))
         {
-            output=out;
+            output = out;
 
             writeComment("HTB");
             //checking if the file is root HTB class
@@ -243,8 +242,10 @@ public class OutputToFile implements OutputHTB
 
         } catch (Exception e)
         {
-            System.out.println("Error: "+e);
-            System.out.println("Caused by: "+e.getCause());
+            System.out.println("Error: " + e);
+            System.out.println("Caused by: " + e.getCause());
+            //TODO here we have lost a track of an exception thrown. E.g. everyone using our OutputToFile class would not
+            // know if that was actually written. Usually it is better to wrap exception into another type and re-throw
         }
 
     }
@@ -258,6 +259,8 @@ public class OutputToFile implements OutputHTB
     private boolean checkIfTrue(String value)
     {
         if (htb.getToFile().get(value) != null && htb.getToFile().get(value)) return true;
+            //todo better always use conditionals and other control structures with code blocks {}
+            // even if it's single-line; really helps avoid issues later
         else return false;
     }
 
