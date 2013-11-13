@@ -8,6 +8,9 @@
 package org.andrey_bayev.htb_configurator.htb;
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Transformations
 {
 
@@ -48,35 +51,31 @@ public class Transformations
      * @param s
      * @return
      */
-    public static SpeedInBytes fromStringToSpeedInBytes(String s)
+    public static SpeedInBytes fromStringToSpeedInBytes(String s) throws IllegalArgumentException
     {
-        //TODO regex!
+        final String BYTE_SPEED_PATTERN="(\\d+)([MmKk]b?)?";
+        final String MBYTE_PATTERN="[Mm]b?";
+        final String KBYTE_PATTERN="[Kk]b?";
+        Pattern speedPattern=Pattern.compile(BYTE_SPEED_PATTERN);
+        Matcher speedMatcher=speedPattern.matcher(s);
+        if(!speedMatcher.find())
+        {
+            throw new IllegalArgumentException("wrong string that represents speed in bytes");
+        }
         SpeedInBytes bytesSpeed = new SpeedInBytes();
-        int mIndex = s.indexOf('M');
-        mIndex = (mIndex != -1) ? mIndex : s.indexOf('m');
-        int kIndex = s.indexOf('K');
-        kIndex = (kIndex != -1) ? kIndex : s.indexOf('k');
-
-
-        if (mIndex != -1)
-        {
-            bytesSpeed.setSpeed(Integer.parseInt(s.substring(0, mIndex)));
+        bytesSpeed.setSpeed(Integer.parseInt(speedMatcher.group(1)));
+        String unit=speedMatcher.group(2);
+        if (unit.matches(MBYTE_PATTERN)){
             bytesSpeed.setUnit(Unit.MBPS);
-            return bytesSpeed;
-        } else
-        {
-            if (kIndex != -1)
-            {
-                bytesSpeed.setSpeed(Integer.parseInt(s.substring(0, kIndex)));
+        }else{
+            if(unit.matches(KBYTE_PATTERN)){
                 bytesSpeed.setUnit(Unit.KBPS);
-                return bytesSpeed;
-            } else
+            }else
             {
-                bytesSpeed.setSpeed(Integer.parseInt(s));
                 bytesSpeed.setUnit(Unit.BPS);
-                return bytesSpeed;
             }
         }
+        return bytesSpeed;
 
     }
 
