@@ -10,16 +10,14 @@ package org.andrey_bayev.htb_configurator.htb;
 //this class keeps speed value(like 10Kb,100Mb,100) dividing it into digit value and Unit value
 public class SpeedInBytes
 {
-    //todo: overload equals and hashcode
-    final int KB = 1024;
-    final int MB = KB * 1024;
+    static final int KB = 1024;
+    static final int MB = KB * 1024;
 
     int speed;//keeps digital value of speed
     Unit unit;
 
     public SpeedInBytes()
     {
-
     }
 
 
@@ -69,4 +67,23 @@ public class SpeedInBytes
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SpeedInBytes that = (SpeedInBytes) o;
+
+        if (speed != that.speed) return false;
+        if (unit != that.unit) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = speed;
+        result = 31 * result + unit.hashCode();
+        return result;
+    }
 }
