@@ -10,7 +10,8 @@ package com.logicify.htb.configurator.htb;
 import com.logicify.htb.configurator.htb.HTBClass;
 import com.logicify.htb.configurator.input.InputFromFile;
 import com.logicify.htb.configurator.output.OutputToFile;
-//import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.junit.Assert;
 
 import java.io.File;
 
@@ -38,8 +39,7 @@ public class TestMain
             output.write(htb1);
             input2.setFile(file);
             htb2 = input2.read();
-            //todo: make all test work
-            //Assert.assertTrue(EqualsBuilder.reflectionEquals(htb1, htb2, new String[]{"fileName"}));
+            Assert.assertTrue(EqualsBuilder.reflectionEquals(htb1, htb2, new String[]{"fileName","comments"}));
         }
     }
 
