@@ -32,21 +32,19 @@ public class TestMain
         InputFromFile input = new InputFromFile(), input2 = new InputFromFile();
         for (File file : htbfiles)
         {
-
+            try{
                 input.setFile(file);
                 htb1 = input.read();
                 String filename2 = catalog2.getAbsolutePath() + '/' + file.getName();
                 htb1.setFileName(filename2);
                 OutputToFile output = new OutputToFile();
-                try{
-                    output.write(htb1);
-                }catch(Exception e){
-                    System.out.println(e);
-                }
+                output.write(htb1);
                 input2.setFile(file);
                 htb2 = input2.read();
                 //Assert.assertEquals(htb1,htb2);
-
+            }catch(Exception e){
+                System.out.println(e);
+            }
         }
     }
 

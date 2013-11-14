@@ -54,7 +54,7 @@ public class InputFromFile implements InputHTB
      * @return
      */
     @Override
-    public HTBClass read()
+    public HTBClass read() throws Exception
     {
 
         HTBClass htb = new HTBClass();
@@ -244,9 +244,7 @@ public class InputFromFile implements InputHTB
             input.close();
         } catch (Exception e)
         {
-            //TODO see the same block in the outputToFile, same issues.
-            System.out.println("Error: " + e);
-            System.out.println("Caused: " + e.getCause());
+            throw e;
         }
 
 
