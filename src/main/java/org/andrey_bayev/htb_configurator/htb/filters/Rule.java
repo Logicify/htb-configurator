@@ -13,7 +13,6 @@ package org.andrey_bayev.htb_configurator.htb.filters;
  */
 public class Rule
 {
-    //todo: override equals and hashcode
     private Address saddr;
     private Address daddr;
     private String comment;
@@ -78,5 +77,23 @@ public class Rule
         this.comment = comment;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        Rule rule = (Rule) o;
+
+        if (daddr != null ? !daddr.equals(rule.daddr) : rule.daddr != null) return false;
+        if (saddr != null ? !saddr.equals(rule.saddr) : rule.saddr != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = saddr != null ? saddr.hashCode() : 0;
+        result = 31 * result + (daddr != null ? daddr.hashCode() : 0);
+        return result;
+    }
 }

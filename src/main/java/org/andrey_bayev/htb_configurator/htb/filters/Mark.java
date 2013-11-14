@@ -45,7 +45,6 @@ public class Mark
 
         Mark mark = (Mark) o;
 
-        if (comment != null ? !comment.equals(mark.comment) : mark.comment != null) return false;
         if (firewallRule != null ? !firewallRule.equals(mark.firewallRule) : mark.firewallRule != null) return false;
 
         return true;
@@ -54,7 +53,6 @@ public class Mark
     @Override
     public int hashCode() {
         int result = firewallRule != null ? firewallRule.hashCode() : 0;
-        result = 31 * result + (comment != null ? comment.hashCode() : 0);
         return result;
     }
 

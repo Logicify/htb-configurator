@@ -58,7 +58,6 @@ public class Realm
 
         Realm realm = (Realm) o;
 
-        if (comment != null ? !comment.equals(realm.comment) : realm.comment != null) return false;
         if (drealm != null ? !drealm.equals(realm.drealm) : realm.drealm != null) return false;
         if (srealm != null ? !srealm.equals(realm.srealm) : realm.srealm != null) return false;
 
@@ -69,7 +68,6 @@ public class Realm
     public int hashCode() {
         int result = srealm != null ? srealm.hashCode() : 0;
         result = 31 * result + (drealm != null ? drealm.hashCode() : 0);
-        result = 31 * result + (comment != null ? comment.hashCode() : 0);
         return result;
     }
 }
