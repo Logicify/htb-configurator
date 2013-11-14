@@ -15,7 +15,6 @@ import org.andrey_bayev.htb_configurator.htb.SpeedInBytes;
  */
 public class SFQParams
 {
-    //todo: overload equals and hashcode
     private SpeedInBytes quantum;//Amount of data in bytes a stream is allowed to dequeue before next queue gets a turn.
     private int perturb;//Period of hash function perturbation.
     // why not name it hashPerturbationPeriod?
@@ -65,5 +64,25 @@ public class SFQParams
     {
         if (perturb < 0) this.perturb = DefaultHTBClassValues.DEFAULT_PERTURB;
         else this.perturb = perturb;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SFQParams sfqParams = (SFQParams) o;
+
+        if (perturb != sfqParams.perturb) return false;
+        if (quantum != null ? !quantum.equals(sfqParams.quantum) : sfqParams.quantum != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = quantum != null ? quantum.hashCode() : 0;
+        result = 31 * result + perturb;
+        return result;
     }
 }
