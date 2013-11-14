@@ -205,13 +205,8 @@ public class Address
                     } else ipMask = Integer.parseInt(maskOfIpGroup, 10);
                 } catch (NumberFormatException e)
                 {
+                    throw new IllegalArgumentException("incorrect mask of ip format");
 
-                    throw e;
-                    // todo was a good idea. Better throw one type of exception from within the method.
-                    // now you are throwing 2 - IAE and NFE; and both unchecked.
-                    // trick is that user of your code may handle IAE only, and when this rare NFE fires,
-                    // it will crash the whole app.
-                    //throw new IllegalArgumentException("incorrect mask of ip format");
                 }
             } else
             {
