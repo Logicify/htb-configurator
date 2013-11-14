@@ -1,0 +1,5 @@
+# Uncategorized traffic. It is allowe dto use [RATE] of bandwidth and borrow unused bandwith, but must not exceed [CEIL]
+RATE=100Kbit
+CEIL=10Mbit
+BURST=15Kb
+LEAF=sfq

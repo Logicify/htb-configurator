@@ -1,0 +1,12 @@
+# All HTTP and HTTPS traffic
+RATE=1400Kbit
+CEIL=5Mbit
+BURST=15Kb
+LEAF=sfq
+PRIO=1
+
+RULE=*:80,
+RULE=*:443,
+
+RULE=*:80
+RULE=*:443

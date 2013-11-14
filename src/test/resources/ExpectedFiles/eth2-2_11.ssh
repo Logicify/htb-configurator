@@ -1,0 +1,10 @@
+# All SSH trafic
+RATE=100Kbit
+CEIL=3Mbit
+PRIO=1
+BURST=100Kb
+LEAF=sfq
+
+RULE=*:22,
+
+RULE=*:22
