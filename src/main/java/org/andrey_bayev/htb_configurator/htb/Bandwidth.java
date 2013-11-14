@@ -15,7 +15,6 @@ import java.util.regex.Pattern;
  */
 public class Bandwidth
 {
-    //todo: overload equals and hashcode
     private Unit unit;//suffices of speed rate
     private boolean prate;//if true uses RATE param of parent class
     private boolean pceil;//if true uses CEIL param of parent class
@@ -61,6 +60,30 @@ public class Bandwidth
 
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Bandwidth bandwidth = (Bandwidth) o;
+
+        if (pceil != bandwidth.pceil) return false;
+        if (prate != bandwidth.prate) return false;
+        if (speed != bandwidth.speed) return false;
+        if (unit != bandwidth.unit) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = unit.hashCode();
+        result = 31 * result + (prate ? 1 : 0);
+        result = 31 * result + (pceil ? 1 : 0);
+        result = 31 * result + speed;
+        return result;
     }
 
     public Unit getUnit()
