@@ -66,26 +66,25 @@ public class RootParams
     }
 
 
-    public boolean equals(RootParams params)
-    {
-        if (this == null && params == null) return true;
-        if (this == null && params != null) return false;
-        if (this != null && params == null) return false;
-        if (this.defaultID != params.defaultID) return false;
-        if (this.r2q != params.r2q) return false;
-        if (this.dcache != params.dcache) return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        RootParams that = (RootParams) o;
+
+        if (dcache != that.dcache) return false;
+        if (defaultID != that.defaultID) return false;
+        if (r2q != that.r2q) return false;
+
         return true;
     }
 
     @Override
-    public int hashCode()
-    {
-        int hash = 1;
-        hash = hash * 17 + defaultID;
-        hash = hash * 31 + r2q;
-        hash = hash * 12 + (dcache ? 1 : 0);
-        return hash;
+    public int hashCode() {
+        int result = defaultID;
+        result = 31 * result + r2q;
+        result = 31 * result + (dcache ? 1 : 0);
+        return result;
     }
-
-
 }

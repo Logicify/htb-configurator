@@ -9,7 +9,7 @@ package org.andrey_bayev.htb_configurator.htb.filters;
  */
 public class Mark
 {
-
+    //todo: override equals and hashcode
     private String firewallRule;
     private String comment;
 

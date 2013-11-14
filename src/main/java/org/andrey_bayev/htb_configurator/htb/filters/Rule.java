@@ -13,6 +13,7 @@ package org.andrey_bayev.htb_configurator.htb.filters;
  */
 public class Rule
 {
+    //todo: override equals and hashcode
     private Address saddr;
     private Address daddr;
     private String comment;

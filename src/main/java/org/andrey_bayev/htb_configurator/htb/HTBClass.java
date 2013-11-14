@@ -22,6 +22,8 @@ import java.util.LinkedList;
  */
 public class HTBClass
 {
+    //todo: make own HTB exception
+    //todo: overload equals and hashcode
     private String fileName;//name of file where HTB class will be keeped
 
     private boolean root; //is HTB class root or not

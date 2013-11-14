@@ -38,7 +38,7 @@ public class TestAddress
         {
             try
             {
-                Address address = Address.convertStringIntoAddress(correctTests[i]);
+                Address address = Address.createAddressFromString(correctTests[i]);
                 Assert.assertTrue(addresses[i].equals(address));
                 System.out.println("Correct test N" + i + " is passed");
             } catch (Exception e)
@@ -52,7 +52,7 @@ public class TestAddress
         {
             try
             {
-                Address address = Address.convertStringIntoAddress(incorrectTests[i]);
+                Address address = Address.createAddressFromString(incorrectTests[i]);
                 Assert.assertTrue("There must be exception", false);
             } catch (Exception e)
             {

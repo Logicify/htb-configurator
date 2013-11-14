@@ -14,7 +14,7 @@ package org.andrey_bayev.htb_configurator.htb;
  */
 public class TimeRange
 {
-
+    //todo: overload equals and hashcode
     private boolean daysOfWeak[];
     private boolean always;//if you don't use daysOfWeak
     private String time;

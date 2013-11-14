@@ -10,6 +10,7 @@ package org.andrey_bayev.htb_configurator.htb.filters;
 
 public class Realm
 {
+    //todo: override equals and hashcode
     private String srealm;
     private String drealm;
     private String comment;

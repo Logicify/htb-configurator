@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  */
 public class Bandwidth
 {
-
+    //todo: overload equals and hashcode
     private Unit unit;//suffices of speed rate
     private boolean prate;//if true uses RATE param of parent class
     private boolean pceil;//if true uses CEIL param of parent class

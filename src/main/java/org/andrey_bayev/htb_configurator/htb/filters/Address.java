@@ -183,7 +183,7 @@ public class Address
     }
 
     //this function convert String of ip socket into Address class format
-    public static Address convertStringIntoAddress(String addressString) throws IllegalArgumentException
+    public static Address createAddressFromString(String addressString) throws IllegalArgumentException
     {
         String ip = "";
         int ipMask = 0, port = 0, portMask = 0;

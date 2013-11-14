@@ -10,6 +10,7 @@ package org.andrey_bayev.htb_configurator.htb;
 //this class keeps speed value(like 10Kb,100Mb,100) dividing it into digit value and Unit value
 public class SpeedInBytes
 {
+    //todo: overload equals and hashcode
     final int KB = 1024;
     final int MB = KB * 1024;
 
@@ -21,7 +22,7 @@ public class SpeedInBytes
 
     }
 
-    ;
+
 
     public SpeedInBytes(int speed, Unit unit)
     {

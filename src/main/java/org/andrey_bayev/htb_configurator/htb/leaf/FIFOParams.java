@@ -16,7 +16,7 @@ import org.andrey_bayev.htb_configurator.htb.SpeedInBytes;
  */
 public class FIFOParams
 {
-
+    //todo: overload equals and hashcode
     SpeedInBytes limit;//Number of packets/bytes the queue can hold
 
     public FIFOParams()
