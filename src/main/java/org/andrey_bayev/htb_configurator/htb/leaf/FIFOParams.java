@@ -16,7 +16,6 @@ import org.andrey_bayev.htb_configurator.htb.SpeedInBytes;
  */
 public class FIFOParams
 {
-    //todo: overload equals and hashcode
     SpeedInBytes limit;//Number of packets/bytes the queue can hold
 
     public FIFOParams()
@@ -51,5 +50,20 @@ public class FIFOParams
         } else this.limit = limit;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        FIFOParams that = (FIFOParams) o;
+
+        if (limit != null ? !limit.equals(that.limit) : that.limit != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return limit != null ? limit.hashCode() : 0;
+    }
 }
