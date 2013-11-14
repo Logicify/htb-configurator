@@ -13,8 +13,8 @@ import java.util.regex.Pattern;
 //this class keeps address for Rule class
 public class Address
 {
-    public static final String IP4_SOCKET_PATTERN = "^(((\\d{1,3})\\.){3}(\\d{1,3}))(\\/((0[xX][a-fA-F\\d]+)|(\\d+)))?(:(\\d{1,5})(\\/((0[xX][a-fA-F\\d]+)|(\\d+)))?)?$";
-    public static final String IP4_ADDRESS_PATTERN = "^(([12]?\\d?\\d)\\.){3}([12]?\\d?\\d)$";
+    public static final String IP4_SOCKET_PATTERN = "^((((\\d{1,3})\\.){3}(\\d{1,3}))|(\\*))(\\/((0[xX][a-fA-F\\d]+)|(\\d+)))?(:(\\d{1,5})(\\/((0[xX][a-fA-F\\d]+)|(\\d+)))?)?$";
+    public static final String IP4_ADDRESS_PATTERN = "^((([12]?\\d?\\d)\\.){3}([12]?\\d?\\d))|(\\*)$";
     public static final String HEX_NUMBER_PATTERN = "0x[a-fA-F\\d]+";
 
     private String ip;
@@ -28,73 +28,6 @@ public class Address
         this.ipMask = ipMask;
         this.port = port;
         this.portMask = portMask;
-    }
-
-
-    /**
-     * String format is "XXX.XXX.XXX.XXX/YYY:PP/MM"
-     * XX - ipv4 address
-     * YY - ipv4 mask
-     * PP - port
-     * MM - port mask
-     *
-     * @param address
-     */
-    public Address(String address)
-    {
-        // TODO: redo with regexp. Outline what's optional and what's required, and code altogether into the single
-        // nice regular expression.
-        // Regexp can be tested online here http://www.regexplanet.com/advanced/java/index.html
-        // with regexp, all this code virtually collapses to 4 lines.
-        // TODO: i believe it's not needed anymore.
-
-
-        String parts[] = address.split(":");
-
-        if (!parts[0].equals(""))
-        {
-            String ipParts[] = parts[0].split("/");
-            ip = ipParts[0];
-            if (ipParts.length == 2)
-            {
-                if ((ipParts[1].charAt(1) == 'x') || (ipParts[1].charAt(1) == 'X'))
-                {
-                    ipMask = Integer.parseInt(ipParts[1].substring(2), 16);
-                } else
-                {
-                    ipMask = Integer.parseInt(ipParts[1]);
-                }
-            } else
-            {
-                ipMask = 0;
-            }
-        } else
-        {
-            ip = "";
-            ipMask = 0;
-        }
-        if (parts.length == 2)
-        {
-            String portParts[] = parts[1].split("/");
-            port = Integer.parseInt(portParts[0]);
-            if (portParts.length == 2)
-            {
-                if ((portParts[1].charAt(1) == 'x') || (portParts[1].charAt(1) == 'X'))
-                {
-                    portMask = Integer.parseInt(portParts[1].substring(2), 16);
-                } else
-                {
-                    portMask = Integer.parseInt(portParts[1]);
-                }
-            } else
-            {
-                portMask = 0;
-            }
-        } else
-        {
-            port = 0;
-            portMask = 0;
-        }
     }
 
     public int getPort()
@@ -182,7 +115,16 @@ public class Address
         return address;
     }
 
-    //this function convert String of ip socket into Address class format
+    /**
+     * This method creates Address object using String interpretation of address
+     * String format is "XXX.XXX.XXX.XXX/YYY:PP/MM"
+     * XX - ipv4 address
+     * YY - ipv4 mask
+     * PP - port
+     * MM - port mask
+     *
+     * @param addressString
+     */
     public static Address create(String addressString) throws IllegalArgumentException
     {
         String ip = "";
@@ -192,10 +134,12 @@ public class Address
                 Pattern.compile(IP4_SOCKET_PATTERN);
         Matcher myMatcher = addressPattern.matcher(addressString);
         if (!myMatcher.find()) throw new IllegalArgumentException("wrong ip socket format");
+
         ip = myMatcher.group(1);
         Pattern ipPattern = Pattern.compile(IP4_ADDRESS_PATTERN);
         if (!ipPattern.matcher(ip).find()) throw new IllegalArgumentException("wrong ip format");
-        String maskOfIpGroup = myMatcher.group(6);
+
+        String maskOfIpGroup = myMatcher.group(8);
         if (maskOfIpGroup != null)
         {
             try
@@ -214,7 +158,7 @@ public class Address
         {
             ipMask = 0;
         }
-        String portGroup = myMatcher.group(10);
+        String portGroup = myMatcher.group(12);
         if (portGroup != null)
         {
             try
@@ -225,7 +169,7 @@ public class Address
                 throw new IllegalArgumentException("incorrect port format");
             }
         } else port = 0;
-        String maskOfPortGroup = myMatcher.group(12);
+        String maskOfPortGroup = myMatcher.group(14);
 
         if (maskOfPortGroup != null)
         {

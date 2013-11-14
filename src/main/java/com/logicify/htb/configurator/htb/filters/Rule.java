@@ -28,7 +28,7 @@ public class Rule
     {
         if (saddr != null)
         {
-            this.saddr = new Address(saddr);
+            this.saddr = Address.create(saddr);
         } else
         {
             this.saddr = null;
@@ -36,7 +36,7 @@ public class Rule
 
         if (daddr != null)
         {
-            this.daddr = new Address(daddr);
+            this.daddr = Address.create(daddr);
         } else
         {
             this.daddr = null;
