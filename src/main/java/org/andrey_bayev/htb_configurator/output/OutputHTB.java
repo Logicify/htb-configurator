@@ -12,5 +12,5 @@ import org.andrey_bayev.htb_configurator.htb.HTBClass;
 
 public interface OutputHTB
 {
-    public void write(HTBClass htb);
+    public void write(HTBClass htb) throws Exception;
 }

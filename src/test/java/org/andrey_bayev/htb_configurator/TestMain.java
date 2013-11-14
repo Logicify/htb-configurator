@@ -38,7 +38,11 @@ public class TestMain
                 String filename2 = catalog2.getAbsolutePath() + '/' + file.getName();
                 htb1.setFileName(filename2);
                 OutputToFile output = new OutputToFile();
-                output.write(htb1);
+                try{
+                    output.write(htb1);
+                }catch(Exception e){
+                    System.out.println(e);
+                }
                 input2.setFile(file);
                 htb2 = input2.read();
                 //Assert.assertEquals(htb1,htb2);

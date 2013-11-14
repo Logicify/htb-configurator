@@ -31,7 +31,7 @@ public class OutputToFile implements OutputHTB
 
 
     @Override
-    public void write(HTBClass htbcl)
+    public void write(HTBClass htbcl) throws Exception
     {
         htb = htbcl;
         fileOfOutput = new File(htb.getFileName());
@@ -258,10 +258,7 @@ public class OutputToFile implements OutputHTB
 
         } catch (Exception e)
         {
-            System.out.println("Error: " + e);
-            System.out.println("Caused by: " + e.getCause());
-            //TODO here we have lost a track of an exception thrown. E.g. everyone using our OutputToFile class would not
-            // know if that was actually written. Usually it is better to wrap exception into another type and re-throw
+            throw e;
         }
 
     }
