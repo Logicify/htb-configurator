@@ -10,7 +10,6 @@ package org.andrey_bayev.htb_configurator.htb.filters;
 
 public class Realm
 {
-    //todo: override equals and hashcode
     private String srealm;
     private String drealm;
     private String comment;
@@ -52,5 +51,25 @@ public class Realm
         this.comment = comment;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        Realm realm = (Realm) o;
+
+        if (comment != null ? !comment.equals(realm.comment) : realm.comment != null) return false;
+        if (drealm != null ? !drealm.equals(realm.drealm) : realm.drealm != null) return false;
+        if (srealm != null ? !srealm.equals(realm.srealm) : realm.srealm != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = srealm != null ? srealm.hashCode() : 0;
+        result = 31 * result + (drealm != null ? drealm.hashCode() : 0);
+        result = 31 * result + (comment != null ? comment.hashCode() : 0);
+        return result;
+    }
 }

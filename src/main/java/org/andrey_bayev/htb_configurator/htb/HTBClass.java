@@ -22,6 +22,7 @@ import java.util.LinkedList;
  */
 public class HTBClass
 {
+    //todo: describe all classes in htb-configurator project
     //todo: make own HTB exception
     //todo: overload equals and hashcode
     private String fileName;//name of file where HTB class will be keeped
