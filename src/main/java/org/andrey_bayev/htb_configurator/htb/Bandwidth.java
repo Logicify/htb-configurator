@@ -47,13 +47,14 @@ public class Bandwidth
                 this.pceil = true;
             } else
             {
-                Pattern speedPattern=Pattern.compile("(\\d+)([KkMm]((bit)|(b))?)?");
-                Matcher speedMatcher=speedPattern.matcher(value);
-                if (speedMatcher.find()){
+                Pattern speedPattern = Pattern.compile("(\\d+)([KkMm]((bit)|(b))?)?");
+                Matcher speedMatcher = speedPattern.matcher(value);
+                if (speedMatcher.find())
+                {
                     this.speed = Integer.parseInt(speedMatcher.group(1));
                     this.unit = Transformations.convertStringIntoUnit(speedMatcher.group(2));
-                }
-                else {
+                } else
+                {
                     throw new IllegalArgumentException("Bandwidth argument is wrong");
                 }
 

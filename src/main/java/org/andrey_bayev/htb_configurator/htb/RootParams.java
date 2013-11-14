@@ -78,11 +78,12 @@ public class RootParams
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int hash = 1;
         hash = hash * 17 + defaultID;
         hash = hash * 31 + r2q;
-        hash = hash * 12 + ( dcache ? 1 : 0);
+        hash = hash * 12 + (dcache ? 1 : 0);
         return hash;
     }
 

@@ -9,7 +9,6 @@ package org.andrey_bayev.htb_configurator.htb.leaf;
 
 import org.andrey_bayev.htb_configurator.htb.DefaultHTBClassValues;
 import org.andrey_bayev.htb_configurator.htb.SpeedInBytes;
-import org.andrey_bayev.htb_configurator.htb.Unit;
 
 /**
  * This class keeps sfq parameters if user set LEAF=sfq;

@@ -16,6 +16,7 @@ public class Address
     public static final String IP4_SOCKET_PATTERN = "^(((\\d{1,3})\\.){3}(\\d{1,3}))(\\/((0[xX][a-fA-F\\d]+)|(\\d+)))?(:(\\d{1,5})(\\/((0[xX][a-fA-F\\d]+)|(\\d+)))?)?$";
     public static final String IP4_ADDRESS_PATTERN = "^(([12]?\\d?\\d)\\.){3}([12]?\\d?\\d)$";
     public static final String HEX_NUMBER_PATTERN = "0x[a-fA-F\\d]+";
+
     private String ip;
     private int ipMask;
     private int port;
@@ -145,35 +146,41 @@ public class Address
         }
 
         if (this.ip.equals(address.ip) && (this.ipMask == address.ipMask) &&
-                (this.port == address.port) && (this.portMask == address.portMask)){
+                (this.port == address.port) && (this.portMask == address.portMask))
+        {
             return true;
-        }
-        else{
+        } else
+        {
             return false;
         }
     }
 
     @Override
-    public int hashCode(){
-        int code=1;
-        code=code*12+ip.hashCode();
-        code=code*18+ipMask;
-        code=code*24+port;
-        code=code*32+portMask;
+    public int hashCode()
+    {
+        int code = 1;
+        code = code * 12 + ip.hashCode();
+        code = code * 18 + ipMask;
+        code = code * 24 + port;
+        code = code * 32 + portMask;
         return code;
     }
+
+
 
     public String toString()
     {
         String address;
         address = ip;
-        if (ipMask != 0){
+        if (ipMask != 0)
+        {
             address = address + '/' + ipMask;
         }
         if (port != 0)
         {
             address = address + ':' + port;
-            if (portMask != 0){
+            if (portMask != 0)
+            {
                 address = address + '/' + portMask;
             }
         }
@@ -189,61 +196,61 @@ public class Address
         Pattern addressPattern =
                 Pattern.compile(IP4_SOCKET_PATTERN);
         Matcher myMatcher = addressPattern.matcher(addressString);
-        if(!myMatcher.find()) throw new IllegalArgumentException("wrong ip socket format");
+        if (!myMatcher.find()) throw new IllegalArgumentException("wrong ip socket format");
         ip = myMatcher.group(1);
         Pattern ipPattern = Pattern.compile(IP4_ADDRESS_PATTERN);
         if (!ipPattern.matcher(ip).find()) throw new IllegalArgumentException("wrong ip format");
         String maskOfIpGroup = myMatcher.group(6);
         if (maskOfIpGroup != null)
+        {
+            try
             {
-                try
-                {
 
-                    if (maskOfIpGroup.matches(HEX_NUMBER_PATTERN))
-                    {
-                        ipMask = Integer.parseInt(maskOfIpGroup.substring(2), 16);
-                    } else ipMask = Integer.parseInt(maskOfIpGroup, 10);
-                } catch (NumberFormatException e)
+                if (maskOfIpGroup.matches(HEX_NUMBER_PATTERN))
                 {
-                    throw new IllegalArgumentException("incorrect mask of ip format");
-
-                }
-            } else
+                    ipMask = Integer.parseInt(maskOfIpGroup.substring(2), 16);
+                } else ipMask = Integer.parseInt(maskOfIpGroup, 10);
+            } catch (NumberFormatException e)
             {
-                ipMask = 0;
+                throw new IllegalArgumentException("incorrect mask of ip format");
+
             }
-            String portGroup = myMatcher.group(10);
-            if (portGroup != null)
+        } else
+        {
+            ipMask = 0;
+        }
+        String portGroup = myMatcher.group(10);
+        if (portGroup != null)
+        {
+            try
             {
-                try
-                {
-                    port = Integer.parseInt(portGroup);
-                } catch (NumberFormatException e)
-                {
-                    throw new IllegalArgumentException("incorrect port format");
-                }
-            } else port = 0;
-            String maskOfPortGroup = myMatcher.group(12);
-
-            if (maskOfPortGroup != null)
+                port = Integer.parseInt(portGroup);
+            } catch (NumberFormatException e)
             {
-                try
-                {
-                    if (maskOfPortGroup.matches("0x[a-fA-F\\d]+"))
-                    {
-                        portMask = Integer.parseInt(maskOfPortGroup.substring(2), 16);
-                    } else portMask = Integer.parseInt(maskOfPortGroup, 10);
-                } catch (NumberFormatException e)
-                {
-                    throw new IllegalArgumentException("incorrect mask of port format");
-                }
-            } else
-            {
-                portMask = 0;
+                throw new IllegalArgumentException("incorrect port format");
             }
+        } else port = 0;
+        String maskOfPortGroup = myMatcher.group(12);
 
-            Address address = new Address(ip, ipMask, port, portMask);
-            return address;
+        if (maskOfPortGroup != null)
+        {
+            try
+            {
+                if (maskOfPortGroup.matches("0x[a-fA-F\\d]+"))
+                {
+                    portMask = Integer.parseInt(maskOfPortGroup.substring(2), 16);
+                } else portMask = Integer.parseInt(maskOfPortGroup, 10);
+            } catch (NumberFormatException e)
+            {
+                throw new IllegalArgumentException("incorrect mask of port format");
+            }
+        } else
+        {
+            portMask = 0;
+        }
+
+        Address address = new Address(ip, ipMask, port, portMask);
+        return address;
     }
 
 }

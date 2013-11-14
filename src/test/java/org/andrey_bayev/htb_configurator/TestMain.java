@@ -10,13 +10,8 @@ package org.andrey_bayev.htb_configurator;
 import org.andrey_bayev.htb_configurator.htb.HTBClass;
 import org.andrey_bayev.htb_configurator.input.InputFromFile;
 import org.andrey_bayev.htb_configurator.output.OutputToFile;
-import org.apache.commons.beanutils.BeanComparator;
-import org.junit.Assert;
-import org.junit.Ignore;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Comparator;
 
 public class TestMain
 {
@@ -32,7 +27,8 @@ public class TestMain
         InputFromFile input = new InputFromFile(), input2 = new InputFromFile();
         for (File file : htbfiles)
         {
-            try{
+            try
+            {
                 input.setFile(file);
                 htb1 = input.read();
                 String filename2 = catalog2.getAbsolutePath() + '/' + file.getName();
@@ -42,7 +38,8 @@ public class TestMain
                 input2.setFile(file);
                 htb2 = input2.read();
                 //Assert.assertEquals(htb1,htb2);
-            }catch(Exception e){
+            } catch (Exception e)
+            {
                 System.out.println(e);
             }
         }

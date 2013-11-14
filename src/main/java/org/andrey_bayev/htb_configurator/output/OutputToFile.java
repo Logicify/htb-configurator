@@ -192,14 +192,17 @@ public class OutputToFile implements OutputHTB
 
                         for (Rule rule : htb.getRules())
                         {
-                            if (rule.getComment() != null){
+                            if (rule.getComment() != null)
+                            {
                                 output.println('#' + rule.getComment());
                             }
                             output.print("RULE=");
-                            if (rule.getSaddr() != null){
+                            if (rule.getSaddr() != null)
+                            {
                                 output.print(rule.getSaddr().toString() + ",");
                             }
-                            if (rule.getDaddr() != null){
+                            if (rule.getDaddr() != null)
+                            {
                                 output.print(rule.getDaddr().toString());
                             }
                             output.println();
@@ -212,14 +215,17 @@ public class OutputToFile implements OutputHTB
 
                         for (Realm realm : htb.getRealms())
                         {
-                            if (realm.getComment() != null){
+                            if (realm.getComment() != null)
+                            {
                                 output.println('#' + realm.getComment());
                             }
                             output.print("REALM=");
-                            if (realm.getSrealm() != null){
+                            if (realm.getSrealm() != null)
+                            {
                                 output.print(realm.getSrealm() + ",");
                             }
-                            if (realm.getDrealm() != null){
+                            if (realm.getDrealm() != null)
+                            {
                                 output.print(realm.getDrealm());
                             }
                             output.println();
@@ -231,7 +237,8 @@ public class OutputToFile implements OutputHTB
                     {
                         for (Mark mark : htb.getMarks())
                         {
-                            if (mark.getComment() != null){
+                            if (mark.getComment() != null)
+                            {
                                 output.println('#' + mark.getComment());
                             }
                             output.println("MARK=" + mark.getFirewallRule());
@@ -243,7 +250,8 @@ public class OutputToFile implements OutputHTB
                     {
                         for (TimeRange time : htb.getTimeRanges())
                         {
-                            if (time.getComment() != null) {
+                            if (time.getComment() != null)
+                            {
                                 output.println('#' + time.getComment());
                             }
                             output.println("TIME=" + time.toString());
@@ -266,7 +274,8 @@ public class OutputToFile implements OutputHTB
 
     private void writeComment(String value)
     {
-        if (htb.getComments().get(value) != null){
+        if (htb.getComments().get(value) != null)
+        {
             output.println("#" + htb.getComments().get(value));
         }
     }
@@ -276,8 +285,7 @@ public class OutputToFile implements OutputHTB
         if (htb.getUseOfTheValues().get(value) != null && htb.getUseOfTheValues().get(value))
         {
             return true;
-        }
-        else
+        } else
         {
             return false;
         }
