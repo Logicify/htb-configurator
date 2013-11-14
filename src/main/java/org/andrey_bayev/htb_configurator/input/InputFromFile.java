@@ -239,15 +239,11 @@ public class InputFromFile implements InputHTB
                     }
                 }
             }
-
-            // todo all shoudl go to try-with-resource or try-finally
             input.close();
+            return htb;
         } catch (Exception e)
         {
             throw e;
         }
-
-
-        return htb;
     }
 }
