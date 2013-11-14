@@ -17,7 +17,9 @@ import org.andrey_bayev.htb_configurator.htb.leaf.SFQParams;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-
+/**
+ *
+ */
 public class HTBClass
 {
     private String fileName;//name of file where HTB class will be keeped
