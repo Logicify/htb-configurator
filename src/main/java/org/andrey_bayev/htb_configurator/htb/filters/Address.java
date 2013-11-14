@@ -137,36 +137,31 @@ public class Address
         this.ipMask = ipMask;
     }
 
-    public boolean equals(Address address)
+    @Override
+    public boolean equals(Object o)
     {
-        if ((this == null) && (address == null)) return true;
-        else
-        {
-            if (((this != null) && (address == null)) || ((this == null) && (address != null))) return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        if (this.ip.equals(address.ip) && (this.ipMask == address.ipMask) &&
-                (this.port == address.port) && (this.portMask == address.portMask))
-        {
-            return true;
-        } else
-        {
-            return false;
-        }
+        Address address = (Address) o;
+
+        if (ipMask != address.ipMask) return false;
+        if (port != address.port) return false;
+        if (portMask != address.portMask) return false;
+        if (ip != null ? !ip.equals(address.ip) : address.ip != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode()
     {
-        int code = 1;
-        code = code * 12 + ip.hashCode();
-        code = code * 18 + ipMask;
-        code = code * 24 + port;
-        code = code * 32 + portMask;
-        return code;
+        int result = ip != null ? ip.hashCode() : 0;
+        result = 31 * result + ipMask;
+        result = 31 * result + port;
+        result = 31 * result + portMask;
+        return result;
     }
-
-
 
     public String toString()
     {
