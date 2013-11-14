@@ -8,13 +8,14 @@
 
 package org.andrey_bayev.htb_configurator.htb;
 
+import java.util.Arrays;
+
 /**
  * This class allows you to change class bandwidth during the day or
  * week
  */
 public class TimeRange
 {
-    //todo: overload equals and hashcode
     private boolean daysOfWeak[];
     private boolean always;//if you don't use daysOfWeak
     private String time;
@@ -189,5 +190,33 @@ public class TimeRange
         return t;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        TimeRange timeRange = (TimeRange) o;
+
+        if (always != timeRange.always) return false;
+        if (burst != null ? !burst.equals(timeRange.burst) : timeRange.burst != null) return false;
+        if (cburst != null ? !cburst.equals(timeRange.cburst) : timeRange.cburst != null) return false;
+        if (ceil != null ? !ceil.equals(timeRange.ceil) : timeRange.ceil != null) return false;
+        if (!Arrays.equals(daysOfWeak, timeRange.daysOfWeak)) return false;
+        if (rate != null ? !rate.equals(timeRange.rate) : timeRange.rate != null) return false;
+        if (time != null ? !time.equals(timeRange.time) : timeRange.time != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = daysOfWeak != null ? Arrays.hashCode(daysOfWeak) : 0;
+        result = 31 * result + (always ? 1 : 0);
+        result = 31 * result + (time != null ? time.hashCode() : 0);
+        result = 31 * result + (rate != null ? rate.hashCode() : 0);
+        result = 31 * result + (ceil != null ? ceil.hashCode() : 0);
+        result = 31 * result + (burst != null ? burst.hashCode() : 0);
+        result = 31 * result + (cburst != null ? cburst.hashCode() : 0);
+        return result;
+    }
 }
