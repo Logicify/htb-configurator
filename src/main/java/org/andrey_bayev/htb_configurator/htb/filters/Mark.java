@@ -9,7 +9,6 @@ package org.andrey_bayev.htb_configurator.htb.filters;
  */
 public class Mark
 {
-    //todo: override equals and hashcode
     private String firewallRule;
     private String comment;
 
@@ -38,4 +37,25 @@ public class Mark
     {
         this.comment = comment;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Mark mark = (Mark) o;
+
+        if (comment != null ? !comment.equals(mark.comment) : mark.comment != null) return false;
+        if (firewallRule != null ? !firewallRule.equals(mark.firewallRule) : mark.firewallRule != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = firewallRule != null ? firewallRule.hashCode() : 0;
+        result = 31 * result + (comment != null ? comment.hashCode() : 0);
+        return result;
+    }
+
 }
