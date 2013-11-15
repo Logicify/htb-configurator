@@ -1,24 +1,44 @@
 package com.logicify.htb.configurator.htb;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * <h1>TimeRange</h1>
  * <p>This parameter allows you to change class bandwidth during the day or
- *	week. You can use multiple TIME rules. If there are several rules with
- *	overlapping time periods, the last match is taken. The <b>rate</b>, <b>burst</b>,
- *	<b>ceil</b> and <b>cburst</b> fields correspond to parameters RATE, BURST, CEIL
- *	and CBURST.
- *
- *	daysOfWeak is couple of digits in range 0-6 and represents day of week as
- *	returned by date.</p>
+ * week. You can use multiple TIME rules. If there are several rules with
+ * overlapping time periods, the last match is taken. The <b>rate</b>, <b>burst</b>,
+ * <b>ceil</b> and <b>cburst</b> fields correspond to parameters RATE, BURST, CEIL
+ * and CBURST.
+ * <p/>
+ * daysOfWeek is couple of digits in range 0-6 and represents day of week as
+ * returned by date.</p>
  */
 public class TimeRange {
+    /**
+     * Represents days of week.
+     */
+    public static enum DayOfWeek {
+        SUNDAY("0"), MONDAY("1"), TUESDAY("2"), WEDNESDAY("3"), THURSDAY("4"), FRIDAY("5"), SATURDAY("6");
+
+        private final String htbNumericRepresentation;
+
+        private DayOfWeek(String htbNumericRepresentation) {
+            this.htbNumericRepresentation = htbNumericRepresentation;
+        }
+
+        public String getHtbNumericRepresentation() {
+            return htbNumericRepresentation;
+        }
+
+    }
+
     public static final String TIMERANGE_PATTERN = "((\\d+)/)?(\\d{2}:\\d{2}-\\d{2}:\\d{2});(\\d+([kKMmbpsit]+)?)(/(\\d+([kKMm]b?)?))?(,(\\d+([kKMmbpsit]+)?)(/(\\d+([kKMm]b?)?))?)?";
-    private boolean daysOfWeak[];
-    private boolean always;//if you don't use daysOfWeak
+    private List<DayOfWeek> daysOfWeek = null;
+    private boolean always;//if you don't use daysOfWeek
     private String time;
     private Bandwidth rate;
     private Bandwidth ceil;
@@ -28,41 +48,49 @@ public class TimeRange {
 
 
     public TimeRange(String timeRange, String comment) throws HTBException {
-        try{
-        this.comment = comment;
-        Pattern timeRangePattern=Pattern.compile(TIMERANGE_PATTERN);
-        Matcher matcher=timeRangePattern.matcher(timeRange);
-        if(!matcher.find()){
-            throw new IllegalArgumentException("wrong timeRange argument");
-        }
-            String days=matcher.group(2);
-            if(days!=null){
-                always=false;
-                daysOfWeak=new boolean[7];
-                for(char i='0';i<'7';i++){
-                    if (days.contains(i+"")) daysOfWeak[i-'0']=true;
-                }
-            }else{
-                always=true;
+        try {
+            this.comment = comment;
+            Pattern timeRangePattern = Pattern.compile(TIMERANGE_PATTERN);
+            Matcher matcher = timeRangePattern.matcher(timeRange);
+            if (!matcher.find()) {
+                throw new IllegalArgumentException("wrong timeRange argument");
             }
-            time=matcher.group(3);
-            rate=new Bandwidth(matcher.group(4));
-            burst=Transformations.fromStringToSpeedInBytes(matcher.group(7));
-            ceil=new Bandwidth(matcher.group(10));
-            cburst=Transformations.fromStringToSpeedInBytes(matcher.group(13));
+            String weekDaysCodeString = matcher.group(2);
+            if (weekDaysCodeString != null) {
+                always = false;
+                daysOfWeek = new ArrayList<DayOfWeek>();
 
-        }catch(Exception e){
-            throw new HTBException("wrong TimeRange argument",e,HTBException.WRONG_ARGUMENT_ERROR);
+                for (DayOfWeek dayOfWeek : DayOfWeek.values()) {
+                    if (weekDaysCodeString.contains(dayOfWeek.getHtbNumericRepresentation())) {
+                        daysOfWeek.add(dayOfWeek);
+                    }
+                }
+            } else {
+                always = true;
+            }
+            time = matcher.group(3);
+            rate = new Bandwidth(matcher.group(4));
+            burst = Transformations.fromStringToSpeedInBytes(matcher.group(7));
+            ceil = new Bandwidth(matcher.group(10));
+            cburst = Transformations.fromStringToSpeedInBytes(matcher.group(13));
+
+        } catch (Exception e) {
+            throw new HTBException("wrong TimeRange argument", e, HTBException.WRONG_ARGUMENT_ERROR);
         }
     }
 
-    public boolean[] getDaysOfWeak() {
-        return daysOfWeak;
+    public List<DayOfWeek> getDaysOfWeek() {
+        return Collections.unmodifiableList(daysOfWeek);
     }
 
-    public void setDaysOfWeak(boolean[] daysOfWeak) {
-        this.daysOfWeak = daysOfWeak;
+    public boolean containsDayOfWeek(DayOfWeek day) {
+        return daysOfWeek.contains(day);
     }
+
+    public void setDaysOfWeek(List<DayOfWeek> value) {
+        this.daysOfWeek = value;
+    }
+
 
     public String getTime() {
         return time;
@@ -122,10 +150,11 @@ public class TimeRange {
     }
 
     public String toString() {
+        //TODO string builder
         String t = "";
         if (!always) {
-            for (int i = 0; i <= 6; i++) {
-                if (daysOfWeak[i]) t += i;
+            for (DayOfWeek day : getDaysOfWeek()) {
+                t += day.getHtbNumericRepresentation();
             }
             t = t + '/';
         }
@@ -154,7 +183,7 @@ public class TimeRange {
         if (burst != null ? !burst.equals(timeRange.burst) : timeRange.burst != null) return false;
         if (cburst != null ? !cburst.equals(timeRange.cburst) : timeRange.cburst != null) return false;
         if (ceil != null ? !ceil.equals(timeRange.ceil) : timeRange.ceil != null) return false;
-        if (!Arrays.equals(daysOfWeak, timeRange.daysOfWeak)) return false;
+        if (daysOfWeek != null ? !daysOfWeek.equals(timeRange.daysOfWeek) : timeRange.daysOfWeek != null) return false;
         if (rate != null ? !rate.equals(timeRange.rate) : timeRange.rate != null) return false;
         if (time != null ? !time.equals(timeRange.time) : timeRange.time != null) return false;
 
@@ -163,7 +192,7 @@ public class TimeRange {
 
     @Override
     public int hashCode() {
-        int result = daysOfWeak != null ? Arrays.hashCode(daysOfWeak) : 0;
+        int result = daysOfWeek != null ? daysOfWeek.hashCode() : 0;
         result = 31 * result + (always ? 1 : 0);
         result = 31 * result + (time != null ? time.hashCode() : 0);
         result = 31 * result + (rate != null ? rate.hashCode() : 0);

@@ -7,9 +7,9 @@ import java.util.regex.Pattern;
  * <h1>Transformations</h1>
  * <p>These class keeps static transformation methods:
  * <ul>
- *     <li><b>ConvertStringIntoUnit</b>-it converts units from string value("Mbit") to Unit constant value Unit.Mbit</li>
- *     <li><b>fromStringToSpeedInBytes</b>-it converts speed from string value("10Kb per sec") to SpeedInBytes value</li>
- *     <li><b>fromSpeedInBytesToString</b>-it converts speed from SpeedInBytes value to string value</li>
+ * <li><b>ConvertStringIntoUnit</b>-it converts units from string value("Mbit") to Unit constant value Unit.Mbit</li>
+ * <li><b>fromStringToSpeedInBytes</b>-it converts speed from string value("10Kb per sec") to SpeedInBytes value</li>
+ * <li><b>fromSpeedInBytesToString</b>-it converts speed from SpeedInBytes value to string value</li>
  * </ul></p>
  */
 public class Transformations {

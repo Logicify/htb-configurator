@@ -7,9 +7,9 @@ import com.logicify.htb.configurator.htb.HTBException;
  * <p>This class make up "u32" filter rules that select traffic for
  * each of the classes. This class contains fields:
  * <ul>
- *     <li><b>ssocket</b>-source socket, is where traffic comes from</li>
- *     <li><b>dsocket</b>-destination socket, is where traffic goes to</li>
- *     <li><b>comment</b>-is a comment to the rule</li>
+ * <li><b>ssocket</b>-source socket, is where traffic comes from</li>
+ * <li><b>dsocket</b>-destination socket, is where traffic goes to</li>
+ * <li><b>comment</b>-is a comment to the rule</li>
  * </ul></p>
  */
 public class Rule {

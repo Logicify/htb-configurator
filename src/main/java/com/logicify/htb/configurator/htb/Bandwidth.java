@@ -6,15 +6,15 @@ import java.util.regex.Pattern;
 /**
  * <h1>Bandwidth</h1>
  * <p>Bandwidth allocated to the class. Traffic going through the class is
- *	shaped to conform to specified rate. You can use Kbit, Mbit or bps,
- *	Kbps and Mbps as suffices. If you don't specify any unit, bits/sec
- *	are used</p>
- *<p>This class has these fields:<ul>
- *     <li><b>unit</b>-it is a speed rate unit</li>
- *     <li><b>prate</b>-if object uses RATE of parent HTB Class this field is true</li>
- *     <li><b>pceil</b>-if object uses CEIL of parent HTB Class this field is true</li>
- *     <li><b>speed</b>-this field keeps digital value of speed</li>
- *</ul></p>
+ * shaped to conform to specified rate. You can use Kbit, Mbit or bps,
+ * Kbps and Mbps as suffices. If you don't specify any unit, bits/sec
+ * are used</p>
+ * <p>This class has these fields:<ul>
+ * <li><b>unit</b>-it is a speed rate unit</li>
+ * <li><b>prate</b>-if object uses RATE of parent HTB Class this field is true</li>
+ * <li><b>pceil</b>-if object uses CEIL of parent HTB Class this field is true</li>
+ * <li><b>speed</b>-this field keeps digital value of speed</li>
+ * </ul></p>
  */
 public class Bandwidth {
     private Unit unit;//speed rate unit

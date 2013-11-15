@@ -225,11 +225,7 @@ public class OutputToFile implements OutputHTB {
     }
 
     private boolean checkIfTrue(String value) {
-        if (htb.getUseOfTheValues().get(value) != null && htb.getUseOfTheValues().get(value)) {
-            return true;
-        } else {
-            return false;
-        }
+        return htb.getUseOfTheValues().get(value) != null && htb.getUseOfTheValues().get(value);
     }
 
 }

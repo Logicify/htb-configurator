@@ -1,6 +1,5 @@
 package com.logicify.htb.configurator.htb;
 
-import com.logicify.htb.configurator.htb.HTBClass;
 import com.logicify.htb.configurator.input.InputFromFile;
 import com.logicify.htb.configurator.output.OutputToFile;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -11,12 +10,10 @@ import java.io.File;
 /**
  * This class tests work of InputHTB and OutputHTB classes
  */
-public class TestMain
-{
+public class TestMain {
 
     @org.junit.Test
-    public void testHTBFiles() throws Exception
-    {
+    public void testHTBFiles() throws Exception {
         HTBClass htb1, htb2;
         ClassLoader loader = ClassLoader.getSystemClassLoader();
         File catalog1 = new File(loader.getResource("ExpectedFiles").getPath());
@@ -25,8 +22,7 @@ public class TestMain
 
         InputFromFile input = new InputFromFile(), input2 = new InputFromFile();
 
-        for (File file : htbfiles)
-        {
+        for (File file : htbfiles) {
             input.setFile(file);
             htb1 = input.read();
             String filename2 = catalog2.getAbsolutePath() + '/' + file.getName();
@@ -35,7 +31,7 @@ public class TestMain
             output.write(htb1);
             input2.setFile(file);
             htb2 = input2.read();
-            Assert.assertTrue(EqualsBuilder.reflectionEquals(htb1, htb2, new String[]{"fileName","comments"}));
+            Assert.assertTrue(EqualsBuilder.reflectionEquals(htb1, htb2, new String[]{"fileName", "comments"}));
         }
     }
 
