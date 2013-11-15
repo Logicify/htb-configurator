@@ -4,13 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * Created with IntelliJ IDEA.
- * User: vasya
- * Date: 11/12/13
- * Time: 3:05 PM
- * To change this template use File | Settings | File Templates.
- */
 public class TestAddress
 {
     String correctTests[];

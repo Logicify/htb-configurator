@@ -3,13 +3,6 @@ package com.logicify.htb.configurator.htb;
 import org.junit.Assert;
 import org.junit.Test;
 
-/**
- * Created with IntelliJ IDEA.
- * User: vasya
- * Date: 11/6/13
- * Time: 11:44 PM
- * To change this template use File | Settings | File Templates.
- */
 public class TestTransformations
 {
 

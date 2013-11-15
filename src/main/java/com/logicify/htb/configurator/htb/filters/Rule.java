@@ -1,46 +1,32 @@
-/**
- * Created with IntelliJ IDEA.
- * User: vasya
- * Date: 10/27/13
- * Time: 7:34 PM
- * To change this template use File | Settings | File Templates.
- */
 package com.logicify.htb.configurator.htb.filters;
 
 import com.logicify.htb.configurator.htb.HTBException;
 
 /**
  * This class make up "u32" filter rules that select traffic for
- * #	each of the classes
+ * each of the classes
  */
-public class Rule
-{
+public class Rule {
     private Address saddr;
     private Address daddr;
     private String comment;
 
-    public Rule()
-    {
+    public Rule() {
         this.saddr = null;
         this.daddr = null;
         this.comment = null;
     }
 
-    public Rule(String saddr, String daddr, String comment) throws HTBException
-    {
-        if (saddr != null)
-        {
+    public Rule(String saddr, String daddr, String comment) throws HTBException {
+        if (saddr != null) {
             this.saddr = Address.create(saddr);
-        } else
-        {
+        } else {
             this.saddr = null;
         }
 
-        if (daddr != null)
-        {
+        if (daddr != null) {
             this.daddr = Address.create(daddr);
-        } else
-        {
+        } else {
             this.daddr = null;
         }
 
@@ -48,34 +34,28 @@ public class Rule
     }
 
 
-    public Address getSaddr()
-    {
+    public Address getSaddr() {
         return saddr;
     }
 
-    public void setSaddr(Address saddr)
-    {
+    public void setSaddr(Address saddr) {
         this.saddr = saddr;
     }
 
-    public Address getDaddr()
-    {
+    public Address getDaddr() {
         return daddr;
     }
 
-    public void setDaddr(Address daddr)
-    {
+    public void setDaddr(Address daddr) {
         this.daddr = daddr;
     }
 
 
-    public String getComment()
-    {
+    public String getComment() {
         return comment;
     }
 
-    public void setComment(String comment)
-    {
+    public void setComment(String comment) {
         this.comment = comment;
     }
 

@@ -1,11 +1,3 @@
-/**
- * Created with IntelliJ IDEA.
- * User: vasya
- * Date: 10/27/13
- * Time: 4:19 PM
- * To change this template use File | Settings | File Templates.
- */
-
 package com.logicify.htb.configurator.input;
 
 import com.logicify.htb.configurator.htb.*;
@@ -23,27 +15,22 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class InputFromFile implements InputHTB
-{
+public class InputFromFile implements InputHTB {
     private File fileOfInput;
 
-    public InputFromFile()
-    {
+    public InputFromFile() {
         this.fileOfInput = null;
     }
 
-    public InputFromFile(File file)
-    {
+    public InputFromFile(File file) {
         this.fileOfInput = file;
     }
 
-    public InputFromFile(String filename)
-    {
+    public InputFromFile(String filename) {
         this.fileOfInput = new File(filename);
     }
 
-    public void setFile(File file)
-    {
+    public void setFile(File file) {
         this.fileOfInput = file;
     }
 
@@ -54,12 +41,10 @@ public class InputFromFile implements InputHTB
      * @return
      */
     @Override
-    public HTBClass read() throws HTBException
-    {
+    public HTBClass read() throws HTBException {
 
         HTBClass htb = new HTBClass();
-        try (BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(fileOfInput))))
-        {
+        try (BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(fileOfInput)))) {
 
             //I am defining values I need to create HTB class
             htb.setComments(new HashMap<String, String>());
@@ -70,8 +55,7 @@ public class InputFromFile implements InputHTB
             htb.setTimeRanges(new LinkedList<TimeRange>());
             HashMap<String, String> values = new HashMap<String, String>();
 
-            if (!fileOfInput.getAbsolutePath().contains("."))
-            {
+            if (!fileOfInput.getAbsolutePath().contains(".")) {
                 htb.setRoot(true);
             }
             htb.setFileName(fileOfInput.getAbsolutePath());
@@ -82,67 +66,50 @@ public class InputFromFile implements InputHTB
             String key = null;
             String value = null;
             str = input.readLine();
-            if (str.length() != 0 && str.charAt(0) == '#')
-            {
+            if (str.length() != 0 && str.charAt(0) == '#') {
                 htb.getComments().put("HTB", str.substring(1));//Main comment to HTB file
                 str = input.readLine();
             }
 
-            do
-            {
-                if (str.length() != 0 && str.charAt(0) == '#')
-                {
+            do {
+                if (str.length() != 0 && str.charAt(0) == '#') {
                     comment = str.substring(1);      //Comment to some key
-                } else
-                {
-                    if (str.contains("="))
-                    {
+                } else {
+                    if (str.contains("=")) {
                         String strs[] = str.split("=");
                         key = strs[0];
                         value = strs[1];
                         htb.getUseOfTheValues().put(key, true);
 
-                        if (key.equals("RULE"))
-                        {
-                            if (value.contains(","))
-                            {
+                        if (key.equals("RULE")) {
+                            if (value.contains(",")) {
                                 strs = value.split(",");
-                                if (strs.length == 2)
-                                {
+                                if (strs.length == 2) {
                                     htb.getRules().add(new Rule(strs[0], strs[1], comment));
-                                } else
-                                {
+                                } else {
                                     htb.getRules().add(new Rule(strs[0], null, comment));
                                 }
                             } else htb.getRules().add(new Rule(null, value, comment));
 
 
-                        } else if (key.equals("REALM"))
-                        {
-                            if (value.contains(","))
-                            {
+                        } else if (key.equals("REALM")) {
+                            if (value.contains(",")) {
                                 strs = value.split(",");
-                                if (strs.length == 2)
-                                {
+                                if (strs.length == 2) {
                                     htb.getRealms().add(new Realm(strs[0], strs[1], comment));
-                                } else
-                                {
+                                } else {
                                     htb.getRealms().add(new Realm(strs[0], null, comment));
                                 }
                             } else htb.getRealms().add(new Realm(null, value, comment));
 
-                        } else if (key.equals("MARK"))
-                        {
+                        } else if (key.equals("MARK")) {
                             htb.getMarks().add(new Mark(value, comment));
 
-                        } else if (key.equals("TIME"))
-                        {
+                        } else if (key.equals("TIME")) {
                             htb.getTimeRanges().add(new TimeRange(value, comment));
 
-                        } else
-                        {
-                            if (comment != null)
-                            {
+                        } else {
+                            if (comment != null) {
                                 htb.getComments().put(key, comment);
                             }
                             values.put(key, value);
@@ -152,8 +119,7 @@ public class InputFromFile implements InputHTB
                     }
                 }
             } while ((str = input.readLine()) != null);
-            if (htb.isRoot())
-            {
+            if (htb.isRoot()) {
                 htb.setRootParams(new RootParams());
                 if (htb.checkIfTrue("DEFAULT"))
                     htb.getRootParams().setDefaultID(Integer.parseInt(values.get("DEFAULT")));
@@ -161,31 +127,24 @@ public class InputFromFile implements InputHTB
                 if (htb.checkIfTrue("DCACHE"))
                     htb.getRootParams().setDchache(values.get("DCACHE").equals("yes") ? true : false);
             }
-            if (htb.checkIfTrue("RATE"))
-            {
+            if (htb.checkIfTrue("RATE")) {
                 htb.setRate(new Bandwidth(values.get("RATE")));
             }
-            if (htb.checkIfTrue("CEIL"))
-            {
+            if (htb.checkIfTrue("CEIL")) {
                 htb.setCeil(new Bandwidth(values.get("CEIL")));
             }
-            if (htb.checkIfTrue("BURST"))
-            {
+            if (htb.checkIfTrue("BURST")) {
                 htb.setBurst(Transformations.fromStringToSpeedInBytes(values.get("BURST")));
             }
-            if (htb.checkIfTrue("CBURST"))
-            {
+            if (htb.checkIfTrue("CBURST")) {
                 htb.setBurst(Transformations.fromStringToSpeedInBytes(values.get("CBURST")));
             }
-            if (htb.checkIfTrue("PRIO"))
-            {
+            if (htb.checkIfTrue("PRIO")) {
                 htb.setPrio(Integer.parseInt(values.get("PRIO")));
             }
-            if (htb.checkIfTrue("LEAF"))
-            {
+            if (htb.checkIfTrue("LEAF")) {
                 String lf = values.get("LEAF");
-                switch (lf)
-                {
+                switch (lf) {
                     case "sfq":
                         htb.setLeaf(Leaf.SFQ);
                         break;
@@ -200,39 +159,29 @@ public class InputFromFile implements InputHTB
                         break;
                 }
             }
-            if (htb.checkIfTrue("MTU"))
-            {
+            if (htb.checkIfTrue("MTU")) {
                 htb.setMtu(Transformations.fromStringToSpeedInBytes(values.get("MTU")));
             }
-            if (htb.checkIfTrue("LEAF"))
-            {
-                switch (htb.getLeaf())
-                {
-                    case SFQ:
-                    {
+            if (htb.checkIfTrue("LEAF")) {
+                switch (htb.getLeaf()) {
+                    case SFQ: {
                         htb.setSfq(new SFQParams());
-                        if (htb.checkIfTrue("QUANTUM"))
-                        {
+                        if (htb.checkIfTrue("QUANTUM")) {
                             htb.getSfq().setQuantum(Transformations.fromStringToSpeedInBytes(values.get("QUANTUM")));
                         }
-                        if (htb.checkIfTrue("PERTURB"))
-                        {
+                        if (htb.checkIfTrue("PERTURB")) {
                             htb.getSfq().setPerturb(Integer.parseInt(values.get("PERTURB")));
                         }
                     }
-                    case PFIFO:
-                    {
+                    case PFIFO: {
                         htb.setPfifo(new FIFOParams());
-                        if (htb.checkIfTrue("LIMIT"))
-                        {
+                        if (htb.checkIfTrue("LIMIT")) {
                             htb.getPfifo().setLimit(Transformations.fromStringToSpeedInBytes(values.get("LIMIT")));
                         }
                     }
-                    case BFIFO:
-                    {
+                    case BFIFO: {
                         htb.setBfifo(new FIFOParams());
-                        if (htb.checkIfTrue("LIMIT"))
-                        {
+                        if (htb.checkIfTrue("LIMIT")) {
                             htb.getBfifo().setLimit(Transformations.fromStringToSpeedInBytes(values.get("LIMIT")));
 
                         }
@@ -241,9 +190,8 @@ public class InputFromFile implements InputHTB
             }
             input.close();
             return htb;
-        } catch (Exception e)
-        {
-            throw new HTBException("error while reading from file",e,HTBException.INPUT_FROM_FILE_ERROR);
+        } catch (Exception e) {
+            throw new HTBException("error while reading from file", e, HTBException.INPUT_FROM_FILE_ERROR);
         }
     }
 }

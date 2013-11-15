@@ -1,10 +1,3 @@
-/**
- * Created with IntelliJ IDEA.
- * User: andrey_bayev
- * Date: 10/26/13
- * Time: 10:36 AM
- * To change this template use File | Settings | File Templates.
- */
 package com.logicify.htb.configurator.htb;
 
 import com.logicify.htb.configurator.htb.filters.Mark;
@@ -20,8 +13,7 @@ import java.util.LinkedList;
 /**
  *
  */
-public class HTBClass
-{
+public class HTBClass {
     //todo: describe all classes in htb-configurator project
     private String fileName;//name of file where HTB class will be keeped
 
@@ -65,8 +57,7 @@ public class HTBClass
 
     private HashMap<String, String> comments;//keeps the comments to the parameters
 
-    public HTBClass()
-    {
+    public HTBClass() {
         burst = new SpeedInBytes();
         cburst = new SpeedInBytes();
         mtu = new SpeedInBytes();
@@ -74,200 +65,161 @@ public class HTBClass
     }
 
     //All getters and setters
-    public boolean isRoot()
-    {
+    public boolean isRoot() {
         return root;
     }
 
-    public void setRoot(boolean root)
-    {
+    public void setRoot(boolean root) {
         this.root = root;
     }
 
-    public RootParams getRootParams()
-    {
+    public RootParams getRootParams() {
         return rootParams;
     }
 
-    public void setRootParams(RootParams rootParams)
-    {
+    public void setRootParams(RootParams rootParams) {
         this.rootParams = rootParams;
     }
 
-    public Leaf getLeaf()
-    {
+    public Leaf getLeaf() {
         return leaf;
     }
 
-    public void setLeaf(Leaf leaf)
-    {
+    public void setLeaf(Leaf leaf) {
         this.leaf = leaf;
     }
 
-    public SFQParams getSfq()
-    {
+    public SFQParams getSfq() {
         return sfq;
     }
 
-    public void setSfq(SFQParams sfq)
-    {
+    public void setSfq(SFQParams sfq) {
         this.sfq = sfq;
     }
 
-    public FIFOParams getPfifo()
-    {
+    public FIFOParams getPfifo() {
         return pfifo;
     }
 
-    public void setPfifo(FIFOParams pfifo)
-    {
+    public void setPfifo(FIFOParams pfifo) {
         this.pfifo = pfifo;
     }
 
-    public FIFOParams getBfifo()
-    {
+    public FIFOParams getBfifo() {
         return bfifo;
     }
 
-    public void setBfifo(FIFOParams bfifo)
-    {
+    public void setBfifo(FIFOParams bfifo) {
         this.bfifo = bfifo;
     }
 
-    public int getPrio()
-    {
+    public int getPrio() {
         return prio;
     }
 
-    public void setPrio(int prio)
-    {
+    public void setPrio(int prio) {
         this.prio = prio;
     }
 
-    public Bandwidth getRate()
-    {
+    public Bandwidth getRate() {
         return rate;
     }
 
-    public void setRate(Bandwidth rate)
-    {
+    public void setRate(Bandwidth rate) {
         this.rate = rate;
     }
 
-    public Bandwidth getCeil()
-    {
+    public Bandwidth getCeil() {
         return ceil;
     }
 
-    public void setCeil(Bandwidth ceil)
-    {
+    public void setCeil(Bandwidth ceil) {
         this.ceil = ceil;
     }
 
-    public SpeedInBytes getBurst()
-    {
+    public SpeedInBytes getBurst() {
         return burst;
     }
 
-    public void setBurst(SpeedInBytes burst)
-    {
+    public void setBurst(SpeedInBytes burst) {
         this.burst = burst;
     }
 
-    public SpeedInBytes getCburst()
-    {
+    public SpeedInBytes getCburst() {
         return cburst;
     }
 
-    public void setCburst(SpeedInBytes cburst)
-    {
+    public void setCburst(SpeedInBytes cburst) {
         this.cburst = cburst;
     }
 
-    public SpeedInBytes getMtu()
-    {
+    public SpeedInBytes getMtu() {
         return mtu;
     }
 
-    public void setMtu(SpeedInBytes mtu)
-    {
+    public void setMtu(SpeedInBytes mtu) {
         this.mtu = mtu;
     }
 
-    public LinkedList<Rule> getRules()
-    {
+    public LinkedList<Rule> getRules() {
         return rules;
     }
 
-    public void setRules(LinkedList<Rule> rules)
-    {
+    public void setRules(LinkedList<Rule> rules) {
         this.rules = rules;
     }
 
-    public LinkedList<Realm> getRealms()
-    {
+    public LinkedList<Realm> getRealms() {
         return realms;
     }
 
-    public void setRealms(LinkedList<Realm> realms)
-    {
+    public void setRealms(LinkedList<Realm> realms) {
         this.realms = realms;
     }
 
-    public LinkedList<Mark> getMarks()
-    {
+    public LinkedList<Mark> getMarks() {
         return marks;
     }
 
-    public void setMarks(LinkedList<Mark> marks)
-    {
+    public void setMarks(LinkedList<Mark> marks) {
         this.marks = marks;
     }
 
-    public LinkedList<TimeRange> getTimeRanges()
-    {
+    public LinkedList<TimeRange> getTimeRanges() {
         return timeRanges;
     }
 
-    public void setTimeRanges(LinkedList<TimeRange> timeRanges)
-    {
+    public void setTimeRanges(LinkedList<TimeRange> timeRanges) {
         this.timeRanges = timeRanges;
     }
 
-    public HashMap<String, Boolean> getUseOfTheValues()
-    {
+    public HashMap<String, Boolean> getUseOfTheValues() {
         return useOfTheValues;
     }
 
-    public void setUseOfTheValues(HashMap<String, Boolean> useOfTheValues)
-    {
+    public void setUseOfTheValues(HashMap<String, Boolean> useOfTheValues) {
         this.useOfTheValues = useOfTheValues;
     }
 
-    public HashMap<String, String> getComments()
-    {
+    public HashMap<String, String> getComments() {
         return comments;
     }
 
-    public void setComments(HashMap<String, String> comments)
-    {
+    public void setComments(HashMap<String, String> comments) {
         this.comments = comments;
     }
 
 
-    public String getFileName()
-    {
+    public String getFileName() {
         return fileName;
     }
 
-    public void setFileName(String fileName)
-    {
+    public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
     //this method checks is we need to write the param to the file
-    public boolean checkIfTrue(String value)
-    {
+    public boolean checkIfTrue(String value) {
         if (useOfTheValues.get(value) != null && useOfTheValues.get(value)) return true;
         else return false;
     }
