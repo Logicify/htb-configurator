@@ -3,7 +3,7 @@ package com.logicify.htb.configurator.htb;
 import com.logicify.htb.configurator.htb.filters.Mark;
 import com.logicify.htb.configurator.htb.filters.Realm;
 import com.logicify.htb.configurator.htb.filters.Rule;
-import com.logicify.htb.configurator.htb.leaf.FIFOParams;
+import com.logicify.htb.configurator.htb.leaf.FIFOParam;
 import com.logicify.htb.configurator.htb.leaf.Leaf;
 import com.logicify.htb.configurator.htb.leaf.SFQParams;
 
@@ -11,10 +11,34 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
- *
+ * <h1>HTBClass</h1>
+ * <p>
+ *     This class represent HTB Class that is described in file. It has fields:
+ *     <ul>
+ *         <li><b>filename</b>-keeps name of file where class is kept</li>
+ *         <li><b>root</b>-detects if class is root or not</li>
+ *         <li><b>rootParams</b>-keeps params of root HTBClass if HTBClass is root</li>
+ *         <li><b>leaf</b>-keeps leaf queueing discipline</li>
+ *         <li><b>sfq</b>-keeps SFQ params</li>
+ *         <li><b>pfifo</b>-keeps PFIFO params</li>
+ *         <li><b>bfifo</b>-keeps BFIFO params</li>
+ *         <li><b>prio</b>-keeps priority of HTB class traffic</li>
+ *         <li><b>rate</b>-keeps RATE param</li>
+ *         <li><b>ceil</b>-keeps CEIL param</li>
+ *         <li><b>burst</b>-keeps BURST param</li>
+ *         <li><b>cburst</b>-keeps CBURST param</li>
+ *         <li><b>mtu</b>-keeps MTU param</li>
+ *         <li><b>rules</b>-keeps traffic rules</li>
+ *         <li><b>realms</b>-keeps traffic rules depending on the Internet realm</li>
+ *         <li><b>marks</b>-keeps firewall marks</li>
+ *         <li><b>timeRanges</b>-keeps bandwidth changes that are depend on different time periods</li>
+ *         <li><b>useOfValues</b>-keeps fields of HTB we need to use</li>
+ *         <li><b>comments</b>-keeps comments to different fields</li>
+ *     </ul>
+ * </p>
  */
 public class HTBClass {
-    //todo: describe all classes in htb-configurator project
+
     private String fileName;//name of file where HTB class will be keeped
 
     private boolean root; //is HTB class root or not
@@ -23,11 +47,11 @@ public class HTBClass {
 
     private Leaf leaf; //specified leaf queueing discipline
 
-    private SFQParams sfq;//keeps sfq parametrs if LEAF=sfq
+    private SFQParams sfq;//keeps sfq parameters if LEAF=sfq
 
-    private FIFOParams pfifo;//keeps pfifo params if LEAF=pfifo
+    private FIFOParam pfifo;//keeps pfifo params if LEAF=pfifo
 
-    private FIFOParams bfifo;//keeps bfifo params if LEAF=bfifo
+    private FIFOParam bfifo;//keeps bfifo params if LEAF=bfifo
 
     private int prio;//priority of class traffic
 
@@ -97,19 +121,19 @@ public class HTBClass {
         this.sfq = sfq;
     }
 
-    public FIFOParams getPfifo() {
+    public FIFOParam getPfifo() {
         return pfifo;
     }
 
-    public void setPfifo(FIFOParams pfifo) {
+    public void setPfifo(FIFOParam pfifo) {
         this.pfifo = pfifo;
     }
 
-    public FIFOParams getBfifo() {
+    public FIFOParam getBfifo() {
         return bfifo;
     }
 
-    public void setBfifo(FIFOParams bfifo) {
+    public void setBfifo(FIFOParam bfifo) {
         this.bfifo = bfifo;
     }
 

@@ -3,6 +3,10 @@ package com.logicify.htb.configurator.htb;
 import org.junit.Assert;
 import org.junit.Test;
 
+
+/**
+ * This class test methods of Transformations classes
+ */
 public class TestTransformations
 {
 

@@ -4,12 +4,15 @@ import com.logicify.htb.configurator.htb.DefaultHTBClassValues;
 import com.logicify.htb.configurator.htb.SpeedInBytes;
 
 /**
- * This class keeps sfq parameters if user set LEAF=sfq;
+ * <h1>SFQParams</h1>
+ * <p>This class keeps sfq parameters if user set LEAF=sfq. It has fields:<ul>
+ * <li><b>quantum</b>-it keeps number of bytes a stream is allowed to dequeue before next queue gets a turn</li>
+ * <li><b>perturb</b>-it keeps period of hash function perturbation</li>
+ * </ul></p>
  */
 public class SFQParams {
     private SpeedInBytes quantum;//Amount of data in bytes a stream is allowed to dequeue before next queue gets a turn.
     private int perturb;//Period of hash function perturbation.
-    // why not name it hashPerturbationPeriod?
 
     public SFQParams() {
         this.quantum = new SpeedInBytes();
@@ -25,9 +28,11 @@ public class SFQParams {
             this.quantum.setSpeed(DefaultHTBClassValues.DEFAULT_QUANTUM_SPEED);
             this.quantum.setUnit(DefaultHTBClassValues.DEFAULT_SPEED_UNIT);
         } else this.quantum = quantum;
-        if (perturb < 0) this.perturb = DefaultHTBClassValues.DEFAULT_PERTURB;
-            // constants class of SpeedDefaults. There should be no 'magic numbers' in code.
-        else this.perturb = perturb;
+        if (perturb < 0) {
+            this.perturb = DefaultHTBClassValues.DEFAULT_PERTURB;
+        } else {
+            this.perturb = perturb;
+        }
     }
 
     public SpeedInBytes getQuantum() {

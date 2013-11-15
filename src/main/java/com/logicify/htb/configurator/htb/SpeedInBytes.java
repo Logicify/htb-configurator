@@ -1,6 +1,9 @@
 package com.logicify.htb.configurator.htb;
 
-//this class keeps speed value(like 10Kb,100Mb,100) dividing it into digit value and Unit value
+/**
+ * <h1>SpeedInBytes</h1>
+ * <p>This class keeps speed value(like 10Kb,100Mb,100) dividing it into digit value and Unit value</p>
+ */
 public class SpeedInBytes {
     static final int KB = 1024;
     static final int MB = KB * 1024;

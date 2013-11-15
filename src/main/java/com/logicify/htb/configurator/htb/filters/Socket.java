@@ -1,11 +1,23 @@
 package com.logicify.htb.configurator.htb.filters;
 
 import com.logicify.htb.configurator.htb.HTBException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//this class keeps address for Rule class
-public class Address {
+/**
+ * <h1>IPV4 Socket</h1>
+ * <p>This class keeps ipv4 socket and has some methods to transform them from string to Socket and from Socket
+ * to String. Fields of Socket:
+ * <ul>
+ * <li><b>ip</b>-keeps ipv4 of address </li>
+ * <li><b>ipMask</b>-keeps ipv4 network mask that filters ip addresses</li>
+ * <li><b>port</b>-keeps number port</li>
+ * <li><b>portMask</b>-keeps mask of the port</li>
+ * </ul>
+ * </p>
+ */
+public class Socket {
     public static final String IP4_SOCKET_PATTERN = "^((((\\d{1,3})\\.){3}(\\d{1,3}))|(\\*))(\\/((0[xX][a-fA-F\\d]+)|(\\d+)))?(:(\\d{1,5})(\\/((0[xX][a-fA-F\\d]+)|(\\d+)))?)?$";
     public static final String IP4_ADDRESS_PATTERN = "^((([12]?\\d?\\d)\\.){3}([12]?\\d?\\d))|(\\*)$";
     public static final String HEX_NUMBER_PATTERN = "0x[a-fA-F\\d]+";
@@ -15,7 +27,7 @@ public class Address {
     private int port;
     private int portMask;
 
-    public Address(String ip, int ipMask, int port, int portMask) {
+    public Socket(String ip, int ipMask, int port, int portMask) {
         this.ip = ip;
         this.ipMask = ipMask;
         this.port = port;
@@ -59,12 +71,12 @@ public class Address {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Address address = (Address) o;
+        Socket socket = (Socket) o;
 
-        if (ipMask != address.ipMask) return false;
-        if (port != address.port) return false;
-        if (portMask != address.portMask) return false;
-        if (ip != null ? !ip.equals(address.ip) : address.ip != null) return false;
+        if (ipMask != socket.ipMask) return false;
+        if (port != socket.port) return false;
+        if (portMask != socket.portMask) return false;
+        if (ip != null ? !ip.equals(socket.ip) : socket.ip != null) return false;
 
         return true;
     }
@@ -94,16 +106,16 @@ public class Address {
     }
 
     /**
-     * This method creates Address object using String interpretation of address
+     * This method creates Socket object using String interpretation of address
      * String format is "XXX.XXX.XXX.XXX/YYY:PP/MM"
      * XX - ipv4 address
      * YY - ipv4 mask
      * PP - port
      * MM - port mask
      *
-     * @param addressString
+     * @param socketString
      */
-    public static Address create(String addressString) throws HTBException {
+    public static Socket create(String socketString) throws HTBException {
         try {
 
             String ip = "";
@@ -111,7 +123,7 @@ public class Address {
 
             Pattern addressPattern =
                     Pattern.compile(IP4_SOCKET_PATTERN);
-            Matcher myMatcher = addressPattern.matcher(addressString);
+            Matcher myMatcher = addressPattern.matcher(socketString);
             if (!myMatcher.find()) throw new IllegalArgumentException("wrong ip socket format");
 
             ip = myMatcher.group(1);
@@ -154,10 +166,10 @@ public class Address {
                 portMask = 0;
             }
 
-            Address address = new Address(ip, ipMask, port, portMask);
-            return address;
+            Socket socket = new Socket(ip, ipMask, port, portMask);
+            return socket;
         } catch (Exception e) {
-            throw new HTBException("wrong argument of Address' method create", e, HTBException.WRONG_ARGUMENT_ERROR);
+            throw new HTBException("wrong argument of Socket's method create", e, HTBException.WRONG_ARGUMENT_ERROR);
         }
     }
 

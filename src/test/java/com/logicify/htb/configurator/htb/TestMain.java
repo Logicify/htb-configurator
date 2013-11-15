@@ -8,6 +8,9 @@ import org.junit.Assert;
 
 import java.io.File;
 
+/**
+ * This class tests work of InputHTB and OutputHTB classes
+ */
 public class TestMain
 {
 

@@ -3,51 +3,57 @@ package com.logicify.htb.configurator.htb.filters;
 import com.logicify.htb.configurator.htb.HTBException;
 
 /**
- * This class make up "u32" filter rules that select traffic for
- * each of the classes
+ * <h1>Rule</h1>
+ * <p>This class make up "u32" filter rules that select traffic for
+ * each of the classes. This class contains fields:
+ * <ul>
+ *     <li><b>ssocket</b>-source socket, is where traffic comes from</li>
+ *     <li><b>dsocket</b>-destination socket, is where traffic goes to</li>
+ *     <li><b>comment</b>-is a comment to the rule</li>
+ * </ul></p>
  */
 public class Rule {
-    private Address saddr;
-    private Address daddr;
+    private Socket ssocket;
+    private Socket dsocket;
     private String comment;
 
     public Rule() {
-        this.saddr = null;
-        this.daddr = null;
+        this.ssocket = null;
+        this.dsocket = null;
         this.comment = null;
     }
 
-    public Rule(String saddr, String daddr, String comment) throws HTBException {
-        if (saddr != null) {
-            this.saddr = Address.create(saddr);
+    public Rule(String ssocket, String dsocket, String comment) throws HTBException {
+        if (ssocket != null) {
+            this.ssocket = Socket.create(ssocket);
         } else {
-            this.saddr = null;
+            this.ssocket = null;
         }
 
-        if (daddr != null) {
-            this.daddr = Address.create(daddr);
+        if (dsocket != null) {
+            this.dsocket = Socket.create(dsocket);
         } else {
-            this.daddr = null;
+            this.dsocket = null;
         }
 
         this.comment = comment;
     }
 
 
-    public Address getSaddr() {
-        return saddr;
+    public Socket getSsocket() {
+        return ssocket;
     }
 
-    public void setSaddr(Address saddr) {
-        this.saddr = saddr;
+    public void setSsocket(Socket ssocket) {
+        this.ssocket = ssocket;
     }
 
-    public Address getDaddr() {
-        return daddr;
+    public Socket getDsocket() {
+        return dsocket;
     }
 
-    public void setDaddr(Address daddr) {
-        this.daddr = daddr;
+    public void setDsocket(Socket dsocket) {
+        this.dsocket = dsocket;
     }
 
 
@@ -66,16 +72,16 @@ public class Rule {
 
         Rule rule = (Rule) o;
 
-        if (daddr != null ? !daddr.equals(rule.daddr) : rule.daddr != null) return false;
-        if (saddr != null ? !saddr.equals(rule.saddr) : rule.saddr != null) return false;
+        if (dsocket != null ? !dsocket.equals(rule.dsocket) : rule.dsocket != null) return false;
+        if (ssocket != null ? !ssocket.equals(rule.ssocket) : rule.ssocket != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = saddr != null ? saddr.hashCode() : 0;
-        result = 31 * result + (daddr != null ? daddr.hashCode() : 0);
+        int result = ssocket != null ? ssocket.hashCode() : 0;
+        result = 31 * result + (dsocket != null ? dsocket.hashCode() : 0);
         return result;
     }
 }

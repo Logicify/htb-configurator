@@ -4,7 +4,7 @@ import com.logicify.htb.configurator.htb.*;
 import com.logicify.htb.configurator.htb.filters.Mark;
 import com.logicify.htb.configurator.htb.filters.Realm;
 import com.logicify.htb.configurator.htb.filters.Rule;
-import com.logicify.htb.configurator.htb.leaf.FIFOParams;
+import com.logicify.htb.configurator.htb.leaf.FIFOParam;
 import com.logicify.htb.configurator.htb.leaf.Leaf;
 import com.logicify.htb.configurator.htb.leaf.SFQParams;
 
@@ -15,6 +15,9 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+/**
+ * This class let us to input HTB Class from file to object. The main method is read().
+ */
 public class InputFromFile implements InputHTB {
     private File fileOfInput;
 
@@ -174,13 +177,13 @@ public class InputFromFile implements InputHTB {
                         }
                     }
                     case PFIFO: {
-                        htb.setPfifo(new FIFOParams());
+                        htb.setPfifo(new FIFOParam());
                         if (htb.checkIfTrue("LIMIT")) {
                             htb.getPfifo().setLimit(Transformations.fromStringToSpeedInBytes(values.get("LIMIT")));
                         }
                     }
                     case BFIFO: {
-                        htb.setBfifo(new FIFOParams());
+                        htb.setBfifo(new FIFOParam());
                         if (htb.checkIfTrue("LIMIT")) {
                             htb.getBfifo().setLimit(Transformations.fromStringToSpeedInBytes(values.get("LIMIT")));
 

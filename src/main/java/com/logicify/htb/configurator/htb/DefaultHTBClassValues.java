@@ -1,5 +1,9 @@
 package com.logicify.htb.configurator.htb;
 
+/**
+ * <h1>DefaultHTBClassValues</h1>
+ * <p>This class keeps important constants that all HTB class' library uses </p>
+ */
 public class DefaultHTBClassValues {
     public static final int DEFAULT_LIMIT_SPEED = 1000; //default limits speed
     public static final Unit DEFAULT_SPEED_UNIT = Unit.BPS; //default limits unit

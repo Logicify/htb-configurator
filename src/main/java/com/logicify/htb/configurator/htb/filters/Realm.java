@@ -1,5 +1,14 @@
 package com.logicify.htb.configurator.htb.filters;
 
+/**
+ * <h1>Realm</h1>
+ * <p>This class make up "route" filter rules that classify traffic
+ *	according to packet source/destination realms. It contains fields:<ul>
+ *	   <li><b>srealm</b>-source realm that classify where traffic comes from</li>
+ *	   <li><b>drealm</b>-destination realm that classify where traffic goes to</li>
+ *	   <li><b>comment</b>-is a comment to Realm</li>
+ *	</ul></p>
+ */
 public class Realm {
     private String srealm;
     private String drealm;

@@ -12,6 +12,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 
+/**
+ * This class let us to output HTB Class from object to file. The main method is read().
+ */
 public class OutputToFile implements OutputHTB {
     private File fileOfOutput;
     private HTBClass htb;
@@ -154,11 +157,11 @@ public class OutputToFile implements OutputHTB {
                                 output.println('#' + rule.getComment());
                             }
                             output.print("RULE=");
-                            if (rule.getSaddr() != null) {
-                                output.print(rule.getSaddr().toString() + ",");
+                            if (rule.getSsocket() != null) {
+                                output.print(rule.getSsocket().toString() + ",");
                             }
-                            if (rule.getDaddr() != null) {
-                                output.print(rule.getDaddr().toString());
+                            if (rule.getDsocket() != null) {
+                                output.print(rule.getDsocket().toString());
                             }
                             output.println();
                         }

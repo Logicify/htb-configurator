@@ -1,7 +1,13 @@
 package com.logicify.htb.configurator.htb;
 
 /**
- * This class keeps params of the HTB root queuening classes
+ * <h1>RootParams</h1>
+ * <p>This class keeps params of the HTB root queuening classes.These are fields:
+ * <ul>
+ *     <li><b>default</b>-this is ID of the default HTB class where unclassified traffic goes</li>
+ *     <li><b>r2q</b>-this is coefficient for computing Deficit Round Robin quanta</li>
+ *     <li><b>dchache</b>-to use or not to use dequeue cache</li>
+ * </ul></p>
  */
 public class RootParams {
     private int defaultID;//this is ID of the default HTB class where UNCLASSIFIED traffic goes

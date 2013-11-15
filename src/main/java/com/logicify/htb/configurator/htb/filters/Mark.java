@@ -1,5 +1,14 @@
 package com.logicify.htb.configurator.htb.filters;
 
+/**
+ * <h1>Mark</h1>
+ * <p>This class keeps parameter that makes up "fw" filter rules that select traffic for
+ * each of the classes according to firewall "mark".
+ * It contains fields: <ul>
+ * <li><b>firewallRule</b>-keeps firewall "mark"</li>
+ * <li><b>comment</b>-keeps comment to this "mark"</li>
+ * </ul> </p>
+ */
 public class Mark {
     private String firewallRule;
     private String comment;

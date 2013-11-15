@@ -4,18 +4,20 @@ import com.logicify.htb.configurator.htb.DefaultHTBClassValues;
 import com.logicify.htb.configurator.htb.SpeedInBytes;
 
 /**
- * this class keeps parameters for simple FIFO queueing disciplines
+ * <h1>FIFOParam</h1>
+ * <p>This class keeps parameter for simple FIFO queueing disciplines if user set LEAF=PFIFO/BFIFO.
+ * It has field <b>limit</b> that keeps number of packets/bytes the queue can hold.<p>
  */
-public class FIFOParams {
+public class FIFOParam {
     SpeedInBytes limit;//Number of packets/bytes the queue can hold
 
-    public FIFOParams() {
+    public FIFOParam() {
         limit = new SpeedInBytes();
         this.limit.setSpeed(DefaultHTBClassValues.DEFAULT_LIMIT_SPEED);
         this.limit.setUnit(DefaultHTBClassValues.DEFAULT_SPEED_UNIT);
     }
 
-    public FIFOParams(SpeedInBytes limit) {
+    public FIFOParam(SpeedInBytes limit) {
 
         if (limit.getSpeed() < 0) {
             this.limit = new SpeedInBytes();
@@ -40,7 +42,7 @@ public class FIFOParams {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        FIFOParams that = (FIFOParams) o;
+        FIFOParam that = (FIFOParam) o;
 
         if (limit != null ? !limit.equals(that.limit) : that.limit != null) return false;
 

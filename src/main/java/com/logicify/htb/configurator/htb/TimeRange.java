@@ -3,8 +3,15 @@ package com.logicify.htb.configurator.htb;
 import java.util.Arrays;
 
 /**
- * This class allows you to change class bandwidth during the day or
- * week
+ * <h1>TimeRange</h1>
+ * <p>This parameter allows you to change class bandwidth during the day or
+ *	week. You can use multiple TIME rules. If there are several rules with
+ *	overlapping time periods, the last match is taken. The <b>rate</b>, <b>burst</b>,
+ *	<b>ceil</b> and <b>cburst</b> fields correspond to parameters RATE, BURST, CEIL
+ *	and CBURST.
+ *
+ *	daysOfWeak is couple of digits in range 0-6 and represents day of week as
+ *	returned by date.</p>
  */
 public class TimeRange {
     private boolean daysOfWeak[];
