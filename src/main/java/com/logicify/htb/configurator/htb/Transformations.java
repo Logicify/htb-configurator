@@ -51,7 +51,7 @@ public class Transformations
      * @param s
      * @return
      */
-    public static SpeedInBytes fromStringToSpeedInBytes(String s) throws IllegalArgumentException
+    public static SpeedInBytes fromStringToSpeedInBytes(String s) throws HTBException
     {
         final String BYTE_SPEED_PATTERN = "(\\d+)([MmKk]b?)?";
         final String MBYTE_PATTERN = "[Mm]b?";
@@ -60,17 +60,18 @@ public class Transformations
         Matcher speedMatcher = speedPattern.matcher(s);
         if (!speedMatcher.find())
         {
-            throw new IllegalArgumentException("wrong string that represents speed in bytes");
+            throw new HTBException("wrong argument of SpeedInBytes function",
+                    new IllegalArgumentException("wrong string that represents speed in bytes"),HTBException.WRONG_ARGUMENT_ERROR);
         }
         SpeedInBytes bytesSpeed = new SpeedInBytes();
         bytesSpeed.setSpeed(Integer.parseInt(speedMatcher.group(1)));
         String unit = speedMatcher.group(2);
-        if (unit.matches(MBYTE_PATTERN))
+        if (unit!=null && unit.matches(MBYTE_PATTERN))
         {
             bytesSpeed.setUnit(Unit.MBPS);
         } else
         {
-            if (unit.matches(KBYTE_PATTERN))
+            if (unit!=null && unit.matches(KBYTE_PATTERN))
             {
                 bytesSpeed.setUnit(Unit.KBPS);
             } else

@@ -7,6 +7,8 @@
  */
 package com.logicify.htb.configurator.htb.filters;
 
+import com.logicify.htb.configurator.htb.HTBException;
+
 /**
  * This class make up "u32" filter rules that select traffic for
  * #	each of the classes
@@ -24,7 +26,7 @@ public class Rule
         this.comment = null;
     }
 
-    public Rule(String saddr, String daddr, String comment)
+    public Rule(String saddr, String daddr, String comment) throws HTBException
     {
         if (saddr != null)
         {

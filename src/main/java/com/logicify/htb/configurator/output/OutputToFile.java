@@ -8,6 +8,7 @@
 package com.logicify.htb.configurator.output;
 
 import com.logicify.htb.configurator.htb.HTBClass;
+import com.logicify.htb.configurator.htb.HTBException;
 import com.logicify.htb.configurator.htb.TimeRange;
 import com.logicify.htb.configurator.htb.Transformations;
 import com.logicify.htb.configurator.htb.filters.Mark;
@@ -31,7 +32,7 @@ public class OutputToFile implements OutputHTB
 
 
     @Override
-    public void write(HTBClass htbcl) throws Exception
+    public void write(HTBClass htbcl) throws HTBException
     {
         htb = htbcl;
         fileOfOutput = new File(htb.getFileName());
@@ -266,7 +267,7 @@ public class OutputToFile implements OutputHTB
 
         } catch (Exception e)
         {
-            throw e;
+            throw new HTBException("Error while writing to File",e,HTBException.OUTPUT_TO_FILE_ERROR);
         }
 
     }

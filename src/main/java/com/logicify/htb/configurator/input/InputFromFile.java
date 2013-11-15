@@ -54,7 +54,7 @@ public class InputFromFile implements InputHTB
      * @return
      */
     @Override
-    public HTBClass read() throws Exception
+    public HTBClass read() throws HTBException
     {
 
         HTBClass htb = new HTBClass();
@@ -243,7 +243,7 @@ public class InputFromFile implements InputHTB
             return htb;
         } catch (Exception e)
         {
-            throw e;
+            throw new HTBException("error while reading from file",e,HTBException.INPUT_FROM_FILE_ERROR);
         }
     }
 }

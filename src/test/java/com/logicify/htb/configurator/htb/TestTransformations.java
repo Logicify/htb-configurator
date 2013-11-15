@@ -14,7 +14,7 @@ public class TestTransformations
 {
 
     @Test
-    public void testFromStringToSpeedInBytes_1()
+    public void testFromStringToSpeedInBytes_1() throws HTBException
     {
         SpeedInBytes sp1 = new SpeedInBytes(100, Unit.KBPS);
         SpeedInBytes sp2 = Transformations.fromStringToSpeedInBytes("100Kb");
@@ -23,7 +23,7 @@ public class TestTransformations
     }
 
     @Test
-    public void testFromStringToSpeedInBytes_2()
+    public void testFromStringToSpeedInBytes_2() throws HTBException
     {
         SpeedInBytes sp1 = new SpeedInBytes(10, Unit.KBPS);
         SpeedInBytes sp2 = Transformations.fromStringToSpeedInBytes("10K");
@@ -32,7 +32,7 @@ public class TestTransformations
     }
 
     @Test
-    public void testFromStringToSpeedInBytes_3()
+    public void testFromStringToSpeedInBytes_3() throws HTBException
     {
         SpeedInBytes sp1 = new SpeedInBytes(29, Unit.KBPS);
         SpeedInBytes sp2 = Transformations.fromStringToSpeedInBytes("29k");
@@ -41,7 +41,7 @@ public class TestTransformations
     }
 
     @Test
-    public void testFromStringToSpeedInBytes_4()
+    public void testFromStringToSpeedInBytes_4() throws HTBException
     {
         SpeedInBytes sp1 = new SpeedInBytes(29, Unit.MBPS);
         SpeedInBytes sp2 = Transformations.fromStringToSpeedInBytes("29m");
@@ -50,7 +50,7 @@ public class TestTransformations
     }
 
     @Test
-    public void testFromStringToSpeedInBytes_5()
+    public void testFromStringToSpeedInBytes_5() throws HTBException
     {
         SpeedInBytes sp1 = new SpeedInBytes(45, Unit.MBPS);
         SpeedInBytes sp2 = Transformations.fromStringToSpeedInBytes("45M");
@@ -59,7 +59,7 @@ public class TestTransformations
     }
 
     @Test
-    public void testFromStringToSpeedInBytes_6()
+    public void testFromStringToSpeedInBytes_6() throws HTBException
     {
         SpeedInBytes sp1 = new SpeedInBytes(4, Unit.MBPS);
         SpeedInBytes sp2 = Transformations.fromStringToSpeedInBytes("4Mb");
@@ -68,7 +68,7 @@ public class TestTransformations
     }
 
     @Test
-    public void testFromStringToSpeedInBytes_7()
+    public void testFromStringToSpeedInBytes_7() throws HTBException
     {
         SpeedInBytes sp1 = new SpeedInBytes(4, Unit.BPS);
         SpeedInBytes sp2 = Transformations.fromStringToSpeedInBytes("4");

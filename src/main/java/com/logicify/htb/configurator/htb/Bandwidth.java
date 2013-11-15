@@ -34,7 +34,7 @@ public class Bandwidth
         this.pceil = pceil;
     }
 
-    public Bandwidth(String value) throws IllegalArgumentException
+    public Bandwidth(String value) throws HTBException
     {
         if (value.equals("prate"))
         {
@@ -54,7 +54,7 @@ public class Bandwidth
                     this.unit = Transformations.convertStringIntoUnit(speedMatcher.group(2));
                 } else
                 {
-                    throw new IllegalArgumentException("Bandwidth argument is wrong");
+                    throw new HTBException("Bandwidth argument is wrong",new IllegalArgumentException("Bandwidth argument is wrong"),HTBException.WRONG_ARGUMENT_ERROR);
                 }
 
 

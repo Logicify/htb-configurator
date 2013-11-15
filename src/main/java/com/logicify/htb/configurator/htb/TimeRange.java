@@ -25,7 +25,7 @@ public class TimeRange
     private SpeedInBytes cburst;
     private String comment;
 
-    public TimeRange(String timeRange, String comment)
+    public TimeRange(String timeRange, String comment) throws HTBException
     {
         // todo: regex again!
         this.comment = comment;

@@ -7,6 +7,8 @@
  */
 package com.logicify.htb.configurator.htb.filters;
 
+import com.logicify.htb.configurator.htb.HTBException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -125,8 +127,10 @@ public class Address
      *
      * @param addressString
      */
-    public static Address create(String addressString) throws IllegalArgumentException
+    public static Address create(String addressString) throws HTBException
     {
+        try{
+
         String ip = "";
         int ipMask = 0, port = 0, portMask = 0;
 
@@ -190,6 +194,10 @@ public class Address
 
         Address address = new Address(ip, ipMask, port, portMask);
         return address;
+        }
+        catch(Exception e){
+            throw new HTBException("wrong argument of Address' method create",e,HTBException.WRONG_ARGUMENT_ERROR);
+        }
     }
 
 }
