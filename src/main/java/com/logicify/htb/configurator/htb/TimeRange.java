@@ -1,6 +1,8 @@
 package com.logicify.htb.configurator.htb;
 
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <h1>TimeRange</h1>
@@ -14,6 +16,7 @@ import java.util.Arrays;
  *	returned by date.</p>
  */
 public class TimeRange {
+    public static final String TIMERANGE_PATTERN = "((\\d+)/)?(\\d{2}:\\d{2}-\\d{2}:\\d{2});(\\d+([kKMmbpsit]+)?)(/(\\d+([kKMm]b?)?))?(,(\\d+([kKMmbpsit]+)?)(/(\\d+([kKMm]b?)?))?)?";
     private boolean daysOfWeak[];
     private boolean always;//if you don't use daysOfWeak
     private String time;
@@ -23,49 +26,33 @@ public class TimeRange {
     private SpeedInBytes cburst;
     private String comment;
 
+
     public TimeRange(String timeRange, String comment) throws HTBException {
-        // todo: regex again!
+        try{
         this.comment = comment;
-        daysOfWeak = new boolean[7];
-        String parts[] = timeRange.split(";");
-        String timePart = parts[0];
-        String bandWidthPart = parts[1];
-        if (timePart.charAt(2) == ':') {
-            always = true;
-            time = timePart;
-        } else {
-            parts = timePart.split("/");
-            int days = Integer.parseInt(parts[0]);
-            while (days > 0) {
-                daysOfWeak[days % 10] = true;
-                days /= 10;
-            }
-            time = parts[1];
+        Pattern timeRangePattern=Pattern.compile(TIMERANGE_PATTERN);
+        Matcher matcher=timeRangePattern.matcher(timeRange);
+        if(!matcher.find()){
+            throw new IllegalArgumentException("wrong timeRange argument");
         }
-        parts = bandWidthPart.split(",");
-        String partOfTimeWithRate = parts[0];
-        String partOfTimeWithCeil = (parts.length == 2) ? parts[1] : "";
-        String rat[] = partOfTimeWithRate.split("/");
-        rate = new Bandwidth(rat[0]);
-        if (rat.length == 2) {
-            burst = Transformations.fromStringToSpeedInBytes(rat[1]);
-        } else {
-            burst.setSpeed(0);
-            burst.setUnit(Unit.BPS);
-        }
-        if (partOfTimeWithCeil != "") {
-            String partsOfCeil[] = partOfTimeWithCeil.split("/");
-            ceil = new Bandwidth(partsOfCeil[0]);
-            if (partsOfCeil.length == 2) {
-                cburst = Transformations.fromStringToSpeedInBytes(partsOfCeil[1]);
-            } else {
-                cburst.setSpeed(0);
-                cburst.setUnit(Unit.BPS);
+            String days=matcher.group(2);
+            if(days!=null){
+                always=false;
+                daysOfWeak=new boolean[7];
+                for(char i='0';i<'7';i++){
+                    if (days.contains(i+"")) daysOfWeak[i-'0']=true;
+                }
+            }else{
+                always=true;
             }
-        } else {
-            ceil = null;
-            cburst.setSpeed(0);
-            cburst.setUnit(Unit.BPS);
+            time=matcher.group(3);
+            rate=new Bandwidth(matcher.group(4));
+            burst=Transformations.fromStringToSpeedInBytes(matcher.group(7));
+            ceil=new Bandwidth(matcher.group(10));
+            cburst=Transformations.fromStringToSpeedInBytes(matcher.group(13));
+
+        }catch(Exception e){
+            throw new HTBException("wrong TimeRange argument",e,HTBException.WRONG_ARGUMENT_ERROR);
         }
     }
 
